@@ -10,7 +10,7 @@
     
     
     
-    <title>beidashuxiao | Wenji&#39;s blog</title>
+    <title>线段树板子 | Wenji&#39;s blog</title>
     <!-- inject:style -->
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <!-- endinject -->
@@ -151,33 +151,42 @@
     <div class="cube-content">
         <div class="cube-left">
             <div class="cube-article">
-    <h1 class="title">beidashuxiao</h1>
+    <h1 class="title">线段树板子</h1>
     
     <div class="cube-article-header">
         <div class="cube-article-date">
             <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
             <!-- moment.js对象 -->
-            2018-09-23
+            2018-09-21
         </div>
         <div class="cube-article-tags">
     <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+    
+    <a href="/tags/线段树/">#线段树</a>
     
 </div>
     </div>
     
     <div class="cube-article-content cube-markdown">
         
-        
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int maxn=1000010;</span><br><span class="line">int A[maxn];</span><br><span class="line">struct dian</span><br><span class="line">&#123;</span><br><span class="line">    int l,r;</span><br><span class="line">    int d;</span><br><span class="line">    int lazy;</span><br><span class="line">&#125;sum[maxn&lt;&lt;2];</span><br><span class="line">void pushup(int rt)</span><br><span class="line">&#123;</span><br><span class="line">    sum[rt].d=max(sum[rt&lt;&lt;1].d,sum[rt&lt;&lt;1|1].d);</span><br><span class="line">&#125;</span><br><span class="line">void build(int l,int r,int rt)</span><br><span class="line">&#123;</span><br><span class="line">    sum[rt].l=l;</span><br><span class="line">    sum[rt].r=r;</span><br><span class="line">    sum[rt].d=0;</span><br><span class="line">    sum[rt].lazy = 0;</span><br><span class="line">    if(l!=r)</span><br><span class="line">    &#123;</span><br><span class="line">        int mid=(l+r)&gt;&gt;1;</span><br><span class="line">        build(l,mid,rt&lt;&lt;1);</span><br><span class="line">        build(mid+1,r,rt&lt;&lt;1|1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">void xiachuan(int rt)</span><br><span class="line">&#123;</span><br><span class="line">        sum[rt&lt;&lt;1].lazy+=sum[rt].lazy;</span><br><span class="line">        sum[rt&lt;&lt;1|1].lazy+=sum[rt].lazy;</span><br><span class="line">        sum[rt&lt;&lt;1].d+=sum[rt].lazy;</span><br><span class="line">        sum[rt&lt;&lt;1|1].d+=sum[rt].lazy;</span><br><span class="line">        sum[rt].lazy=0;</span><br><span class="line">&#125;</span><br><span class="line">void cha(int l,int r,int rt)</span><br><span class="line">&#123;</span><br><span class="line">    if(sum[rt].l==l&amp;&amp;sum[rt].r==r)</span><br><span class="line">    &#123;</span><br><span class="line">        sum[rt].d++;</span><br><span class="line">        sum[rt].lazy++;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if(sum[rt].lazy)</span><br><span class="line">    xiachuan(rt);</span><br><span class="line">    int mid=(sum[rt].l+sum[rt].r)&gt;&gt;1;</span><br><span class="line">    if(r&lt;=mid)</span><br><span class="line">        cha(l,r,rt&lt;&lt;1);</span><br><span class="line">    else if(l&gt;mid)</span><br><span class="line">        cha(l,r,rt&lt;&lt;1|1);</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        cha(l,mid,rt&lt;&lt;1);</span><br><span class="line">        cha(mid+1,r,rt&lt;&lt;1|1);</span><br><span class="line">    &#125;</span><br><span class="line">    pushup(rt);</span><br><span class="line">&#125;</span><br><span class="line">int query(int l,int r,int rt)</span><br><span class="line">&#123;</span><br><span class="line">    if(sum[rt].l==l&amp;&amp;sum[rt].r==r)</span><br><span class="line">        return sum[rt].d;</span><br><span class="line">    if(sum[rt].lazy) </span><br><span class="line">    xiachuan(rt);</span><br><span class="line">    int mid=(sum[rt].r+sum[rt].l)&gt;&gt;1;</span><br><span class="line">    if(r&lt;=mid)</span><br><span class="line">        return query(l,r,rt&lt;&lt;1);</span><br><span class="line">    else if(l&gt;mid)</span><br><span class="line">        return query(l,r,rt&lt;&lt;1|1);</span><br><span class="line">    else</span><br><span class="line">        return max(query(l,mid,rt&lt;&lt;1),query(mid+1,r,rt&lt;&lt;1|1));</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">		int k,m;</span><br><span class="line">		int a,b;</span><br><span class="line">		memset(A,0,sizeof(A));</span><br><span class="line">        scanf(&quot;%d%d&quot;,&amp;k,&amp;m);</span><br><span class="line">        build(1,1000000,1);</span><br><span class="line">        int id=0;</span><br><span class="line">        for(int i=0;i&lt;m;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf(&quot;%d%d&quot;,&amp;a,&amp;b);</span><br><span class="line">            b--;</span><br><span class="line">            if(query(a,b,1)&lt;k)</span><br><span class="line">            &#123;</span><br><span class="line">                A[id++]=i+1;</span><br><span class="line">                cha(a,b,1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=0;i&lt;id;i++)</span><br><span class="line">        printf(&quot;%d &quot;,A[i]);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 </div>
 
 <div class="cube-article-nav">
     <ul>
         
+        <li class="prev">
+            <a href="/2018/09/22/du6-1/">
+                <i class="cube-icon cube-prev" aria-hidden="true"></i>
+                并查集基础题hdu1232畅通工程详解附带模板
+            </a>
+        </li>
+        
         
         <li class="next">
-            <a href="/2018/09/23/du8/">
-                线段树板子
+            <a href="/2018/09/21/du7/">
+                contest1 hdu3635 drahonball 并查集升级版本 理解并查集基本概念和应用
                 <i class="cube-icon cube-next" aria-hidden="true"></i>
             </a>
         </li>
@@ -228,7 +237,7 @@
     
     <div class="count">
         <a class="count articles"><span>18</span>Article</a>
-        <a class="count tags"><span>11</span>Tags</a>
+        <a class="count tags"><span>12</span>Tags</a>
         <a class="count categories"><span>0</span>Categories</a>
     </div>
 </div>
@@ -266,7 +275,7 @@
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/23/beidashuxiao/" title="beidashuxiao">beidashuxiao</a>
+                    <a href="/2018/09/22/du11/" title="poj2377 最小生成树 负数化变成最大生成树 prime算法实践">poj2377 最小生成树 负数化变成最大生成树 prime算法实践</a>
                 </p>
             </div>
             
@@ -280,7 +289,7 @@
                     <span>2</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/23/du8/" title="线段树板子">线段树板子</a>
+                    <a href="/2018/09/22/du10/" title="hdu2066 Dijkstra 最短路 无向图版本 板子修改">hdu2066 Dijkstra 最短路 无向图版本 板子修改</a>
                 </p>
             </div>
         </li>
@@ -293,7 +302,7 @@
                     <span>3</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/22/du11/" title="poj2377 最小生成树 负数化变成最大生成树 prime算法实践">poj2377 最小生成树 负数化变成最大生成树 prime算法实践</a>
+                    <a href="/2018/09/22/du9/" title="Dijkstra 最短路 有向图版本板子 无向图就是双重附边">Dijkstra 最短路 有向图版本板子 无向图就是双重附边</a>
                 </p>
             </div>
         </li>
@@ -306,7 +315,7 @@
                     <span>4</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/22/du10/" title="hdu2066 Dijkstra 最短路 无向图版本 板子修改">hdu2066 Dijkstra 最短路 无向图版本 板子修改</a>
+                    <a href="/2018/09/22/du6-1/" title="并查集基础题hdu1232畅通工程详解附带模板">并查集基础题hdu1232畅通工程详解附带模板</a>
                 </p>
             </div>
         </li>
@@ -319,7 +328,7 @@
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/22/du9/" title="Dijkstra 最短路 有向图版本板子 无向图就是双重附边">Dijkstra 最短路 有向图版本板子 无向图就是双重附边</a>
+                    <a href="/2018/09/21/du8/" title="线段树板子">线段树板子</a>
                 </p>
             </div>
         </li>
@@ -339,12 +348,12 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/编程经验/">#编程经验</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/Dijkstra/">#Dijkstra</a>
         </div>
         
@@ -354,7 +363,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/prime/">#prime</a>
         </div>
         
@@ -374,7 +383,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/线段树/">#线段树</a>
         </div>
         
@@ -389,8 +398,13 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/游戏/">#游戏</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/申请暑校/">#申请暑校</a>
         </div>
         
     </div>
