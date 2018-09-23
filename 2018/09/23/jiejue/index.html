@@ -10,7 +10,7 @@
     
     
     
-    <title>Tags: 数据结构 | Wenji&#39;s blog</title>
+    <title>关于博客页面在移动端和pc端的页面显示不全的解决方法 | Wenji&#39;s blog</title>
     <!-- inject:style -->
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <!-- endinject -->
@@ -150,41 +150,50 @@
     
     <div class="cube-content">
         <div class="cube-left">
-            <style>
-    @media(max-width: 768px) {
-        body {
-            background-color: #fff!important;
-        }
-    }
-</style>
-<div class="cube-archives">
+            <div class="cube-article">
+    <h1 class="title">关于博客页面在移动端和pc端的页面显示不全的解决方法</h1>
     
-    <div class="cube-archive" style="margin-top: 0;">
-        <h1 class="title">数据结构</h1>
-        
-        <ul class="posts">
-            
-            <li class="post">
-                <a href="/2018/09/21/du6/">contest1 hdu1873优先队列的结构体应用题</a>
-            </li>
-            
-            <li class="post">
-                <a href="/2018/09/21/du5/">set练习题</a>
-            </li>
-            
-            <li class="post">
-                <a href="/2018/09/20/du4/">map和set</a>
-            </li>
-            
-            <li class="post">
-                <a href="/2018/09/19/du3-1/">priority_queue 练习</a>
-            </li>
-            
-        </ul>
-        
-    </div>
+    <div class="cube-article-header">
+        <div class="cube-article-date">
+            <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+            <!-- moment.js对象 -->
+            2018-09-23
+        </div>
+        <div class="cube-article-tags">
+    <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+    
+    <a href="/tags/有趣/">#有趣</a>
     
 </div>
+    </div>
+    
+    <div class="cube-article-content cube-markdown">
+        
+        <p>真的非常搞笑的一件事情，我的博客在移动端和pc端会出现非常大的差异。<br>由于hexo自身渲染的原因，而相关文件是用markdown语法来写，但是很多<br>文件并不全是。除了md这个内容的文件外，页面还是要用到html的相关语<br>句。但是与传统的html文件不同，这个是渲染生成index.html,所以找不到<br>相关的html文件。有的html文件都是之前hexo渲染生成的临时文件，所以<br>修改没有任何作用。<br>之后我以为是代码的问题，主要是认为估计可能是display化后造成的边框溢出。<br>最后通过google的开发者的调试模式，一直在调试具体两个模块的代码，<br>不管如何调都是没法改变，由于是body主体已经将整个代码都display了，<br>所以最后是很无奈的。<br>之后通过百度和Google,发现这样的问题并不普遍。最后发现有关网页<br>说，无论是电脑还是手机，要做到自适应屏幕，其实都是一样的。<br>首先，在网页代码的头部，加入一行viewport标签<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, 
+minimum-scale=1.0, user-scalable=no">viewport是网页默认的宽度和高度，<br>上面这行代码的意思是，网页宽度默认等于屏幕宽度（width=device-width），<br>原始缩放比例（initial-scale=1）为1.0，即网页初始大小占屏幕面积的100%。<br>即让viewport的宽度等于物理设备上的真实分辨率，不允许用户缩放。<br>之后我开始找有关渲染的原始文件，通过搜索关键字viewport,发现在<br>Hexo\themes\有关theme\layout_partial的header.ejs文件里面有<br>相关的html代码，发现里面已经定义了这个标签，发现width=device-width这个条件<br>于是我将相关代码补全，然后没有用。<br>最后，我仔细发现看来是这个标签的原因，这个标签是为了适配两种设备。<br>于是我试了下将这个标签去掉，让其自然显示，发现果然解决了问题。<br>终于移动端和pc端都可以使用相关的所有功能。</p>
+
+    </div>
+</div>
+
+<div class="cube-article-nav">
+    <ul>
+        
+        
+        <li class="next">
+            <a href="/2018/09/23/shenri/">
+                今天是我的生日
+                <i class="cube-icon cube-next" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+<!-- TODO 根据theme.comment的内容进行入口选择 -->
+
+
+
         </div>
         <div class="cube-right">
             
@@ -334,7 +343,7 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/关于我自己/">#关于我自己</a>
         </div>
         
@@ -344,7 +353,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/申请暑校/">#申请暑校</a>
         </div>
         
@@ -369,7 +378,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/并查集/">#并查集</a>
         </div>
         
@@ -379,7 +388,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/游戏/">#游戏</a>
         </div>
         
@@ -404,7 +413,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/感想/">#感想</a>
         </div>
         

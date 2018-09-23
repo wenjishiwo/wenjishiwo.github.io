@@ -10,7 +10,7 @@
     
     
     
-    <title>Tags: 数据结构 | Wenji&#39;s blog</title>
+    <title>Wenji&#39;s blog</title>
     <!-- inject:style -->
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <!-- endinject -->
@@ -150,41 +150,90 @@
     
     <div class="cube-content">
         <div class="cube-left">
-            <style>
-    @media(max-width: 768px) {
-        body {
-            background-color: #fff!important;
-        }
-    }
-</style>
-<div class="cube-archives">
-    
-    <div class="cube-archive" style="margin-top: 0;">
-        <h1 class="title">数据结构</h1>
+            
+<div class="cube-excerpt" id="cube-excerpt-第一篇博客">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2018/09/12/hello-world/">第一篇博客</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2018-09-12
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/添加博客/" class="cube-excerpt-tag-link">#添加博客</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
         
-        <ul class="posts">
-            
-            <li class="post">
-                <a href="/2018/09/21/du6/">contest1 hdu1873优先队列的结构体应用题</a>
-            </li>
-            
-            <li class="post">
-                <a href="/2018/09/21/du5/">set练习题</a>
-            </li>
-            
-            <li class="post">
-                <a href="/2018/09/20/du4/">map和set</a>
-            </li>
-            
-            <li class="post">
-                <a href="/2018/09/19/du3-1/">priority_queue 练习</a>
-            </li>
-            
-        </ul>
         
-    </div>
-    
+           <p>  这个主要是一个博客发表内容的主要步骤，以及如何链接到hexo所需的文件</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="创建一个md文件，来添加新的内容"><a href="#创建一个md文件，来添加新的内容" class="headerlink" title="创建一个md文件，来添加新的内容"></a>创建一个md文件，来添加新的内容</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>创建后md文件会在hexo文件下的source的_posts里面</p>
+<p>更多的功能: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="运行自己的hexo-server"><a href="#运行自己的hexo-server" class="headerlink" title="运行自己的hexo-server"></a>运行自己的hexo-server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-server --save</span><br></pre></td></tr></table></figure>
+<p>Hexo 3.0 把服务器独立成了个别模块，您必须先安装 hexo-server 才能使用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></p>
+<p>安装完成后，输入以下命令以启动服务器，您的网站会在 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 下启动。在服务器启动期间，Hexo 会监视文件变动并自动更新，您无须重启服务器。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server -p 5000</span><br></pre></td></tr></table></figure></p>
+<p>如果您想要更改端口，或是在执行时遇到了 EADDRINUSE 错误，可以在执行时使用 -p 选项指定其他端口，如下：</p>
+<p>更多的功能: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="使用Hexo生成静态文件"><a href="#使用Hexo生成静态文件" class="headerlink" title="使用Hexo生成静态文件"></a>使用Hexo生成静态文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>监视文件变动<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate --watch</span><br></pre></td></tr></table></figure></p>
+<p>Hexo 能够监视文件变动并立即重新生成静态文件，在生成时会比对文件的 SHA1 checksum，只有变动的文件才会写入。<br>完成对文件等内容的修改，进行网页的完成后部署，上传上去<br>您可执行下列的其中一个命令，让 Hexo 在生成完毕后自动部署网站，两个命令的作用是相同的。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate --deploy</span><br><span class="line">$ hexo deploy --generate</span><br></pre></td></tr></table></figure></p>
+<p>简写<br>上面两个命令可以简写为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g -d</span><br><span class="line">$ hexo d -g</span><br></pre></td></tr></table></figure></p>
+<p>也可以分成两步<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g </span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure></p>
+<p>更多的功能: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="快速部署功能，一条命令就能将网站部署到服务器上"><a href="#快速部署功能，一条命令就能将网站部署到服务器上" class="headerlink" title="快速部署功能，一条命令就能将网站部署到服务器上"></a>快速部署功能，一条命令就能将网站部署到服务器上</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>在开始之前，您必须先在 _config.yml 中修改参数，一个正确的部署配置中至少要有 type 参数，例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br></pre></td></tr></table></figure></p>
+<p>更多的功能: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2018/09/12/hello-world/">Read More</a>
+    </footer>
 </div>
+
+
+
+<ul class="cube-pagination cube-pagination-6">
+    
+    <li class="cube-pagination-prev">
+        <a href="/page/2/">« Prev</a>
+    </li>
+    
+    
+        
+            
+            <li class="cube-pagination-index">
+                <a href="/">1</a>
+            </li>
+            
+        
+            
+            <li class="cube-pagination-index">
+                <a href="/page/2">2</a>
+            </li>
+            
+        
+            
+            <li class="cube-pagination-index disabled">
+                <span>3</span>
+            </li>
+            
+        
+    
+
+    
+    <li class="cube-pagination-next disabled">
+        <span>Next »</span>
+    </li>
+    
+</ul>
+
+<!--其他组件后续添加-->
         </div>
         <div class="cube-right">
             
@@ -334,12 +383,12 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/关于我自己/">#关于我自己</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/编程经验/">#编程经验</a>
         </div>
         
@@ -359,17 +408,17 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/数据结构/">#数据结构</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/bfs和dfs/">#bfs和dfs</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/并查集/">#并查集</a>
         </div>
         
