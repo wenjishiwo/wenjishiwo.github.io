@@ -10,7 +10,7 @@
     
     
     
-    <title>Tags: 编程经验 | Wenji&#39;s blog</title>
+    <title>priority_queue 练习 | Wenji&#39;s blog</title>
     <!-- inject:style -->
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <!-- endinject -->
@@ -150,29 +150,58 @@
     
     <div class="cube-content">
         <div class="cube-left">
-            <style>
-    @media(max-width: 768px) {
-        body {
-            background-color: #fff!important;
-        }
-    }
-</style>
-<div class="cube-archives">
+            <div class="cube-article">
+    <h1 class="title">priority_queue 练习</h1>
     
-    <div class="cube-archive" style="margin-top: 0;">
-        <h1 class="title">编程经验</h1>
-        
-        <ul class="posts">
-            
-            <li class="post">
-                <a href="/2018/09/15/ddd/">数学和编程</a>
-            </li>
-            
-        </ul>
-        
-    </div>
+    <div class="cube-article-header">
+        <div class="cube-article-date">
+            <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+            <!-- moment.js对象 -->
+            2018-09-19
+        </div>
+        <div class="cube-article-tags">
+    <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+    
+    <a href="/tags/数据结构/">#数据结构</a>
     
 </div>
+    </div>
+    
+    <div class="cube-article-content cube-markdown">
+        
+        <p>##代码  greater算子</p>
+<p>#include<iostream></iostream></p>
+<p>#include<queue><br>using namespace std;<br>class T<br>{<br>    public:<br>    int x,y,z;<br>    T(int a,int b,int c):x(a),y(b),z(c)<br>    {</queue></p>
+<pre><code>}    
+</code></pre><p>};<br>bool operator &gt;(const T &amp;t1,const T &amp;t2)<br>{<br>    return t1.z&gt;t2.z;<br>}<br>int main()<br>{<br>    priority_queue&lt;T,vector<t>,greater<t> &gt; q;<br>    q.push(T(4,4,3));<br>    q.push(T(2,2,5));<br>    q.push(T(1,5,4));<br>    q.push(T(3,3,6));<br>    while(!q.empty())<br>    {<br>        T t=q.top();<br>        q.pop();<br>        cout&lt;&lt;t.x&lt;&lt;” “&lt;&lt;t.y&lt;&lt;” “&lt;&lt;t.z&lt;&lt;endl;<br>    }<br>    return 0;<br>}</t></t></p>
+<p>##代码 less 算子</p>
+<p>#include<iostream></iostream></p>
+<p>#include<queue><br>using namespace std;<br>class T<br>{<br>    public:<br>    int x,y,z;<br>    T(int a,int b,int c):x(a),y(b),z(c)<br>    {</queue></p>
+<pre><code>}    
+</code></pre><p>};<br>bool operator &lt;(const T &amp;t1,const T &amp;t2)<br>{<br>    return t1.z&lt;t2.z;<br>}<br>int main()<br>{<br>    priority_queue<t> q;<br>    q.push(T(4,4,3));<br>    q.push(T(2,2,5));<br>    q.push(T(1,5,4));<br>    q.push(T(3,3,6));<br>    while(!q.empty())<br>    {<br>        T t=q.top();<br>        q.pop();<br>        cout&lt;&lt;t.x&lt;&lt;” “&lt;&lt;t.y&lt;&lt;” “&lt;&lt;t.z&lt;&lt;endl;<br>    }<br>    return 0;<br>}</t></p>
+
+    </div>
+</div>
+
+<div class="cube-article-nav">
+    <ul>
+        
+        
+        <li class="next">
+            <a href="/2018/09/18/du3/">
+                搜索
+                <i class="cube-icon cube-next" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+<!-- TODO 根据theme.comment的内容进行入口选择 -->
+
+
+
         </div>
         <div class="cube-right">
             
@@ -322,7 +351,7 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/编程经验/">#编程经验</a>
         </div>
         
@@ -332,27 +361,27 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/bfs和dfs/">#bfs和dfs</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/数据结构/">#数据结构</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/游戏/">#游戏</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/添加博客/">#添加博客</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/常用学习网址/">#常用学习网址</a>
         </div>
         
