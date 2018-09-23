@@ -150,39 +150,6 @@
     <div class="cube-content">
         <div class="cube-left">
             
-<div class="cube-excerpt" id="cube-excerpt-页面问题1">
-    <header class="cube-excerpt-header">
-        <h1><a href="/2018/09/23/jiejue/">页面问题1</a></h1>
-        <div class="cube-excerpt-header-msg">
-            <div class="cube-excerpt-date">
-                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2018-09-23
-            </div>
-            <div class="cube-excerpt-tags">
-                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-                
-                <a href="/tags/有趣/" class="cube-excerpt-tag-link">#有趣</a>
-                
-            </div>
-        </div>
-    </header>
-    <article class="cube-excerpt-entry cube-markdown">
-        
-        
-           <p>##关于博客页面在移动端</p>
-<p>##和pc端的页面显示不全的解决方法真的非常搞笑的一件事情，我的博客在移动端和pc端会出现非常大的差异。由于hexo自身渲<br>染的原因，而相关文件是用markdown语法来写，<br>但是很多文件并不全是。除了md这个内容的文<br>件外，页面还是要用到html的相关语句。但是<br>与传统的html文件不同，这个是渲染生成<br>index.html,所以找不到相关的html文件。有的<br>html文件都是之前hexo渲染生成的临时文件，所<br>以修改没有任何作用。之后我以为是代码的问题<br>，主要是认为估计可能是display化后造成的边<br>框溢出。最后通过google的开发者的调试模式，<br>一直在调试具体两个模块的代码，不管如何调<br>都是没法改变，由于是body主体已经将整个代<br>码都display了，所以最后是很无奈的。之后<br>通过百度和Google,发现这样的问题并不普遍。<br>最后发现有关网页说，无论是电脑还是手机，<br>要做到自适应屏幕，其实都是一样的。首先，<br>在网页代码的头部，加入一行viewport标签</p>
-<p><meta name="viewport" content="width=
-device-width, initial-scale=1.0, 
-maximum-scale=1.0, minimum-scale=1.0, 
-user-scalable=no">viewport是网页默认<br>的宽度和高度，上面这行代码的意思是，网<br>页宽度默认等于屏幕宽度（width=device-<br>width），原始缩放比例（initial-scale=1）<br>为1.0，即网页初始大小占屏幕面积的100%。<br>即让viewport的宽度等于物理设备上的真实<br>分辨率，不允许用户缩放。之后我开始找有<br>关渲染的原始文件，通过搜索关键字<br>viewport,发现在Hexo\themes\有关theme<br>\layout_partial的header.ejs文件里面有<br>相关的html代码，发现里面已经定义了这个<br>标签，发现width=device-width这个条件<br>于是我将相关代码补全，然后没有用。最后，<br>我仔细发现看来是这个标签的原因，这个标<br>签是为了适配两种设备。于是我试了下将这<br>个标签去掉，让其自然显示，发现果然解决<br>了问题。终于移动端和pc端都可以使用相关的<br>所有功能。</p>
-
-        
-    </article>
-    <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2018/09/23/jiejue/">Read More</a>
-    </footer>
-</div>
-
 <div class="cube-excerpt" id="cube-excerpt-今天是我的生日">
     <header class="cube-excerpt-header">
         <h1><a href="/2018/09/23/shenri/">今天是我的生日</a></h1>
@@ -431,6 +398,36 @@ user-scalable=no">viewport是网页默认<br>的宽度和高度，上面这行�
     </footer>
 </div>
 
+<div class="cube-excerpt" id="cube-excerpt-set练习题">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2018/09/21/du5/">set练习题</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2018-09-21
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/数据结构/" class="cube-excerpt-tag-link">#数据结构</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <h2 id="丑数-优先队列和set查重count练习"><a href="#丑数-优先队列和set查重count练习" class="headerlink" title="丑数 优先队列和set查重count练习"></a>丑数 优先队列和set查重count练习</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;set&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;//此题易错是long long 不是int </span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	ll n;</span><br><span class="line">	int factor[3]=&#123;2,3,5&#125;;</span><br><span class="line">	while(cin&gt;&gt;n&amp;&amp;n!=0)</span><br><span class="line">	&#123;</span><br><span class="line">		priority_queue&lt;ll,vector&lt;ll&gt;, greater&lt;ll&gt; &gt; q1;</span><br><span class="line">		set&lt;ll&gt; q2;</span><br><span class="line">		q1.push(1);</span><br><span class="line">		q2.insert(1);</span><br><span class="line">		ll i;</span><br><span class="line">		for(i=1;;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			ll m1=q1.top();</span><br><span class="line">			q1.pop();</span><br><span class="line">			if(i==n)</span><br><span class="line">			&#123;</span><br><span class="line">				printf(&quot;%lld\n&quot;,m1);</span><br><span class="line">				break;</span><br><span class="line">			&#125; </span><br><span class="line">			for(int j=0;j&lt;3;j++)</span><br><span class="line">			&#123;</span><br><span class="line">					ll m2=m1*factor[j];</span><br><span class="line">					if(!q2.count(m2))</span><br><span class="line">					&#123;</span><br><span class="line">						q1.push(m2);</span><br><span class="line">						q2.insert(m2);	</span><br><span class="line">					&#125;			</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="set对结构体排序的常见用法和排序插件cmp的用法"><a href="#set对结构体排序的常见用法和排序插件cmp的用法" class="headerlink" title="set对结构体排序的常见用法和排序插件cmp的用法"></a>set对结构体排序的常见用法和排序插件cmp的用法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;set&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">struct Student</span><br><span class="line">&#123;</span><br><span class="line">	int id;</span><br><span class="line">	string name;</span><br><span class="line">&#125;stu1,stu2,stu3;</span><br><span class="line">struct setcmp//set容器的插件,来确定set内部的排序 </span><br><span class="line">&#123;</span><br><span class="line">	bool operator()(Student a,Student b)</span><br><span class="line">	&#123;</span><br><span class="line">	return a.id&gt;b.id;					//这个大括号不可以省略，不然会报错的										</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">struct Setcmp</span><br><span class="line">&#123;</span><br><span class="line">	bool operator()(Student a,Student b)</span><br><span class="line">	&#123;</span><br><span class="line">	return a.id&lt;b.id;	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;; </span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	set&lt;Student,setcmp&gt; my;</span><br><span class="line">	set&lt;Student&gt;::iterator it; </span><br><span class="line">	stu1.id=1000;</span><br><span class="line">	stu2.id=2000;</span><br><span class="line">	stu3.id=3000;</span><br><span class="line">	stu1.name=&quot;ddd&quot;;</span><br><span class="line">	stu2.name=&quot;www&quot;;</span><br><span class="line">	stu3.name=&quot;aaa&quot;;</span><br><span class="line">	my.insert(stu1);</span><br><span class="line">	my.insert(stu2);</span><br><span class="line">	my.insert(stu3);	</span><br><span class="line">	for(it=my.begin();it!=my.end();it++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;it-&gt;id&lt;&lt;&quot; &quot;&lt;&lt;it-&gt;name&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	set&lt;Student,Setcmp&gt; mm;</span><br><span class="line">	mm.insert(stu1);</span><br><span class="line">	mm.insert(stu2);</span><br><span class="line">	mm.insert(stu3);</span><br><span class="line">	for(it=mm.begin();it!=mm.end();it++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;it-&gt;id&lt;&lt;&quot; &quot;&lt;&lt;it-&gt;name&lt;&lt;endl;</span><br><span class="line">	&#125;	</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="uva10815-set练习以及输入流sstream中的stringstream"><a href="#uva10815-set练习以及输入流sstream中的stringstream" class="headerlink" title="uva10815 set练习以及输入流sstream中的stringstream"></a>uva10815 set练习以及输入流sstream中的stringstream</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;sstream&gt;</span><br><span class="line">#include&lt;set&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	set&lt;string&gt; str;</span><br><span class="line">	string s;</span><br><span class="line">	while(cin&gt;&gt;s)</span><br><span class="line">	&#123;</span><br><span class="line">		for(int i=0;i&lt;s.length();i++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(isalpha(s[i]))</span><br><span class="line">			&#123;</span><br><span class="line">				s[i]=tolower(s[i]);</span><br><span class="line">			&#125;</span><br><span class="line">			else</span><br><span class="line">			&#123;</span><br><span class="line">				s[i]=&apos; &apos;;//一个字符空格时&apos; &apos;不是&quot; &quot;; 输入的非字符转换为空格，作为单词的分界点</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		stringstream ss(s);//流 ;</span><br><span class="line">		//构造时就写进，因为时对象的原因，将s加入ss流类里面,就类似于文件里面的输入文件一样 </span><br><span class="line">		string s2;</span><br><span class="line">		while(ss&gt;&gt;s2)</span><br><span class="line">		&#123;</span><br><span class="line">			str.insert(s2); </span><br><span class="line">		&#125; </span><br><span class="line">	&#125;</span><br><span class="line">	for(set&lt;string&gt;::iterator it=str.begin();it!=str.end();it++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;*it&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2018/09/21/du5/">Read More</a>
+    </footer>
+</div>
+
 
 
 <ul class="cube-pagination cube-pagination-6">
@@ -450,12 +447,6 @@ user-scalable=no">viewport是网页默认<br>的宽度和高度，上面这行�
             
             <li class="cube-pagination-index">
                 <a href="/page/2">2</a>
-            </li>
-            
-        
-            
-            <li class="cube-pagination-index">
-                <a href="/page/3">3</a>
             </li>
             
         
@@ -506,7 +497,7 @@ user-scalable=no">viewport是网页默认<br>的宽度和高度，上面这行�
     
     
     <div class="count">
-        <a class="count articles"><span>21</span>Article</a>
+        <a class="count articles"><span>20</span>Article</a>
         <a class="count tags"><span>15</span>Tags</a>
         <a class="count categories"><span>0</span>Categories</a>
     </div>
@@ -545,7 +536,7 @@ user-scalable=no">viewport是网页默认<br>的宽度和高度，上面这行�
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/23/jiejue/" title="页面问题1">页面问题1</a>
+                    <a href="/2018/09/23/shenri/" title="今天是我的生日">今天是我的生日</a>
                 </p>
             </div>
             
@@ -559,7 +550,7 @@ user-scalable=no">viewport是网页默认<br>的宽度和高度，上面这行�
                     <span>2</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/23/shenri/" title="今天是我的生日">今天是我的生日</a>
+                    <a href="/2018/09/22/tupian/" title="风语咒">风语咒</a>
                 </p>
             </div>
         </li>
@@ -572,7 +563,7 @@ user-scalable=no">viewport是网页默认<br>的宽度和高度，上面这行�
                     <span>3</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/22/tupian/" title="风语咒">风语咒</a>
+                    <a href="/2018/09/21/du11/" title="poj2377 最小生成树 负数化变成最大生成树 prime算法实践">poj2377 最小生成树 负数化变成最大生成树 prime算法实践</a>
                 </p>
             </div>
         </li>
@@ -585,7 +576,7 @@ user-scalable=no">viewport是网页默认<br>的宽度和高度，上面这行�
                     <span>4</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/21/du11/" title="poj2377 最小生成树 负数化变成最大生成树 prime算法实践">poj2377 最小生成树 负数化变成最大生成树 prime算法实践</a>
+                    <a href="/2018/09/21/du10/" title="hdu2066 Dijkstra 最短路 无向图版本 板子修改">hdu2066 Dijkstra 最短路 无向图版本 板子修改</a>
                 </p>
             </div>
         </li>
@@ -598,7 +589,7 @@ user-scalable=no">viewport是网页默认<br>的宽度和高度，上面这行�
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/21/du10/" title="hdu2066 Dijkstra 最短路 无向图版本 板子修改">hdu2066 Dijkstra 最短路 无向图版本 板子修改</a>
+                    <a href="/2018/09/21/du9/" title="Dijkstra 最短路 有向图版本板子 无向图就是双重附边">Dijkstra 最短路 有向图版本板子 无向图就是双重附边</a>
                 </p>
             </div>
         </li>
@@ -618,7 +609,7 @@ user-scalable=no">viewport是网页默认<br>的宽度和高度，上面这行�
     <div class="cube-boxs">
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/关于我自己/">#关于我自己</a>
         </div>
         
@@ -683,7 +674,7 @@ user-scalable=no">viewport是网页默认<br>的宽度和高度，上面这行�
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/常用学习网址/">#常用学习网址</a>
         </div>
         
