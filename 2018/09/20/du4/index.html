@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="WenJi">
+    
+    
+    
+    
+    
+    
+    <title>map和set | Wenji&#39;s blog</title>
+    <!-- inject:style -->
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <!-- endinject -->
+    <style>
+        .cube-loading {
+            top: 0;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url('/images/lg/loading.gif') no-repeat center center;
+            background-color: rgba(0,0,0,.7);
+        }
+
+        .cube-loading.out {
+            display: none;
+        }
+
+        .cube-loading:before {
+            display: block;
+            content: 'Loading';
+            position: relative;
+            width: 100%;
+            top: 50%;
+            right: -50%;
+            color: #fff;
+        }
+
+        @media(max-width: 768px) {
+            .cube-loading:before {
+                font-size: 1.2em;
+                transform: translate(-24px,20px);
+                -webkit-transform: translate(-24px,20px);
+                -o-transform: translate(-24px,20px);
+                -ms-transform: translate(-24px,20px);
+            }
+        }
+
+        @media(min-width: 768px) {
+            .cube-loading:before {
+
+            }
+        }
+    </style>
+    
+</head>
+<body>
+<div class="cube-body">
+    <nav id="cube-top-memu" class="cube-menu">
+    <ul class="cube-menu-collapse">
+        
+        <li>
+            <i class="cube-icon cube-icon-home" aria-hidden="true"></i>
+            <a href="/">首页</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-archive" aria-hidden="true"></i>
+            <a href="/archives">归档</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-about" aria-hidden="true"></i>
+            <a href="https://wenjishiwo.github.io/2018/09/13/about-me/">关于我</a>
+        </li>
+        
+    </ul>
+</nav>
+<nav class="cube-side-menu" id="cube-side-menu">
+    <ul class="cube-menu-list">
+        
+        <li>
+            <a class="lrc-control">Open Lyrics</a>
+        </li>
+        
+        <li>
+            <a class="scroll-to-top">Top</a>
+        </li>
+    </ul>
+</nav>
+    <header class="cube-header" id="cube-header">
+    <img src=" https://github.com/wenjishiwo/wenjishiwo.github.io/blob/master/images/lg/feiji.jpg?raw=true " alt="头部背景图片">
+    
+    <div class="cube-type">
+        <span class="cube-typed-title">WenJi&#39;s blog</span>
+        <span class="cube-typed-cursor">|</span>
+    </div>
+    
+</header>
+
+    <style>
+        nav.cube-menu:before {
+            content: '';
+            visibility: hidden;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 44px;
+        
+            filter: blur(5px);
+            -webkit-filter: blur(5px);
+        
+            z-index: -1;
+            background-image: url('https://github.com/wenjishiwo/wenjishiwo.github.io/blob/master/images/lg/feiji.jpg?raw=true');
+            background-repeat: no-repeat;
+            background-position: center -356px;
+            background-size: cover;
+            background-color: transparent;
+        }
+
+        header.cube-background.cube-header-background {
+            visibility: hidden;
+            background-image: url('https://github.com/wenjishiwo/wenjishiwo.github.io/blob/master/images/lg/feiji.jpg?raw=true');
+            background-position: center -400px;
+        }
+    </style>
+    <header class="cube-background cube-header-background">
+        
+        <div class="cube-type">
+            <span class="cube-typed-title">WenJi&#39;s blog</span>
+            <span class="cube-typed-cursor">|</span>
+        </div>
+        
+    </header>
+    <div class="load-header-background"></div>
+    <script>
+        (function (window) {
+
+            window.headerModule = {}
+            window.headerModule.image = {
+                width: '2000',
+                height: '1414'
+            }
+
+        })(window)
+    </script>
+    
+    <div class="cube-content">
+        <div class="cube-left">
+            <div class="cube-article">
+    <h1 class="title">map和set</h1>
+    
+    <div class="cube-article-header">
+        <div class="cube-article-date">
+            <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+            <!-- moment.js对象 -->
+            2018-09-20
+        </div>
+        <div class="cube-article-tags">
+    <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+    
+    <a href="/tags/数据结构/">#数据结构</a>
+    
+</div>
+    </div>
+    
+    <div class="cube-article-content cube-markdown">
+        
+        <p>##map 数据结构常见用法<br>代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">#include&lt;iterator&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef map&lt;int,string,less&lt;int&gt; &gt;M_TYPE;//less greater 都是算子，针对键值来的 默认排序其实也就是key值的升序 ，也就是less&lt;int&gt; </span><br><span class="line">typedef M_TYPE::iterator M_IT;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	M_TYPE Map;</span><br><span class="line">	Map[1]=&quot;no.1&quot;;</span><br><span class="line">	Map[2]=&quot;no.2&quot;;</span><br><span class="line">	Map[3]=&quot;no.3&quot;;</span><br><span class="line">	Map[4]=&quot;no.4&quot;;</span><br><span class="line">	Map[5]=&quot;no.5&quot;;</span><br><span class="line">	M_IT it=Map.find(2);</span><br><span class="line">	cout&lt;&lt;&quot;map[2]是&quot;&lt;&lt;it-&gt;second&lt;&lt;endl;</span><br><span class="line">	Map.insert(make_pair(2,&quot;new no.2&quot;));//不能改变已有的，可以添加没有的</span><br><span class="line">	Map.insert(make_pair(6,&quot;no.6&quot;)); </span><br><span class="line">	Map.insert(pair&lt;int,string&gt;(7,&quot;no.7&quot;));</span><br><span class="line">	cout&lt;&lt;&quot;新的map[2]是&quot;&lt;&lt;it-&gt;second&lt;&lt;endl;</span><br><span class="line">	M_IT is=Map.find(2);</span><br><span class="line">	cout&lt;&lt;&quot;新的map[2]是&quot;&lt;&lt;is-&gt;second&lt;&lt;endl;</span><br><span class="line">	it-&gt;second=&quot;new new no.2&quot;;//可以修改原有的 </span><br><span class="line">	cout&lt;&lt;&quot;最新的map[2]是&quot;&lt;&lt;it-&gt;second&lt;&lt;endl;</span><br><span class="line">	for(M_IT tt= Map.begin();tt!=Map.end();tt++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;tt-&gt;second&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	Map.erase(2);</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	for(M_IT tt= Map.begin();tt!=Map.end();tt++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;tt-&gt;second&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	M_IT id=Map.find(5);</span><br><span class="line">	Map.erase(id);</span><br><span class="line">	for(M_IT tt= Map.begin();tt!=Map.end();tt++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;tt-&gt;second&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="水果hdu1263-map内部嵌套用法-简单例题"><a href="#水果hdu1263-map内部嵌套用法-简单例题" class="headerlink" title="水果hdu1263 map内部嵌套用法 简单例题"></a>水果hdu1263 map内部嵌套用法 简单例题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef map&lt;string,map&lt;string,int&gt; &gt; MA_P;</span><br><span class="line">typedef map&lt;string,int&gt; Ma_P;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int n;</span><br><span class="line">	cin&gt;&gt;n; </span><br><span class="line">	while(n--)</span><br><span class="line">	&#123;</span><br><span class="line">		int o;</span><br><span class="line">		cin&gt;&gt;o;</span><br><span class="line">		string s1,s2;</span><br><span class="line">		int k;</span><br><span class="line">		map&lt;string,map&lt;string,int&gt; &gt;q;</span><br><span class="line">		for(int i=0;i&lt;o;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cin&gt;&gt;s1&gt;&gt;s2&gt;&gt;k;</span><br><span class="line">			q[s2][s1]+=k;//亲测双重map只能这样用，不能用q.insert(make_pair(s2,make_pair(s1,k)))和pair(XX);   </span><br><span class="line">		&#125;</span><br><span class="line">		for(MA_P::iterator i=q.begin();i!=q.end();i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cout&lt;&lt;i-&gt;first&lt;&lt;endl;</span><br><span class="line">			for(Ma_P::iterator t=i-&gt;second.begin();t!=i-&gt;second.end();t++)</span><br><span class="line">			&#123;</span><br><span class="line">				cout&lt;&lt;&quot;   |----&quot;&lt;&lt;t-&gt;first&lt;&lt;&quot;(&quot;&lt;&lt;t-&gt;second&lt;&lt;&quot;)&quot;&lt;&lt;endl;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if(n&gt;0)</span><br><span class="line">		cout&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="set数据结构常见用法"><a href="#set数据结构常见用法" class="headerlink" title="set数据结构常见用法"></a>set数据结构常见用法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;set&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	set&lt;string&gt;strset;</span><br><span class="line">	set&lt;string&gt;::iterator it;</span><br><span class="line">	strset.insert(&quot;aa&quot;);</span><br><span class="line">	strset.insert(&quot;bb&quot;);</span><br><span class="line">	strset.insert(&quot;cc&quot;);</span><br><span class="line">	strset.insert(&quot;dd&quot;);</span><br><span class="line">	for(it=strset.begin();it!=strset.end();it++)//set默认排序为升序，也就是less </span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;*it&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	it=strset.begin();</span><br><span class="line">	cout&lt;&lt;&quot;set的第一个元素&quot;&lt;&lt;*it&lt;&lt;endl;</span><br><span class="line">	it=strset.end();</span><br><span class="line">	it--;</span><br><span class="line">	cout&lt;&lt;&quot;set的最后一个元素&quot;&lt;&lt;*it&lt;&lt;endl;</span><br><span class="line">	cout&lt;&lt;strset.empty()&lt;&lt;endl;</span><br><span class="line">	cout&lt;&lt;strset.size()&lt;&lt;endl; </span><br><span class="line">	cout&lt;&lt;strset.max_size()&lt;&lt;endl;//容器可能包含的元素最大个数 	</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+</div>
+
+<div class="cube-article-nav">
+    <ul>
+        
+        <li class="prev">
+            <a href="/2018/09/20/beidashuxiao/">
+                <i class="cube-icon cube-prev" aria-hidden="true"></i>
+                北大暑校
+            </a>
+        </li>
+        
+        
+        <li class="next">
+            <a href="/2018/09/19/du3-1/">
+                priority_queue 练习
+                <i class="cube-icon cube-next" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+<!-- TODO 根据theme.comment的内容进行入口选择 -->
+
+
+
+        </div>
+        <div class="cube-right">
+            
+
+<div class="cube-search cube-sidebar" id="cube-search">
+    <div class="search-container">
+        <input type="text" placeholder="Search" class="cube-search-input" id="cube-search-input">
+        <i class="cube-icon cube-icon-search cube-search-submit" aria-hidden="true"></i>
+    </div>
+    <!-- TODO 通过给window赋一个全局变量，通过脚本赋值 -->
+</div>
+<script>
+    (function (window) {
+        'use strict';
+        window.searchModule = {}
+        window.searchModule.JSONUrl = '/content.json'
+        window.searchModule.rootUrl = '/'
+    })(window)
+</script>
+<div class="cube-search-form">
+    <div class="cube-search-control">
+        <input type="text" placeholder="Search" class="search-input">
+        <a class="close-button">
+            <i class="cube-icon cube-close" aria-hidden="true"></i>
+        </a>
+    </div>
+    <div class="cube-search-result"></div>
+</div>
+
+
+<div class="cube-author cube-sidebar" id="cube-author">
+    
+    
+    <span>WenJi</span>
+    
+    
+    <div class="count">
+        <a class="count articles"><span>20</span>Article</a>
+        <a class="count tags"><span>14</span>Tags</a>
+        <a class="count categories"><span>0</span>Categories</a>
+    </div>
+</div>
+
+
+
+<div class="cube-music cube-sidebar" id="cube-music">
+    <div class="cube-player aplayer" id="cube-player"></div>
+</div>
+<script>
+    (function (window) {
+        window.musicModule = {}
+        window.musicModule.musicConfig = '{"narrow":false,"autoplay":false,"showlrc":3,"theme":"#b7daff","mutex":true,"mode":"circulation","preload":"auto","listmaxheight":"513px","music":[{"title":"Dear friends","author":"TRIPLANE","url":"http://cube-1252774894.cosgz.myqcloud.com/music/source/TRIPLANE - Dear friends.mp3","lrc":"http://cube-1252774894.cosgz.myqcloud.com/music/lrc/Dear friends - TRIPLANE.lrc","pic":"http://cube-1252774894.cosgz.myqcloud.com/music/image/TRIPLANE - Dear friends.jpg"},{"title":"Butter-Fly","author":"和田光司","url":"http://cube-1252774894.cosgz.myqcloud.com/music/source/和田光司 - Butter-Fly (ピアノヴァージョン).mp3","lrc":"http://cube-1252774894.cosgz.myqcloud.com/music/lrc/Butter-Fly (ピアノヴァージョン) - 和田光司.lrc","pic":"http://cube-1252774894.cosgz.myqcloud.com/music/image/和田光司 - Butter-Fly (ピアノヴァージョン).jpg"},{"title":"宵闇花火","author":"葉月ゆら","url":"http://cube-1252774894.cosgz.myqcloud.com/music/source/葉月ゆら - 宵闇花火.mp3","lrc":"http://cube-1252774894.cosgz.myqcloud.com/music/lrc/宵闇花火 - 葉月ゆら.lrc","pic":"http://cube-1252774894.cosgz.myqcloud.com/music/image/葉月ゆら - 宵闇花火.jpg"}]}'
+        window.musicModule.lrcConfig = {
+            open: 'Open Lyrics',
+            close: 'Close Lyrics'
+        }
+    })(window)
+</script>
+
+
+
+<div class="cube-recent-posts cube-sidebar" id="cube-recent-posts">
+    <div class="title">
+        <a>Recent Posts</a>
+    </div>
+    <ul class="list">
+        
+        
+        <li>
+            <!-- TODO 如果文章要显示图片，那么在front-matter上添加preview属性(url or path) -->
+            
+            <div class="normal">
+                <p class="index first">
+                    <span>1</span>
+                </p>
+                <p class="title">
+                    <a href="/2018/09/23/shenri/" title="今天是我的生日">今天是我的生日</a>
+                </p>
+            </div>
+            
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>2</span>
+                </p>
+                <p class="title">
+                    <a href="/2018/09/22/tupian/" title="风语咒">风语咒</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>3</span>
+                </p>
+                <p class="title">
+                    <a href="/2018/09/21/du11/" title="poj2377 最小生成树 负数化变成最大生成树 prime算法实践">poj2377 最小生成树 负数化变成最大生成树 prime算法实践</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>4</span>
+                </p>
+                <p class="title">
+                    <a href="/2018/09/21/du10/" title="hdu2066 Dijkstra 最短路 无向图版本 板子修改">hdu2066 Dijkstra 最短路 无向图版本 板子修改</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>5</span>
+                </p>
+                <p class="title">
+                    <a href="/2018/09/21/du9/" title="Dijkstra 最短路 有向图版本板子 无向图就是双重附边">Dijkstra 最短路 有向图版本板子 无向图就是双重附边</a>
+                </p>
+            </div>
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+
+
+
+<div class="cube-tagcloud cube-sidebar" id="cube-tagcloud">
+    <div class="title">
+        <a href="/tags">Tagcloud</a>
+    </div>
+    <div class="cube-boxs">
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/申请暑校/">#申请暑校</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/关于我自己/">#关于我自己</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/编程经验/">#编程经验</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/prime/">#prime</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/数据结构/">#数据结构</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/bfs和dfs/">#bfs和dfs</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/Dijkstra/">#Dijkstra</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/并查集/">#并查集</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/线段树/">#线段树</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/常用学习网址/">#常用学习网址</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/游戏/">#游戏</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/无/">#无</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/添加博客/">#添加博客</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/感想/">#感想</a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="cube-links cube-sidebar" id="cube-links">
+    <div class="title">
+        <a>Links</a>
+    </div>
+    <ul class="list">
+        
+        <li>
+            
+            
+            <img src="https://github.com/wenjishiwo/wenjishiwo.github.io/blob/master/images/lg/GitHub.png?raw=true">
+            
+            <a href="https://github.com/wenjishiwo" target="_blank">my GitHub</a>
+        </li>
+        
+        <li>
+            
+            
+            <img src="http://www.bjfuacm.com/static/img/index/a.png">
+            
+            <a href="http://www.bjfuacm.com/" target="_blank">北林oj</a>
+        </li>
+        
+        <li>
+            
+            
+            <img src="http://acm.hdu.edu.cn/images/banner.jpg">
+            
+            <a href="http://acm.hdu.edu.cn/" target="_blank">杭电oj</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+<div class="cube-friend-links cube-sidebar" id="cube-friend-links">
+    <div class="title">
+        <a>Friend Links</a>
+    </div>
+    <ul class="list">
+        
+        <li>
+            <!-- TODO change avatar.png to friend.png-->
+            <img src="https://github.com/wenjishiwo/wenjishiwo.github.io/blob/master/images/lg/d1.png?raw=true">
+            <a href="https://cyyzero.github.io/" target="_blank">计协会长巨佬</a>
+        </li>
+        
+        <li>
+            <!-- TODO change avatar.png to friend.png-->
+            <img src="https://avatar.csdn.net/F/6/C/1_sanganqi_wusuierzi.jpg?1537680615">
+            <a href="https://me.csdn.net/sanganqi_wusuierzi" target="_blank">网工14级学姐桑安琪</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+    </div>
+</div>
+<footer class="cube-footer">
+    
+© 2018 WenJi
+
+<br>
+Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://wenjishiwo.github.io" target="_blank">WenJi</a>
+</footer>
+<!-- inject:script -->
+<script src="/js/script.js"></script>
+<!-- endinject -->
+<div class="cube-loading out"></div>
+</body>
+</html>
