@@ -150,9 +150,9 @@
     <div class="cube-content">
         <div class="cube-left">
             
-<div class="cube-excerpt" id="cube-excerpt-页面问题2">
+<div class="cube-excerpt" id="cube-excerpt-页面问题3">
     <header class="cube-excerpt-header">
-        <h1><a href="/2018/09/23/jiejue/">页面问题2</a></h1>
+        <h1><a href="/2018/09/23/jiejue/">页面问题3</a></h1>
         <div class="cube-excerpt-header-msg">
             <div class="cube-excerpt-date">
                 <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
@@ -169,10 +169,7 @@
     <article class="cube-excerpt-entry cube-markdown">
         
         
-           <p>##关于博客页面在移动端</p>
-<p>##和pc端的页面显示不全的解决方法真的非常搞笑的一件事情，我的博客在移动端和pc端会出现非常大的差异。<br>由于hexo自身渲染的原因，而相关文件是用markdown语法来写，但是很多文件并不全是。除了md这个内容的文<br>件外，页面还是要用到html的相关语句。但是与传统的html文件不同，这个是渲染生成<br>index.html,所以找不到相关的html文件。有的html文件都是之前hexo渲染生成的临时文件，所<br>以修改没有任何作用。之后我以为是代码的问题，主要是认为估计可能是display化后造成的边<br>框溢出。最后通过google的开发者的调试模式，一直在调试具体两个模块的代码，不管如何调<br>都是没法改变，由于是body主体已经将整个代码都display了，所以最后是很无奈的。之后<br>通过百度和Google,发现这样的问题并不普遍。最后发现有关网页说，无论是电脑还是手机，<br>要做到自适应屏幕，其实都是一样的。首先，在网页代码的头部，加入一行viewport标签</p>
-<p><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,
-minimum-scale=1.0, user-scalable=no">viewport是网页默认的宽度和高度，上面这行代码的意思是，<br>网页宽度默认等于屏幕宽度（width=device-width），原始缩放比例（initial-scale=1）为1.0，<br>即网页初始大小占屏幕面积的100%。即让viewport的宽度等于物理设备上的真实分辨率，不允许<br>用户缩放。之后我开始找有关渲染的原始文件，通过搜索关键字viewport,发现在Hexo\themes\有关theme<br>\layout_partial的header.ejs文件里面有相关的html代码，发现里面已经定义了这个标签，发现width=device-width这个条件<br>于是我将相关代码补全，然后没有用。最后，我仔细发现看来是这个标签的原因，这个标签是为了适配两种设备。于是我试了下将这<br>个标签去掉，让其自然显示，发现果然解决<br>了问题。终于移动端和pc端都可以使用相关的<br>所有功能。</p>
+           <p>关于博客页面在移动端<br>和pc端的页面显示不全的解决方法真的非常搞笑的一件事情，我的博<br>客在移动端和pc端会出现非常大的差异。由于hexo自身渲染的原因，<br>而相关文件是用markdown语法来写，但是很多文件并不全是。除了md<br>这个内容的文件外，页面还是要用到html的相关语句。但是与传统的<br>html文件不同，这个是渲染生成。</p>
 
         
     </article>
@@ -543,7 +540,7 @@ minimum-scale=1.0, user-scalable=no">viewport是网页默认的宽度和高度�
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/23/jiejue/" title="页面问题2">页面问题2</a>
+                    <a href="/2018/09/23/jiejue/" title="页面问题3">页面问题3</a>
                 </p>
             </div>
             
@@ -631,12 +628,12 @@ minimum-scale=1.0, user-scalable=no">viewport是网页默认的宽度和高度�
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/prime/">#prime</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/Dijkstra/">#Dijkstra</a>
         </div>
         
@@ -651,17 +648,17 @@ minimum-scale=1.0, user-scalable=no">viewport是网页默认的宽度和高度�
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/并查集/">#并查集</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/线段树/">#线段树</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/游戏/">#游戏</a>
         </div>
         
@@ -681,7 +678,7 @@ minimum-scale=1.0, user-scalable=no">viewport是网页默认的宽度和高度�
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/感想/">#感想</a>
         </div>
         
