@@ -10,7 +10,7 @@
     
     
     
-    <title>Archives | Wenji&#39;s blog</title>
+    <title>搜索 | Wenji&#39;s blog</title>
     <!-- inject:style -->
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <!-- endinject -->
@@ -150,75 +150,55 @@
     
     <div class="cube-content">
         <div class="cube-left">
-            <style>
-    @media(max-width: 768px) {
-        body {
-            background-color: #fff!important;
-        }
-    }
-</style>
-<div class="cube-archives">
+            <div class="cube-article">
+    <h1 class="title">搜索</h1>
     
-        
-        <div class="cube-archive" style="margin-top: 0;">
-            
-                
-                   
-                            <h1 class="title">2018</h1>
-                            <ul class="posts">
-                   
-                            <li class="post">
-                                <a href="/2018/09/23/du3/">搜索</a>
-                            </li>
-                
-            
-                
-                   
-                            <li class="post">
-                                <a href="/2018/09/17/du2/">随笔</a>
-                            </li>
-                
-            
-                
-                   
-                            <li class="post">
-                                <a href="/2018/09/16/search/">计协会长推荐的常用网址（实时更新）</a>
-                            </li>
-                
-            
-                
-                   
-                            <li class="post">
-                                <a href="/2018/09/15/ddd/">数学和编程</a>
-                            </li>
-                
-            
-                
-                   
-                            <li class="post">
-                                <a href="/2018/09/14/duwen/">dos游戏</a>
-                            </li>
-                
-            
-                
-                   
-                            <li class="post">
-                                <a href="/2018/09/13/about-me/">about me</a>
-                            </li>
-                
-            
-                
-                   
-                            <li class="post">
-                                <a href="/2018/09/12/hello-world/">第一篇博客</a>
-                            </li>
-                
-            
-                    </ul>
-                        </div>
-        
+    <div class="cube-article-header">
+        <div class="cube-article-date">
+            <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+            <!-- moment.js对象 -->
+            2018-09-23
+        </div>
+        <div class="cube-article-tags">
+    <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+    
+    <a href="/tags/bfs和dfs/">#bfs和dfs</a>
     
 </div>
+    </div>
+    
+    <div class="cube-article-content cube-markdown">
+        
+        <p>说起bfs和dfs模板，就是智闯迷宫<br><a href="http://www.bjfuacm.com/problem/62/" target="_blank" rel="noopener">http://www.bjfuacm.com/problem/62/</a><br>题目：<br>描述<br>有一个N*M大小的矩阵迷宫，由字符 ’ . ’ 和 ‘ # ’ 组成。起点位于第一行第一列，终点位于最后一行最后一列。想要机智的闯迷宫当然是走最短路径啦！机智的你来算一算迷宫的最短路径吧！(起点为左上角，重点为右下角)</p>
+<p>输入<br>有多组测试<br>每组测试第一行输入两个数字N，M（0 &lt; N,M &lt; 20），空格隔开。接下来N行输入N*M大小矩阵。只有字符 ‘ . ’ 和 ‘ # ’ 组成。 ‘ . ’ 表示可以走的路，‘ # ’ 表示高高的障碍物。</p>
+<p>输出<br>每组输出从起点到终点的最短路径长度（保证数据每组都有解）</p>
+<p>样例输入1 复制<br>3 3<br>…<br>…<br>…<br>样例输出1<br>4<br>样例输入2 复制<br>4 4<br>….</p>
+<p>#.##<br>….</p>
+<p>#.#.<br>样例输出2<br>6</p>
+<p>##代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;cstdlib&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">char map[22][22];</span><br><span class="line">int vis[22][22];</span><br><span class="line">int n,m,t=0,l=420;</span><br><span class="line">int to[4][2]=&#123;1,0,0,1,-1,0,0,-1&#125;;</span><br><span class="line">/*void dfs(int x,int y)</span><br><span class="line">&#123;</span><br><span class="line">	int tx,ty;</span><br><span class="line">	t++;</span><br><span class="line">	for(int i=0;i&lt;4;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		tx=x+to[i][0];</span><br><span class="line">		ty=y+to[i][1];</span><br><span class="line">		if(tx&lt;0||ty&lt;0||tx&gt;=n||ty&gt;=m||map[tx][ty]==&apos;#&apos;||vis[tx][ty]==1)</span><br><span class="line">			continue;</span><br><span class="line">		if(map[tx][ty]==&apos;.&apos;&amp;&amp;vis[tx][ty]==0)</span><br><span class="line">			&#123;vis[tx][ty]=1;</span><br><span class="line">			if((tx==n-1)&amp;&amp;(ty==m-1)&amp;&amp;t&lt;l)</span><br><span class="line">				l=t;</span><br><span class="line">			dfs(tx,ty);	</span><br><span class="line">			&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	t--;	</span><br><span class="line">&#125;*/</span><br><span class="line">struct node</span><br><span class="line">&#123;</span><br><span class="line">	int x;</span><br><span class="line">	int y;</span><br><span class="line">&#125;;</span><br><span class="line">queue&lt;node&gt;que;</span><br><span class="line">void bfs(int x,int y)</span><br><span class="line">&#123;</span><br><span class="line">	struct node q;</span><br><span class="line">	q.x=x;</span><br><span class="line">	q.y=y;</span><br><span class="line">	que.push(q);</span><br><span class="line">	while(!que.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		q=que.front();</span><br><span class="line">		for(int i=0;i&lt;4;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			q.x+=to[i][0];</span><br><span class="line">			q.y+=to[i][1];</span><br><span class="line">			if(q.x&lt;0||q.y&lt;0||q.x&gt;=n||q.y&gt;=m)</span><br><span class="line">			&#123;</span><br><span class="line">				continue;</span><br><span class="line">			&#125;</span><br><span class="line">			if(map[q.x][q.y]==&apos;#&apos;||vis[q.x][q.y]==1)</span><br><span class="line">			continue;</span><br><span class="line">			if(map[q.x][q.y]==&apos;.&apos;&amp;&amp;vis[q.x][q.y]==0)</span><br><span class="line">			&#123;que.push(q);</span><br><span class="line">			t++;&#125;</span><br><span class="line">			if(q.x==n-1&amp;&amp;q.y==m-1)</span><br><span class="line">			return ;</span><br><span class="line">		&#125;</span><br><span class="line">		que.pop();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;*/</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">	memset(vis,0,sizeof(vis));</span><br><span class="line">	while(cin&gt;&gt;n&gt;&gt;m)&#123;</span><br><span class="line">        l=420;</span><br><span class="line">        t=0;</span><br><span class="line">        memset(vis,0,sizeof(vis));</span><br><span class="line">	for(int i=0;i&lt;n;i++)</span><br><span class="line">	for(int j=0;j&lt;m;j++)</span><br><span class="line">		cin&gt;&gt;map[i][j];</span><br><span class="line">	dfs(0,0);</span><br><span class="line">        if(n==1&amp;&amp;m==1)</span><br><span class="line">            l=0;</span><br><span class="line">	cout&lt;&lt;l&lt;&lt;endl;&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+</div>
+
+<div class="cube-article-nav">
+    <ul>
+        
+        
+        <li class="next">
+            <a href="/2018/09/17/du2/">
+                随笔
+                <i class="cube-icon cube-next" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+<!-- TODO 根据theme.comment的内容进行入口选择 -->
+
+
+
         </div>
         <div class="cube-right">
             
@@ -378,22 +358,22 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/游戏/">#游戏</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/bfs和dfs/">#bfs和dfs</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/添加博客/">#添加博客</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/常用学习网址/">#常用学习网址</a>
         </div>
         
