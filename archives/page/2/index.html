@@ -10,7 +10,7 @@
     
     
     
-    <title>map和set | Wenji&#39;s blog</title>
+    <title>Archives | Wenji&#39;s blog</title>
     <!-- inject:style -->
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <!-- endinject -->
@@ -150,58 +150,103 @@
     
     <div class="cube-content">
         <div class="cube-left">
-            <div class="cube-article">
-    <h1 class="title">map和set</h1>
+            <style>
+    @media(max-width: 768px) {
+        body {
+            background-color: #fff!important;
+        }
+    }
+</style>
+<div class="cube-archives">
     
-    <div class="cube-article-header">
-        <div class="cube-article-date">
-            <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-            <!-- moment.js对象 -->
-            2018-09-20
-        </div>
-        <div class="cube-article-tags">
-    <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-    
-    <a href="/tags/数据结构/">#数据结构</a>
+        
+        <div class="cube-archive" style="margin-top: 0;">
+            
+                
+                   
+                            <h1 class="title">2018</h1>
+                            <ul class="posts">
+                   
+                            <li class="post">
+                                <a href="/2018/09/21/du6/">contest1 hdu1873优先队列的结构体应用题</a>
+                            </li>
+                
+            
+                
+                   
+                            <li class="post">
+                                <a href="/2018/09/21/du5/">set练习题</a>
+                            </li>
+                
+            
+                
+                   
+                            <li class="post">
+                                <a href="/2018/09/20/du4/">map和set</a>
+                            </li>
+                
+            
+                
+                   
+                            <li class="post">
+                                <a href="/2018/09/19/du3-1/">priority_queue 练习</a>
+                            </li>
+                
+            
+                
+                   
+                            <li class="post">
+                                <a href="/2018/09/18/du3/">搜索</a>
+                            </li>
+                
+            
+                
+                   
+                            <li class="post">
+                                <a href="/2018/09/17/du2/">随笔</a>
+                            </li>
+                
+            
+                
+                   
+                            <li class="post">
+                                <a href="/2018/09/16/search/">计协会长推荐的常用网址（实时更新）</a>
+                            </li>
+                
+            
+                
+                   
+                            <li class="post">
+                                <a href="/2018/09/15/ddd/">数学和编程</a>
+                            </li>
+                
+            
+                
+                   
+                            <li class="post">
+                                <a href="/2018/09/14/duwen/">dos游戏</a>
+                            </li>
+                
+            
+                
+                   
+                            <li class="post">
+                                <a href="/2018/09/13/about-me/">about me</a>
+                            </li>
+                
+            
+                
+                   
+                            <li class="post">
+                                <a href="/2018/09/12/hello-world/">第一篇博客</a>
+                            </li>
+                
+            
+                    </ul>
+                        </div>
+        
     
 </div>
-    </div>
-    
-    <div class="cube-article-content cube-markdown">
-        
-        <p>##map 数据结构常见用法<br>代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">#include&lt;iterator&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef map&lt;int,string,less&lt;int&gt; &gt;M_TYPE;//less greater 都是算子，针对键值来的 默认排序其实也就是key值的升序 ，也就是less&lt;int&gt; </span><br><span class="line">typedef M_TYPE::iterator M_IT;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	M_TYPE Map;</span><br><span class="line">	Map[1]=&quot;no.1&quot;;</span><br><span class="line">	Map[2]=&quot;no.2&quot;;</span><br><span class="line">	Map[3]=&quot;no.3&quot;;</span><br><span class="line">	Map[4]=&quot;no.4&quot;;</span><br><span class="line">	Map[5]=&quot;no.5&quot;;</span><br><span class="line">	M_IT it=Map.find(2);</span><br><span class="line">	cout&lt;&lt;&quot;map[2]是&quot;&lt;&lt;it-&gt;second&lt;&lt;endl;</span><br><span class="line">	Map.insert(make_pair(2,&quot;new no.2&quot;));//不能改变已有的，可以添加没有的</span><br><span class="line">	Map.insert(make_pair(6,&quot;no.6&quot;)); </span><br><span class="line">	Map.insert(pair&lt;int,string&gt;(7,&quot;no.7&quot;));</span><br><span class="line">	cout&lt;&lt;&quot;新的map[2]是&quot;&lt;&lt;it-&gt;second&lt;&lt;endl;</span><br><span class="line">	M_IT is=Map.find(2);</span><br><span class="line">	cout&lt;&lt;&quot;新的map[2]是&quot;&lt;&lt;is-&gt;second&lt;&lt;endl;</span><br><span class="line">	it-&gt;second=&quot;new new no.2&quot;;//可以修改原有的 </span><br><span class="line">	cout&lt;&lt;&quot;最新的map[2]是&quot;&lt;&lt;it-&gt;second&lt;&lt;endl;</span><br><span class="line">	for(M_IT tt= Map.begin();tt!=Map.end();tt++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;tt-&gt;second&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	Map.erase(2);</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	for(M_IT tt= Map.begin();tt!=Map.end();tt++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;tt-&gt;second&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	M_IT id=Map.find(5);</span><br><span class="line">	Map.erase(id);</span><br><span class="line">	for(M_IT tt= Map.begin();tt!=Map.end();tt++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;tt-&gt;second&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="水果hdu1263-map内部嵌套用法-简单例题"><a href="#水果hdu1263-map内部嵌套用法-简单例题" class="headerlink" title="水果hdu1263 map内部嵌套用法 简单例题"></a>水果hdu1263 map内部嵌套用法 简单例题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef map&lt;string,map&lt;string,int&gt; &gt; MA_P;</span><br><span class="line">typedef map&lt;string,int&gt; Ma_P;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int n;</span><br><span class="line">	cin&gt;&gt;n; </span><br><span class="line">	while(n--)</span><br><span class="line">	&#123;</span><br><span class="line">		int o;</span><br><span class="line">		cin&gt;&gt;o;</span><br><span class="line">		string s1,s2;</span><br><span class="line">		int k;</span><br><span class="line">		map&lt;string,map&lt;string,int&gt; &gt;q;</span><br><span class="line">		for(int i=0;i&lt;o;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cin&gt;&gt;s1&gt;&gt;s2&gt;&gt;k;</span><br><span class="line">			q[s2][s1]+=k;//亲测双重map只能这样用，不能用q.insert(make_pair(s2,make_pair(s1,k)))和pair(XX);   </span><br><span class="line">		&#125;</span><br><span class="line">		for(MA_P::iterator i=q.begin();i!=q.end();i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cout&lt;&lt;i-&gt;first&lt;&lt;endl;</span><br><span class="line">			for(Ma_P::iterator t=i-&gt;second.begin();t!=i-&gt;second.end();t++)</span><br><span class="line">			&#123;</span><br><span class="line">				cout&lt;&lt;&quot;   |----&quot;&lt;&lt;t-&gt;first&lt;&lt;&quot;(&quot;&lt;&lt;t-&gt;second&lt;&lt;&quot;)&quot;&lt;&lt;endl;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if(n&gt;0)</span><br><span class="line">		cout&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="set数据结构常见用法"><a href="#set数据结构常见用法" class="headerlink" title="set数据结构常见用法"></a>set数据结构常见用法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;set&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	set&lt;string&gt;strset;</span><br><span class="line">	set&lt;string&gt;::iterator it;</span><br><span class="line">	strset.insert(&quot;aa&quot;);</span><br><span class="line">	strset.insert(&quot;bb&quot;);</span><br><span class="line">	strset.insert(&quot;cc&quot;);</span><br><span class="line">	strset.insert(&quot;dd&quot;);</span><br><span class="line">	for(it=strset.begin();it!=strset.end();it++)//set默认排序为升序，也就是less </span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;*it&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	it=strset.begin();</span><br><span class="line">	cout&lt;&lt;&quot;set的第一个元素&quot;&lt;&lt;*it&lt;&lt;endl;</span><br><span class="line">	it=strset.end();</span><br><span class="line">	it--;</span><br><span class="line">	cout&lt;&lt;&quot;set的最后一个元素&quot;&lt;&lt;*it&lt;&lt;endl;</span><br><span class="line">	cout&lt;&lt;strset.empty()&lt;&lt;endl;</span><br><span class="line">	cout&lt;&lt;strset.size()&lt;&lt;endl; </span><br><span class="line">	cout&lt;&lt;strset.max_size()&lt;&lt;endl;//容器可能包含的元素最大个数 	</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-    </div>
-</div>
-
-<div class="cube-article-nav">
-    <ul>
-        
-        <li class="prev">
-            <a href="/2018/09/21/du5/">
-                <i class="cube-icon cube-prev" aria-hidden="true"></i>
-                set练习题
-            </a>
-        </li>
-        
-        
-        <li class="next">
-            <a href="/2018/09/19/du3-1/">
-                priority_queue 练习
-                <i class="cube-icon cube-next" aria-hidden="true"></i>
-            </a>
-        </li>
-        
-    </ul>
-</div>
-
-
-<!-- TODO 根据theme.comment的内容进行入口选择 -->
-
-
-
         </div>
         <div class="cube-right">
             
@@ -351,7 +396,7 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/关于我自己/">#关于我自己</a>
         </div>
         
@@ -361,7 +406,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/数据结构/">#数据结构</a>
         </div>
         

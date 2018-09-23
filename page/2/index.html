@@ -10,7 +10,7 @@
     
     
     
-    <title>map和set | Wenji&#39;s blog</title>
+    <title>Wenji&#39;s blog</title>
     <!-- inject:style -->
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <!-- endinject -->
@@ -150,58 +150,84 @@
     
     <div class="cube-content">
         <div class="cube-left">
-            <div class="cube-article">
-    <h1 class="title">map和set</h1>
-    
-    <div class="cube-article-header">
-        <div class="cube-article-date">
-            <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-            <!-- moment.js对象 -->
-            2018-09-20
+            
+<div class="cube-excerpt" id="cube-excerpt-第一篇博客">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2018/09/12/hello-world/">第一篇博客</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2018-09-12
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/添加博客/" class="cube-excerpt-tag-link">#添加博客</a>
+                
+            </div>
         </div>
-        <div class="cube-article-tags">
-    <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-    
-    <a href="/tags/数据结构/">#数据结构</a>
-    
-</div>
-    </div>
-    
-    <div class="cube-article-content cube-markdown">
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
         
-        <p>##map 数据结构常见用法<br>代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">#include&lt;iterator&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef map&lt;int,string,less&lt;int&gt; &gt;M_TYPE;//less greater 都是算子，针对键值来的 默认排序其实也就是key值的升序 ，也就是less&lt;int&gt; </span><br><span class="line">typedef M_TYPE::iterator M_IT;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	M_TYPE Map;</span><br><span class="line">	Map[1]=&quot;no.1&quot;;</span><br><span class="line">	Map[2]=&quot;no.2&quot;;</span><br><span class="line">	Map[3]=&quot;no.3&quot;;</span><br><span class="line">	Map[4]=&quot;no.4&quot;;</span><br><span class="line">	Map[5]=&quot;no.5&quot;;</span><br><span class="line">	M_IT it=Map.find(2);</span><br><span class="line">	cout&lt;&lt;&quot;map[2]是&quot;&lt;&lt;it-&gt;second&lt;&lt;endl;</span><br><span class="line">	Map.insert(make_pair(2,&quot;new no.2&quot;));//不能改变已有的，可以添加没有的</span><br><span class="line">	Map.insert(make_pair(6,&quot;no.6&quot;)); </span><br><span class="line">	Map.insert(pair&lt;int,string&gt;(7,&quot;no.7&quot;));</span><br><span class="line">	cout&lt;&lt;&quot;新的map[2]是&quot;&lt;&lt;it-&gt;second&lt;&lt;endl;</span><br><span class="line">	M_IT is=Map.find(2);</span><br><span class="line">	cout&lt;&lt;&quot;新的map[2]是&quot;&lt;&lt;is-&gt;second&lt;&lt;endl;</span><br><span class="line">	it-&gt;second=&quot;new new no.2&quot;;//可以修改原有的 </span><br><span class="line">	cout&lt;&lt;&quot;最新的map[2]是&quot;&lt;&lt;it-&gt;second&lt;&lt;endl;</span><br><span class="line">	for(M_IT tt= Map.begin();tt!=Map.end();tt++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;tt-&gt;second&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	Map.erase(2);</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	for(M_IT tt= Map.begin();tt!=Map.end();tt++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;tt-&gt;second&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	M_IT id=Map.find(5);</span><br><span class="line">	Map.erase(id);</span><br><span class="line">	for(M_IT tt= Map.begin();tt!=Map.end();tt++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;tt-&gt;second&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="水果hdu1263-map内部嵌套用法-简单例题"><a href="#水果hdu1263-map内部嵌套用法-简单例题" class="headerlink" title="水果hdu1263 map内部嵌套用法 简单例题"></a>水果hdu1263 map内部嵌套用法 简单例题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef map&lt;string,map&lt;string,int&gt; &gt; MA_P;</span><br><span class="line">typedef map&lt;string,int&gt; Ma_P;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int n;</span><br><span class="line">	cin&gt;&gt;n; </span><br><span class="line">	while(n--)</span><br><span class="line">	&#123;</span><br><span class="line">		int o;</span><br><span class="line">		cin&gt;&gt;o;</span><br><span class="line">		string s1,s2;</span><br><span class="line">		int k;</span><br><span class="line">		map&lt;string,map&lt;string,int&gt; &gt;q;</span><br><span class="line">		for(int i=0;i&lt;o;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cin&gt;&gt;s1&gt;&gt;s2&gt;&gt;k;</span><br><span class="line">			q[s2][s1]+=k;//亲测双重map只能这样用，不能用q.insert(make_pair(s2,make_pair(s1,k)))和pair(XX);   </span><br><span class="line">		&#125;</span><br><span class="line">		for(MA_P::iterator i=q.begin();i!=q.end();i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cout&lt;&lt;i-&gt;first&lt;&lt;endl;</span><br><span class="line">			for(Ma_P::iterator t=i-&gt;second.begin();t!=i-&gt;second.end();t++)</span><br><span class="line">			&#123;</span><br><span class="line">				cout&lt;&lt;&quot;   |----&quot;&lt;&lt;t-&gt;first&lt;&lt;&quot;(&quot;&lt;&lt;t-&gt;second&lt;&lt;&quot;)&quot;&lt;&lt;endl;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if(n&gt;0)</span><br><span class="line">		cout&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="set数据结构常见用法"><a href="#set数据结构常见用法" class="headerlink" title="set数据结构常见用法"></a>set数据结构常见用法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;set&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	set&lt;string&gt;strset;</span><br><span class="line">	set&lt;string&gt;::iterator it;</span><br><span class="line">	strset.insert(&quot;aa&quot;);</span><br><span class="line">	strset.insert(&quot;bb&quot;);</span><br><span class="line">	strset.insert(&quot;cc&quot;);</span><br><span class="line">	strset.insert(&quot;dd&quot;);</span><br><span class="line">	for(it=strset.begin();it!=strset.end();it++)//set默认排序为升序，也就是less </span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;*it&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	it=strset.begin();</span><br><span class="line">	cout&lt;&lt;&quot;set的第一个元素&quot;&lt;&lt;*it&lt;&lt;endl;</span><br><span class="line">	it=strset.end();</span><br><span class="line">	it--;</span><br><span class="line">	cout&lt;&lt;&quot;set的最后一个元素&quot;&lt;&lt;*it&lt;&lt;endl;</span><br><span class="line">	cout&lt;&lt;strset.empty()&lt;&lt;endl;</span><br><span class="line">	cout&lt;&lt;strset.size()&lt;&lt;endl; </span><br><span class="line">	cout&lt;&lt;strset.max_size()&lt;&lt;endl;//容器可能包含的元素最大个数 	</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+           <p>  这个主要是一个博客发表内容的主要步骤，以及如何链接到hexo所需的文件</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="创建一个md文件，来添加新的内容"><a href="#创建一个md文件，来添加新的内容" class="headerlink" title="创建一个md文件，来添加新的内容"></a>创建一个md文件，来添加新的内容</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>创建后md文件会在hexo文件下的source的_posts里面</p>
+<p>更多的功能: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="运行自己的hexo-server"><a href="#运行自己的hexo-server" class="headerlink" title="运行自己的hexo-server"></a>运行自己的hexo-server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-server --save</span><br></pre></td></tr></table></figure>
+<p>Hexo 3.0 把服务器独立成了个别模块，您必须先安装 hexo-server 才能使用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></p>
+<p>安装完成后，输入以下命令以启动服务器，您的网站会在 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 下启动。在服务器启动期间，Hexo 会监视文件变动并自动更新，您无须重启服务器。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server -p 5000</span><br></pre></td></tr></table></figure></p>
+<p>如果您想要更改端口，或是在执行时遇到了 EADDRINUSE 错误，可以在执行时使用 -p 选项指定其他端口，如下：</p>
+<p>更多的功能: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="使用Hexo生成静态文件"><a href="#使用Hexo生成静态文件" class="headerlink" title="使用Hexo生成静态文件"></a>使用Hexo生成静态文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>监视文件变动<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate --watch</span><br></pre></td></tr></table></figure></p>
+<p>Hexo 能够监视文件变动并立即重新生成静态文件，在生成时会比对文件的 SHA1 checksum，只有变动的文件才会写入。<br>完成对文件等内容的修改，进行网页的完成后部署，上传上去<br>您可执行下列的其中一个命令，让 Hexo 在生成完毕后自动部署网站，两个命令的作用是相同的。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate --deploy</span><br><span class="line">$ hexo deploy --generate</span><br></pre></td></tr></table></figure></p>
+<p>简写<br>上面两个命令可以简写为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g -d</span><br><span class="line">$ hexo d -g</span><br></pre></td></tr></table></figure></p>
+<p>也可以分成两步<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g </span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure></p>
+<p>更多的功能: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="快速部署功能，一条命令就能将网站部署到服务器上"><a href="#快速部署功能，一条命令就能将网站部署到服务器上" class="headerlink" title="快速部署功能，一条命令就能将网站部署到服务器上"></a>快速部署功能，一条命令就能将网站部署到服务器上</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>在开始之前，您必须先在 _config.yml 中修改参数，一个正确的部署配置中至少要有 type 参数，例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br></pre></td></tr></table></figure></p>
+<p>更多的功能: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
-    </div>
-</div>
-
-<div class="cube-article-nav">
-    <ul>
         
-        <li class="prev">
-            <a href="/2018/09/21/du5/">
-                <i class="cube-icon cube-prev" aria-hidden="true"></i>
-                set练习题
-            </a>
-        </li>
-        
-        
-        <li class="next">
-            <a href="/2018/09/19/du3-1/">
-                priority_queue 练习
-                <i class="cube-icon cube-next" aria-hidden="true"></i>
-            </a>
-        </li>
-        
-    </ul>
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2018/09/12/hello-world/">Read More</a>
+    </footer>
 </div>
 
 
-<!-- TODO 根据theme.comment的内容进行入口选择 -->
 
+<ul class="cube-pagination cube-pagination-6">
+    
+    <li class="cube-pagination-prev">
+        <a href="/">« Prev</a>
+    </li>
+    
+    
+        
+            
+            <li class="cube-pagination-index">
+                <a href="/">1</a>
+            </li>
+            
+        
+            
+            <li class="cube-pagination-index disabled">
+                <span>2</span>
+            </li>
+            
+        
+    
 
+    
+    <li class="cube-pagination-next disabled">
+        <span>Next »</span>
+    </li>
+    
+</ul>
 
+<!--其他组件后续添加-->
         </div>
         <div class="cube-right">
             
@@ -371,7 +397,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/游戏/">#游戏</a>
         </div>
         
