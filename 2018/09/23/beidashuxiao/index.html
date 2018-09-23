@@ -10,7 +10,7 @@
     
     
     
-    <title>set练习题 | Wenji&#39;s blog</title>
+    <title>beidashuxiao | Wenji&#39;s blog</title>
     <!-- inject:style -->
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <!-- endinject -->
@@ -151,45 +151,33 @@
     <div class="cube-content">
         <div class="cube-left">
             <div class="cube-article">
-    <h1 class="title">set练习题</h1>
+    <h1 class="title">beidashuxiao</h1>
     
     <div class="cube-article-header">
         <div class="cube-article-date">
             <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
             <!-- moment.js对象 -->
-            2018-09-21
+            2018-09-23
         </div>
         <div class="cube-article-tags">
     <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-    
-    <a href="/tags/数据结构/">#数据结构</a>
     
 </div>
     </div>
     
     <div class="cube-article-content cube-markdown">
         
-        <h2 id="丑数-优先队列和set查重count练习"><a href="#丑数-优先队列和set查重count练习" class="headerlink" title="丑数 优先队列和set查重count练习"></a>丑数 优先队列和set查重count练习</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;set&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;//此题易错是long long 不是int </span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	ll n;</span><br><span class="line">	int factor[3]=&#123;2,3,5&#125;;</span><br><span class="line">	while(cin&gt;&gt;n&amp;&amp;n!=0)</span><br><span class="line">	&#123;</span><br><span class="line">		priority_queue&lt;ll,vector&lt;ll&gt;, greater&lt;ll&gt; &gt; q1;</span><br><span class="line">		set&lt;ll&gt; q2;</span><br><span class="line">		q1.push(1);</span><br><span class="line">		q2.insert(1);</span><br><span class="line">		ll i;</span><br><span class="line">		for(i=1;;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			ll m1=q1.top();</span><br><span class="line">			q1.pop();</span><br><span class="line">			if(i==n)</span><br><span class="line">			&#123;</span><br><span class="line">				printf(&quot;%lld\n&quot;,m1);</span><br><span class="line">				break;</span><br><span class="line">			&#125; </span><br><span class="line">			for(int j=0;j&lt;3;j++)</span><br><span class="line">			&#123;</span><br><span class="line">					ll m2=m1*factor[j];</span><br><span class="line">					if(!q2.count(m2))</span><br><span class="line">					&#123;</span><br><span class="line">						q1.push(m2);</span><br><span class="line">						q2.insert(m2);	</span><br><span class="line">					&#125;			</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="set对结构体排序的常见用法和排序插件cmp的用法"><a href="#set对结构体排序的常见用法和排序插件cmp的用法" class="headerlink" title="set对结构体排序的常见用法和排序插件cmp的用法"></a>set对结构体排序的常见用法和排序插件cmp的用法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;set&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">struct Student</span><br><span class="line">&#123;</span><br><span class="line">	int id;</span><br><span class="line">	string name;</span><br><span class="line">&#125;stu1,stu2,stu3;</span><br><span class="line">struct setcmp//set容器的插件,来确定set内部的排序 </span><br><span class="line">&#123;</span><br><span class="line">	bool operator()(Student a,Student b)</span><br><span class="line">	&#123;</span><br><span class="line">	return a.id&gt;b.id;					//这个大括号不可以省略，不然会报错的										</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">struct Setcmp</span><br><span class="line">&#123;</span><br><span class="line">	bool operator()(Student a,Student b)</span><br><span class="line">	&#123;</span><br><span class="line">	return a.id&lt;b.id;	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;; </span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	set&lt;Student,setcmp&gt; my;</span><br><span class="line">	set&lt;Student&gt;::iterator it; </span><br><span class="line">	stu1.id=1000;</span><br><span class="line">	stu2.id=2000;</span><br><span class="line">	stu3.id=3000;</span><br><span class="line">	stu1.name=&quot;ddd&quot;;</span><br><span class="line">	stu2.name=&quot;www&quot;;</span><br><span class="line">	stu3.name=&quot;aaa&quot;;</span><br><span class="line">	my.insert(stu1);</span><br><span class="line">	my.insert(stu2);</span><br><span class="line">	my.insert(stu3);	</span><br><span class="line">	for(it=my.begin();it!=my.end();it++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;it-&gt;id&lt;&lt;&quot; &quot;&lt;&lt;it-&gt;name&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	set&lt;Student,Setcmp&gt; mm;</span><br><span class="line">	mm.insert(stu1);</span><br><span class="line">	mm.insert(stu2);</span><br><span class="line">	mm.insert(stu3);</span><br><span class="line">	for(it=mm.begin();it!=mm.end();it++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;it-&gt;id&lt;&lt;&quot; &quot;&lt;&lt;it-&gt;name&lt;&lt;endl;</span><br><span class="line">	&#125;	</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="uva10815-set练习以及输入流sstream中的stringstream"><a href="#uva10815-set练习以及输入流sstream中的stringstream" class="headerlink" title="uva10815 set练习以及输入流sstream中的stringstream"></a>uva10815 set练习以及输入流sstream中的stringstream</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;sstream&gt;</span><br><span class="line">#include&lt;set&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	set&lt;string&gt; str;</span><br><span class="line">	string s;</span><br><span class="line">	while(cin&gt;&gt;s)</span><br><span class="line">	&#123;</span><br><span class="line">		for(int i=0;i&lt;s.length();i++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(isalpha(s[i]))</span><br><span class="line">			&#123;</span><br><span class="line">				s[i]=tolower(s[i]);</span><br><span class="line">			&#125;</span><br><span class="line">			else</span><br><span class="line">			&#123;</span><br><span class="line">				s[i]=&apos; &apos;;//一个字符空格时&apos; &apos;不是&quot; &quot;; 输入的非字符转换为空格，作为单词的分界点</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		stringstream ss(s);//流 ;</span><br><span class="line">		//构造时就写进，因为时对象的原因，将s加入ss流类里面,就类似于文件里面的输入文件一样 </span><br><span class="line">		string s2;</span><br><span class="line">		while(ss&gt;&gt;s2)</span><br><span class="line">		&#123;</span><br><span class="line">			str.insert(s2); </span><br><span class="line">		&#125; </span><br><span class="line">	&#125;</span><br><span class="line">	for(set&lt;string&gt;::iterator it=str.begin();it!=str.end();it++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;*it&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+        
     </div>
 </div>
 
 <div class="cube-article-nav">
     <ul>
         
-        <li class="prev">
-            <a href="/2018/09/21/du6/">
-                <i class="cube-icon cube-prev" aria-hidden="true"></i>
-                contest1 hdu1873优先队列的结构体应用题
-            </a>
-        </li>
-        
         
         <li class="next">
-            <a href="/2018/09/20/du4/">
-                map和set
+            <a href="/2018/09/23/du8/">
+                线段树板子
                 <i class="cube-icon cube-next" aria-hidden="true"></i>
             </a>
         </li>
@@ -351,7 +339,7 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/编程经验/">#编程经验</a>
         </div>
         
@@ -371,7 +359,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/数据结构/">#数据结构</a>
         </div>
         
@@ -391,7 +379,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/常用学习网址/">#常用学习网址</a>
         </div>
         
