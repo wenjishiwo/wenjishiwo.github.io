@@ -150,6 +150,43 @@
     <div class="cube-content">
         <div class="cube-left">
             
+<div class="cube-excerpt" id="cube-excerpt-priority_queue 练习">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2018/09/19/du3-1/">priority_queue 练习</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2018-09-19
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/数据结构/" class="cube-excerpt-tag-link">#数据结构</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>##代码  greater算子</p>
+<p>#include<iostream></iostream></p>
+<p>#include<queue><br>using namespace std;<br>class T<br>{<br>    public:<br>    int x,y,z;<br>    T(int a,int b,int c):x(a),y(b),z(c)<br>    {</queue></p>
+<pre><code>}    
+</code></pre><p>};<br>bool operator &gt;(const T &amp;t1,const T &amp;t2)<br>{<br>    return t1.z&gt;t2.z;<br>}<br>int main()<br>{<br>    priority_queue&lt;T,vector<t>,greater<t> &gt; q;<br>    q.push(T(4,4,3));<br>    q.push(T(2,2,5));<br>    q.push(T(1,5,4));<br>    q.push(T(3,3,6));<br>    while(!q.empty())<br>    {<br>        T t=q.top();<br>        q.pop();<br>        cout&lt;&lt;t.x&lt;&lt;” “&lt;&lt;t.y&lt;&lt;” “&lt;&lt;t.z&lt;&lt;endl;<br>    }<br>    return 0;<br>}</t></t></p>
+<p>##代码 less 算子</p>
+<p>#include<iostream></iostream></p>
+<p>#include<queue><br>using namespace std;<br>class T<br>{<br>    public:<br>    int x,y,z;<br>    T(int a,int b,int c):x(a),y(b),z(c)<br>    {</queue></p>
+<pre><code>}    
+</code></pre><p>};<br>bool operator &lt;(const T &amp;t1,const T &amp;t2)<br>{<br>    return t1.z&lt;t2.z;<br>}<br>int main()<br>{<br>    priority_queue<t> q;<br>    q.push(T(4,4,3));<br>    q.push(T(2,2,5));<br>    q.push(T(1,5,4));<br>    q.push(T(3,3,6));<br>    while(!q.empty())<br>    {<br>        T t=q.top();<br>        q.pop();<br>        cout&lt;&lt;t.x&lt;&lt;” “&lt;&lt;t.y&lt;&lt;” “&lt;&lt;t.z&lt;&lt;endl;<br>    }<br>    return 0;<br>}</t></p>
+
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2018/09/19/du3-1/">Read More</a>
+    </footer>
+</div>
+
 <div class="cube-excerpt" id="cube-excerpt-搜索">
     <header class="cube-excerpt-header">
         <h1><a href="/2018/09/18/du3/">搜索</a></h1>
@@ -466,7 +503,7 @@
     
     
     <div class="count">
-        <a class="count articles"><span>27</span>Article</a>
+        <a class="count articles"><span>28</span>Article</a>
         <a class="count tags"><span>19</span>Tags</a>
         <a class="count categories"><span>0</span>Categories</a>
     </div>
@@ -505,7 +542,7 @@
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/24/9-24-5/" title="中秋节快乐">中秋节快乐</a>
+                    <a href="/2018/09/24/9-24-6/" title="9-24">9-24</a>
                 </p>
             </div>
             
@@ -519,7 +556,7 @@
                     <span>2</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/24/9-24-4/" title="基于顺序存储结构的图书信息表的图书去重">基于顺序存储结构的图书信息表的图书去重</a>
+                    <a href="/2018/09/24/9-24-5/" title="中秋节快乐">中秋节快乐</a>
                 </p>
             </div>
         </li>
@@ -532,7 +569,7 @@
                     <span>3</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/24/9-24-3/" title="基于顺序存储结构的图书信息表的新图书的入库">基于顺序存储结构的图书信息表的新图书的入库</a>
+                    <a href="/2018/09/24/9-24-4/" title="基于顺序存储结构的图书信息表的图书去重">基于顺序存储结构的图书信息表的图书去重</a>
                 </p>
             </div>
         </li>
@@ -545,7 +582,7 @@
                     <span>4</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/24/9-24-2/" title="基本编程知识（我不会的）">基本编程知识（我不会的）</a>
+                    <a href="/2018/09/24/9-24-3/" title="基于顺序存储结构的图书信息表的新图书的入库">基于顺序存储结构的图书信息表的新图书的入库</a>
                 </p>
             </div>
         </li>
@@ -558,7 +595,7 @@
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/24/9-24-1/" title="基于顺序存储结构的图书信息表的排序">基于顺序存储结构的图书信息表的排序</a>
+                    <a href="/2018/09/24/9-24-2/" title="基本编程知识（我不会的）">基本编程知识（我不会的）</a>
                 </p>
             </div>
         </li>
@@ -578,8 +615,13 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/排序sort/">#排序sort</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/顺序存储结构/">#顺序存储结构</a>
         </div>
         
         
@@ -594,12 +636,7 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/顺序存储结构/">#顺序存储结构</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/关于我自己/">#关于我自己</a>
+            <a href="/tags/申请暑校/">#申请暑校</a>
         </div>
         
         
@@ -609,36 +646,36 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/申请暑校/">#申请暑校</a>
+            <a href="/tags/编程经验/">#编程经验</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/Dijkstra/">#Dijkstra</a>
         </div>
         
         
         <div class="cube-box-bg ">
+            <a href="/tags/关于我自己/">#关于我自己</a>
+        </div>
+        
+        
+        <div class="cube-box ">
             <a href="/tags/prime/">#prime</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/数据结构/">#数据结构</a>
         </div>
         
         
-        <div class="cube-box ">
-            <a href="/tags/编程经验/">#编程经验</a>
-        </div>
-        
-        
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/bfs和dfs/">#bfs和dfs</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/并查集/">#并查集</a>
         </div>
         
@@ -649,22 +686,22 @@
         
         
         <div class="cube-box ">
+            <a href="/tags/游戏/">#游戏</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
             <a href="/tags/添加博客/">#添加博客</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/游戏/">#游戏</a>
+            <a href="/tags/常用学习网址/">#常用学习网址</a>
         </div>
         
         
         <div class="cube-box ">
             <a href="/tags/有趣/">#有趣</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/常用学习网址/">#常用学习网址</a>
         </div>
         
         
