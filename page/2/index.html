@@ -150,6 +150,33 @@
     <div class="cube-content">
         <div class="cube-left">
             
+<div class="cube-excerpt" id="cube-excerpt-Dijkstra 最短路 有向图版本板子 无向图就是双重附边">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2018/09/21/du9/">Dijkstra 最短路 有向图版本板子 无向图就是双重附边</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2018-09-21
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/Dijkstra/" class="cube-excerpt-tag-link">#Dijkstra</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"> #include &lt;stdio.h&gt;</span><br><span class="line">    int main()</span><br><span class="line">    &#123;</span><br><span class="line">        int e[10][10],dis[10],book[10],i,j,n,m,t1,t2,t3,u,v,min;</span><br><span class="line">        int inf=99999999; //用inf(infinity的缩写)存储一个我们认为的正无穷值</span><br><span class="line">        //读入n和m，n表示顶点个数，m表示边的条数</span><br><span class="line">        scanf(&quot;%d %d&quot;,&amp;n,&amp;m);</span><br><span class="line"></span><br><span class="line">        //初始化</span><br><span class="line">        for(i=1;i&lt;=n;i++)</span><br><span class="line">            for(j=1;j&lt;=n;j++)</span><br><span class="line">                if(i==j) e[i][j]=0;</span><br><span class="line">                  else e[i][j]=inf;</span><br><span class="line"></span><br><span class="line">        //读入边</span><br><span class="line">        for(i=1;i&lt;=m;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf(&quot;%d %d %d&quot;,&amp;t1,&amp;t2,&amp;t3);</span><br><span class="line">            e[t1][t2]=t3;</span><br><span class="line">        &#125;</span><br><span class="line">        //初始化dis数组，这里是1号顶点到其余各个顶点的初始路程</span><br><span class="line">        for(i=1;i&lt;=n;i++)</span><br><span class="line">            dis[i]=e[1][i];</span><br><span class="line">        //book数组初始化</span><br><span class="line">        for(i=1;i&lt;=n;i++)</span><br><span class="line">            book[i]=0;</span><br><span class="line">        book[1]=1;</span><br><span class="line"></span><br><span class="line">        //Dijkstra算法核心语句</span><br><span class="line">        for(i=1;i&lt;=n-1;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            //找到离1号顶点最近的顶点</span><br><span class="line">            min=inf;</span><br><span class="line">            for(j=1;j&lt;=n;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                if(book[j]==0 &amp;&amp; dis[j]&lt;min)</span><br><span class="line">                &#123;</span><br><span class="line">                    min=dis[j];</span><br><span class="line">                    u=j;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            book[u]=1;</span><br><span class="line">            for(v=1;v&lt;=n;v++)</span><br><span class="line">            &#123;</span><br><span class="line">                if(e[u][v]&lt;inf)</span><br><span class="line">                &#123;</span><br><span class="line">                    if(dis[v]&gt;dis[u]+e[u][v])</span><br><span class="line">                        dis[v]=dis[u]+e[u][v];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        //输出最终的结果</span><br><span class="line">        for(i=1;i&lt;=n;i++)</span><br><span class="line">            printf(&quot;%d &quot;,dis[i]);</span><br><span class="line"></span><br><span class="line">        getchar();</span><br><span class="line">        getchar();</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">/*</span><br><span class="line">可以输入以下数据进行验证。第一行两个整数 n m。n 表示顶点个数（顶点编号为 1~n），m 表示边的条数。接下来 m 行表示，每行有 3 个数 x y z。表示顶点 x 到顶点 y 边的权值为 z。</span><br><span class="line">    6 9</span><br><span class="line">    1 2 1</span><br><span class="line">    1 3 12</span><br><span class="line">    2 3 9</span><br><span class="line">    2 4 3</span><br><span class="line">    3 5 5</span><br><span class="line">    4 3 4</span><br><span class="line">    4 5 13</span><br><span class="line">    4 6 15</span><br><span class="line">    5 6 4</span><br><span class="line">运行结果是</span><br><span class="line">    0 1 8 4 13 17</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2018/09/21/du9/">Read More</a>
+    </footer>
+</div>
+
 <div class="cube-excerpt" id="cube-excerpt-线段树板子">
     <header class="cube-excerpt-header">
         <h1><a href="/2018/09/21/du8/">线段树板子</a></h1>
@@ -420,32 +447,6 @@
     </footer>
 </div>
 
-<div class="cube-excerpt" id="cube-excerpt-随笔">
-    <header class="cube-excerpt-header">
-        <h1><a href="/2018/09/17/du2/">随笔</a></h1>
-        <div class="cube-excerpt-header-msg">
-            <div class="cube-excerpt-date">
-                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2018-09-17
-            </div>
-            <div class="cube-excerpt-tags">
-                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-                
-            </div>
-        </div>
-    </header>
-    <article class="cube-excerpt-entry cube-markdown">
-        
-        
-           <p>我准备整理记录一些以前做过的题，也是为了提醒自己。<br>先从基础知识开始，就从搜索算法开始。</p>
-
-        
-    </article>
-    <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2018/09/17/du2/">Read More</a>
-    </footer>
-</div>
-
 
 
 <ul class="cube-pagination cube-pagination-6">
@@ -521,7 +522,7 @@
     
     
     <div class="count">
-        <a class="count articles"><span>25</span>Article</a>
+        <a class="count articles"><span>26</span>Article</a>
         <a class="count tags"><span>19</span>Tags</a>
         <a class="count categories"><span>0</span>Categories</a>
     </div>
@@ -560,7 +561,7 @@
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/24/9-24-3/" title="基于顺序存储结构的图书信息表的新图书的入库">基于顺序存储结构的图书信息表的新图书的入库</a>
+                    <a href="/2018/09/24/9-24-4/" title="基于顺序存储结构的图书信息表的图书去重">基于顺序存储结构的图书信息表的图书去重</a>
                 </p>
             </div>
             
@@ -574,7 +575,7 @@
                     <span>2</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/24/9-24-2/" title="基本编程知识（我不会的）">基本编程知识（我不会的）</a>
+                    <a href="/2018/09/24/9-24-3/" title="基于顺序存储结构的图书信息表的新图书的入库">基于顺序存储结构的图书信息表的新图书的入库</a>
                 </p>
             </div>
         </li>
@@ -587,7 +588,7 @@
                     <span>3</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/24/9-24-1/" title="基于顺序存储结构的图书信息表的排序">基于顺序存储结构的图书信息表的排序</a>
+                    <a href="/2018/09/24/9-24-2/" title="基本编程知识（我不会的）">基本编程知识（我不会的）</a>
                 </p>
             </div>
         </li>
@@ -600,7 +601,7 @@
                     <span>4</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/24/9-24/" title="基于顺序存储结构的图书信息表的创建和输出">基于顺序存储结构的图书信息表的创建和输出</a>
+                    <a href="/2018/09/24/9-24-1/" title="基于顺序存储结构的图书信息表的排序">基于顺序存储结构的图书信息表的排序</a>
                 </p>
             </div>
         </li>
@@ -613,7 +614,7 @@
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/23/jiejue/" title="博客页面显示问题">博客页面显示问题</a>
+                    <a href="/2018/09/24/9-24/" title="基于顺序存储结构的图书信息表的创建和输出">基于顺序存储结构的图书信息表的创建和输出</a>
                 </p>
             </div>
         </li>
@@ -634,11 +635,6 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/基础/">#基础</a>
-        </div>
-        
-        
-        <div class="cube-box ">
             <a href="/tags/排序sort/">#排序sort</a>
         </div>
         
@@ -648,33 +644,33 @@
         </div>
         
         
+        <div class="cube-box-bg ">
+            <a href="/tags/基础/">#基础</a>
+        </div>
+        
+        
         <div class="cube-box ">
             <a href="/tags/顺序存储结构顺序表/">#顺序存储结构顺序表</a>
         </div>
         
         
-        <div class="cube-box ">
-            <a href="/tags/申请暑校/">#申请暑校</a>
-        </div>
-        
-        
         <div class="cube-box-bg ">
-            <a href="/tags/编程经验/">#编程经验</a>
-        </div>
-        
-        
-        <div class="cube-box ">
             <a href="/tags/关于我自己/">#关于我自己</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/Dijkstra/">#Dijkstra</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/数据结构/">#数据结构</a>
+            <a href="/tags/编程经验/">#编程经验</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/申请暑校/">#申请暑校</a>
         </div>
         
         
@@ -684,12 +680,12 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/bfs和dfs/">#bfs和dfs</a>
+            <a href="/tags/数据结构/">#数据结构</a>
         </div>
         
         
-        <div class="cube-box ">
-            <a href="/tags/并查集/">#并查集</a>
+        <div class="cube-box-bg ">
+            <a href="/tags/bfs和dfs/">#bfs和dfs</a>
         </div>
         
         
@@ -698,8 +694,8 @@
         </div>
         
         
-        <div class="cube-box ">
-            <a href="/tags/添加博客/">#添加博客</a>
+        <div class="cube-box-bg ">
+            <a href="/tags/并查集/">#并查集</a>
         </div>
         
         
@@ -708,8 +704,8 @@
         </div>
         
         
-        <div class="cube-box ">
-            <a href="/tags/常用学习网址/">#常用学习网址</a>
+        <div class="cube-box-bg ">
+            <a href="/tags/添加博客/">#添加博客</a>
         </div>
         
         
@@ -719,12 +715,17 @@
         
         
         <div class="cube-box ">
+            <a href="/tags/感想/">#感想</a>
+        </div>
+        
+        
+        <div class="cube-box ">
             <a href="/tags/无/">#无</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/感想/">#感想</a>
+            <a href="/tags/常用学习网址/">#常用学习网址</a>
         </div>
         
     </div>
