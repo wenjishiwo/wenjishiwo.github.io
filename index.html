@@ -150,6 +150,42 @@
     <div class="cube-content">
         <div class="cube-left">
             
+<div class="cube-excerpt" id="cube-excerpt-基于顺序存储结构的图书信息表的新图书的入库">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2018/09/24/9-24-3/">基于顺序存储结构的图书信息表的新图书的入库</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2018-09-24
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/顺序存储结构/" class="cube-excerpt-tag-link">#顺序存储结构</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>描述<br>定义一个包含图书信息（书号、书名、价格）的顺序表，读入相应的图书数据来完成图书信息表的创建，然后根据指定的待入库的新图书的位置和信息，将新图书插入到图书表中指定的位置上，最后输出新图书入库后所有图书的信息。</p>
+<p>输入<br>总计n+3行。首先输入n+1行，其中，第一行是图书数目n，后n行是n本图书的信息（书号、书名、价格），每本图书信息占一行，书号、书名、价格用空格分隔，价格之后没有空格。其中书号和书名为字符串类型，价格为浮点数类型。之后输入第n+2行，内容仅为一个整数，代表待入库的新图书的位置序号。最后输入第n+3行，内容为新图书的信息，书号、书名、价格用空格分隔。</p>
+<p>输出<br>若插入成功：</p>
+<p>输出新图书入库后所有图书的信息（书号、书名、价格），总计n+1行，每行是一本图书的信息，书号、书名、价格用空格分隔。其中价格输出保留两位小数。</p>
+<p>若插入失败：</p>
+<p>只输出以下提示：抱歉，入库位置非法！</p>
+<p>样例输入1 复制<br>7<br>9787302257646 Data-Structure 35.00<br>9787302164340 Operating-System 50.00<br>9787302219972 Software-Engineer 32.00<br>9787302203513 Database-Principles 36.00<br>9787810827430 Discrete-Mathematics 36.00<br>9787302257800 Data-Structure 62.00<br>9787811234923 Compiler-Principles 62.00<br>2<br>9787822234110 The-C-Programming-Language 38.00<br>样例输出1<br>9787302257646 Data-Structure 35.00<br>9787822234110 The-C-Programming-Language 38.00<br>9787302164340 Operating-System 50.00<br>9787302219972 Software-Engineer 32.00<br>9787302203513 Database-Principles 36.00<br>9787810827430 Discrete-Mathematics 36.00<br>9787302257800 Data-Structure 62.00<br>9787811234923 Compiler-Principles 62.00</p>
+<p>这道题最开始wa的时候，我以为是由于我没用英文，<br>最后发现是由于没注意到插入的次序，也就是先后移之后<br>在插入。而我先插入之后再后移，就会造成数据出现重复。</p>
+<p>正确代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#define MAXSIZE 1000</span><br><span class="line">#define OK 1</span><br><span class="line">#define ERROR 0</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">	char no[20];</span><br><span class="line">	char name[50];</span><br><span class="line">	float price;</span><br><span class="line">&#125;Book;</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">	Book *elem;</span><br><span class="line">	int length;</span><br><span class="line">&#125;SqList;</span><br><span class="line">SqList L;</span><br><span class="line">int N;</span><br><span class="line">bool IninList(SqList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">	L.elem = new Book[MAXSIZE];</span><br><span class="line">	if (!L.elem) exit(OVERFLOW);</span><br><span class="line">	L.length = 0;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	cin&gt;&gt;N;</span><br><span class="line">	IninList(L);</span><br><span class="line">	for(int i=0;i&lt;N;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		scanf(&quot;%s%s%f&quot;, L.elem[i].no, L.elem[i].name, &amp;L.elem[i].price);</span><br><span class="line">		L.length++;</span><br><span class="line">	&#125;</span><br><span class="line">	int position;</span><br><span class="line">	Book book;</span><br><span class="line">	cin&gt;&gt;position;</span><br><span class="line">	scanf(&quot;%s%s%f&quot;, book.no, book.name, &amp;book.price);</span><br><span class="line">	if(position&lt;1||position&gt;(L.length+1))</span><br><span class="line">		cout&lt;&lt;&quot;Sorry, the storage location is illegal!&quot;&lt;&lt;endl;</span><br><span class="line">	else</span><br><span class="line">	&#123;</span><br><span class="line">		L.length++;</span><br><span class="line">		for(int i=L.length-1;i&gt;=position;i--)</span><br><span class="line">		&#123;</span><br><span class="line">			L.elem[i]=L.elem[i-1];</span><br><span class="line">		&#125;</span><br><span class="line">		L.elem[position-1]=book;</span><br><span class="line">	&#125;</span><br><span class="line">	for(int j=0;j&lt;L.length;j++)</span><br><span class="line">		printf(&quot;%s %s %.2f\n&quot;,L.elem[j].no,L.elem[j].name,L.elem[j].price);</span><br><span class="line">	delete[] L.elem;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2018/09/24/9-24-3/">Read More</a>
+    </footer>
+</div>
+
 <div class="cube-excerpt" id="cube-excerpt-基本编程知识（我不会的）">
     <header class="cube-excerpt-header">
         <h1><a href="/2018/09/24/9-24-2/">基本编程知识（我不会的）</a></h1>
@@ -415,33 +451,6 @@
     </footer>
 </div>
 
-<div class="cube-excerpt" id="cube-excerpt-线段树板子">
-    <header class="cube-excerpt-header">
-        <h1><a href="/2018/09/21/du8/">线段树板子</a></h1>
-        <div class="cube-excerpt-header-msg">
-            <div class="cube-excerpt-date">
-                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2018-09-21
-            </div>
-            <div class="cube-excerpt-tags">
-                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-                
-                <a href="/tags/线段树/" class="cube-excerpt-tag-link">#线段树</a>
-                
-            </div>
-        </div>
-    </header>
-    <article class="cube-excerpt-entry cube-markdown">
-        
-        
-           <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int maxn=1000010;</span><br><span class="line">int A[maxn];</span><br><span class="line">struct dian</span><br><span class="line">&#123;</span><br><span class="line">    int l,r;</span><br><span class="line">    int d;</span><br><span class="line">    int lazy;</span><br><span class="line">&#125;sum[maxn&lt;&lt;2];</span><br><span class="line">void pushup(int rt)</span><br><span class="line">&#123;</span><br><span class="line">    sum[rt].d=max(sum[rt&lt;&lt;1].d,sum[rt&lt;&lt;1|1].d);</span><br><span class="line">&#125;</span><br><span class="line">void build(int l,int r,int rt)</span><br><span class="line">&#123;</span><br><span class="line">    sum[rt].l=l;</span><br><span class="line">    sum[rt].r=r;</span><br><span class="line">    sum[rt].d=0;</span><br><span class="line">    sum[rt].lazy = 0;</span><br><span class="line">    if(l!=r)</span><br><span class="line">    &#123;</span><br><span class="line">        int mid=(l+r)&gt;&gt;1;</span><br><span class="line">        build(l,mid,rt&lt;&lt;1);</span><br><span class="line">        build(mid+1,r,rt&lt;&lt;1|1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">void xiachuan(int rt)</span><br><span class="line">&#123;</span><br><span class="line">        sum[rt&lt;&lt;1].lazy+=sum[rt].lazy;</span><br><span class="line">        sum[rt&lt;&lt;1|1].lazy+=sum[rt].lazy;</span><br><span class="line">        sum[rt&lt;&lt;1].d+=sum[rt].lazy;</span><br><span class="line">        sum[rt&lt;&lt;1|1].d+=sum[rt].lazy;</span><br><span class="line">        sum[rt].lazy=0;</span><br><span class="line">&#125;</span><br><span class="line">void cha(int l,int r,int rt)</span><br><span class="line">&#123;</span><br><span class="line">    if(sum[rt].l==l&amp;&amp;sum[rt].r==r)</span><br><span class="line">    &#123;</span><br><span class="line">        sum[rt].d++;</span><br><span class="line">        sum[rt].lazy++;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if(sum[rt].lazy)</span><br><span class="line">    xiachuan(rt);</span><br><span class="line">    int mid=(sum[rt].l+sum[rt].r)&gt;&gt;1;</span><br><span class="line">    if(r&lt;=mid)</span><br><span class="line">        cha(l,r,rt&lt;&lt;1);</span><br><span class="line">    else if(l&gt;mid)</span><br><span class="line">        cha(l,r,rt&lt;&lt;1|1);</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        cha(l,mid,rt&lt;&lt;1);</span><br><span class="line">        cha(mid+1,r,rt&lt;&lt;1|1);</span><br><span class="line">    &#125;</span><br><span class="line">    pushup(rt);</span><br><span class="line">&#125;</span><br><span class="line">int query(int l,int r,int rt)</span><br><span class="line">&#123;</span><br><span class="line">    if(sum[rt].l==l&amp;&amp;sum[rt].r==r)</span><br><span class="line">        return sum[rt].d;</span><br><span class="line">    if(sum[rt].lazy) </span><br><span class="line">    xiachuan(rt);</span><br><span class="line">    int mid=(sum[rt].r+sum[rt].l)&gt;&gt;1;</span><br><span class="line">    if(r&lt;=mid)</span><br><span class="line">        return query(l,r,rt&lt;&lt;1);</span><br><span class="line">    else if(l&gt;mid)</span><br><span class="line">        return query(l,r,rt&lt;&lt;1|1);</span><br><span class="line">    else</span><br><span class="line">        return max(query(l,mid,rt&lt;&lt;1),query(mid+1,r,rt&lt;&lt;1|1));</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">		int k,m;</span><br><span class="line">		int a,b;</span><br><span class="line">		memset(A,0,sizeof(A));</span><br><span class="line">        scanf(&quot;%d%d&quot;,&amp;k,&amp;m);</span><br><span class="line">        build(1,1000000,1);</span><br><span class="line">        int id=0;</span><br><span class="line">        for(int i=0;i&lt;m;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf(&quot;%d%d&quot;,&amp;a,&amp;b);</span><br><span class="line">            b--;</span><br><span class="line">            if(query(a,b,1)&lt;k)</span><br><span class="line">            &#123;</span><br><span class="line">                A[id++]=i+1;</span><br><span class="line">                cha(a,b,1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=0;i&lt;id;i++)</span><br><span class="line">        printf(&quot;%d &quot;,A[i]);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-    </article>
-    <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2018/09/21/du8/">Read More</a>
-    </footer>
-</div>
-
 
 
 <ul class="cube-pagination cube-pagination-6">
@@ -517,8 +526,8 @@
     
     
     <div class="count">
-        <a class="count articles"><span>24</span>Article</a>
-        <a class="count tags"><span>18</span>Tags</a>
+        <a class="count articles"><span>25</span>Article</a>
+        <a class="count tags"><span>19</span>Tags</a>
         <a class="count categories"><span>0</span>Categories</a>
     </div>
 </div>
@@ -556,7 +565,7 @@
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/24/9-24-2/" title="基本编程知识（我不会的）">基本编程知识（我不会的）</a>
+                    <a href="/2018/09/24/9-24-3/" title="基于顺序存储结构的图书信息表的新图书的入库">基于顺序存储结构的图书信息表的新图书的入库</a>
                 </p>
             </div>
             
@@ -570,7 +579,7 @@
                     <span>2</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/24/9-24-1/" title="基于顺序存储结构的图书信息表的排序">基于顺序存储结构的图书信息表的排序</a>
+                    <a href="/2018/09/24/9-24-2/" title="基本编程知识（我不会的）">基本编程知识（我不会的）</a>
                 </p>
             </div>
         </li>
@@ -583,7 +592,7 @@
                     <span>3</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/24/9-24/" title="基于顺序存储结构的图书信息表的创建和输出">基于顺序存储结构的图书信息表的创建和输出</a>
+                    <a href="/2018/09/24/9-24-1/" title="基于顺序存储结构的图书信息表的排序">基于顺序存储结构的图书信息表的排序</a>
                 </p>
             </div>
         </li>
@@ -596,7 +605,7 @@
                     <span>4</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/23/jiejue/" title="博客页面显示问题">博客页面显示问题</a>
+                    <a href="/2018/09/24/9-24/" title="基于顺序存储结构的图书信息表的创建和输出">基于顺序存储结构的图书信息表的创建和输出</a>
                 </p>
             </div>
         </li>
@@ -609,7 +618,7 @@
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/23/shenri/" title="今天是我的生日">今天是我的生日</a>
+                    <a href="/2018/09/23/jiejue/" title="博客页面显示问题">博客页面显示问题</a>
                 </p>
             </div>
         </li>
@@ -629,23 +638,23 @@
     <div class="cube-boxs">
         
         
+        <div class="cube-box ">
+            <a href="/tags/基础/">#基础</a>
+        </div>
+        
+        
         <div class="cube-box-bg ">
             <a href="/tags/排序sort/">#排序sort</a>
         </div>
         
         
         <div class="cube-box-bg ">
-            <a href="/tags/基础/">#基础</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
-            <a href="/tags/顺序存储结构顺序表/">#顺序存储结构顺序表</a>
+            <a href="/tags/顺序存储结构/">#顺序存储结构</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/关于我自己/">#关于我自己</a>
+            <a href="/tags/顺序存储结构顺序表/">#顺序存储结构顺序表</a>
         </div>
         
         
@@ -659,13 +668,13 @@
         </div>
         
         
-        <div class="cube-box ">
-            <a href="/tags/Dijkstra/">#Dijkstra</a>
+        <div class="cube-box-bg ">
+            <a href="/tags/关于我自己/">#关于我自己</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/prime/">#prime</a>
+            <a href="/tags/Dijkstra/">#Dijkstra</a>
         </div>
         
         
@@ -675,27 +684,32 @@
         
         
         <div class="cube-box ">
+            <a href="/tags/prime/">#prime</a>
+        </div>
+        
+        
+        <div class="cube-box ">
             <a href="/tags/bfs和dfs/">#bfs和dfs</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/并查集/">#并查集</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/线段树/">#线段树</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/游戏/">#游戏</a>
+            <a href="/tags/添加博客/">#添加博客</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/添加博客/">#添加博客</a>
+            <a href="/tags/游戏/">#游戏</a>
         </div>
         
         
@@ -709,12 +723,12 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/无/">#无</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/感想/">#感想</a>
         </div>
         
