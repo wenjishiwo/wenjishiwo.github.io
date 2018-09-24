@@ -150,6 +150,38 @@
     <div class="cube-content">
         <div class="cube-left">
             
+<div class="cube-excerpt" id="cube-excerpt-基本编程知识（我不会的）">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2018/09/24/9-24-2/">基本编程知识（我不会的）</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2018-09-24
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/基础/" class="cube-excerpt-tag-link">#基础</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>##1<br>c++中数据类型的转换一般分为隐含转换和强制转换两种；<br>（1）隐含转换<br>算术运算符 关系运算符 逻辑运算符赋值运算符等二元运算符<br>要求两个运算符的类型一致，算术运算 关系运算中参与运算的<br>类型不一致时要进行隐含转换，原则是将低类型转化成高类型<br>（类型越高数据精度越高，double&gt;float&gt;unsigned long&gt;long </p>
+<blockquote>
+<p>int&gt;short&gt;char&gt;）这种转化是电脑自动完成，是安全的，数据<br>精度没有损失；注意：逻辑运算符要求草错书读是bool型，如不<br>是则系统中地转换成bool型，非0数据转换成true，0转化成false；<br>（2）强制转换<br>一般涉及到将高类型转化成低类型时使用，不安全，可能在精度的<br>损失，有两种方法<br>1类型说明符（表达式）//c++强制转化符号<br>2(类型说明符)表达式 //c强制转化符号;<br>如 float z=7.56；<br>int a；<br>a=int（z）；或a=（int）z；</p>
+</blockquote>
+<p>##2<br>abs( )主要用于对求整数的绝对值，在“stdlib.h”(或 <cstdlib>)头文件<br>里面。<br>而fabs( )主要是求精度要求更高的double ，float 型的绝对值，在<cmath>头文件里。<br>两者在只#include<cmath>时都可以使用。 </cmath></cmath></cstdlib></p>
+
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2018/09/24/9-24-2/">Read More</a>
+    </footer>
+</div>
+
 <div class="cube-excerpt" id="cube-excerpt-基于顺序存储结构的图书信息表的排序">
     <header class="cube-excerpt-header">
         <h1><a href="/2018/09/24/9-24-1/">基于顺序存储结构的图书信息表的排序</a></h1>
@@ -410,33 +442,6 @@
     </footer>
 </div>
 
-<div class="cube-excerpt" id="cube-excerpt-contest1 hdu3635 drahonball 并查集升级版本 理解并查集基本概念和应用">
-    <header class="cube-excerpt-header">
-        <h1><a href="/2018/09/21/du7/">contest1 hdu3635 drahonball 并查集升级版本 理解并查集基本概念和应用</a></h1>
-        <div class="cube-excerpt-header-msg">
-            <div class="cube-excerpt-date">
-                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2018-09-21
-            </div>
-            <div class="cube-excerpt-tags">
-                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-                
-                <a href="/tags/并查集/" class="cube-excerpt-tag-link">#并查集</a>
-                
-            </div>
-        </div>
-    </header>
-    <article class="cube-excerpt-entry cube-markdown">
-        
-        
-           <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;//龙珠和城市都有区分 </span><br><span class="line">int gen[10010];//龙珠附属于某个城市 </span><br><span class="line">int num[10010];//龙珠移动次数 </span><br><span class="line">int rankk[10010];//所在城市的龙珠数</span><br><span class="line">int find(int x)</span><br><span class="line">&#123;</span><br><span class="line">	int r=x;</span><br><span class="line">	while(r!=gen[r])</span><br><span class="line">	&#123;</span><br><span class="line">		num[r]+=num[gen[r]];</span><br><span class="line">		r=gen[r];</span><br><span class="line">	&#125;</span><br><span class="line">	int i=x,j;</span><br><span class="line">	while(i!=r)</span><br><span class="line">	&#123;</span><br><span class="line">		j=gen[i];</span><br><span class="line">		gen[i]=r;</span><br><span class="line">		i=j;</span><br><span class="line">	&#125;</span><br><span class="line">&#125; </span><br><span class="line">void join(int a,int b)</span><br><span class="line">&#123;</span><br><span class="line">	int fx=find(a);</span><br><span class="line">	int fy=find(b);</span><br><span class="line">	if(fx!=fy)</span><br><span class="line">	&#123;</span><br><span class="line">		gen[fx]=fy;</span><br><span class="line">		rankk[fy]+=rankk[fx];</span><br><span class="line">		num[fx]=1;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int N; </span><br><span class="line">	cin&gt;&gt;N;</span><br><span class="line">	int ttt=0;</span><br><span class="line">	while(N--)</span><br><span class="line">	&#123;</span><br><span class="line">		int n,m;</span><br><span class="line">		ttt++;</span><br><span class="line">		cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">		string caozuo;</span><br><span class="line">		for(int i=1;i&lt;=n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			gen[i]=i;</span><br><span class="line">			num[i]=0;</span><br><span class="line">			rankk[i]=1;</span><br><span class="line">		&#125; </span><br><span class="line">		for(int i=1;i&lt;=m;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			int a,b;</span><br><span class="line">			cin&gt;&gt;caozuo;</span><br><span class="line">			if(caozuo==&quot;T&quot;)</span><br><span class="line">			&#123;</span><br><span class="line">				cin&gt;&gt;a&gt;&gt;b;</span><br><span class="line">				join(a,b);</span><br><span class="line">			&#125; </span><br><span class="line">			else</span><br><span class="line">			&#123;</span><br><span class="line">				cin&gt;&gt;a;</span><br><span class="line">				int temp=find(a);</span><br><span class="line">				cout&lt;&lt;&quot;Case &quot;&lt;&lt;ttt&lt;&lt;&quot;:&quot;&lt;&lt;endl&lt;&lt;temp&lt;&lt;&quot; &quot;&lt;&lt;rankk[temp]&lt;&lt;&quot; &quot;&lt;&lt;num[a]&lt;&lt;endl;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-    </article>
-    <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2018/09/21/du7/">Read More</a>
-    </footer>
-</div>
-
 
 
 <ul class="cube-pagination cube-pagination-6">
@@ -512,8 +517,8 @@
     
     
     <div class="count">
-        <a class="count articles"><span>23</span>Article</a>
-        <a class="count tags"><span>17</span>Tags</a>
+        <a class="count articles"><span>24</span>Article</a>
+        <a class="count tags"><span>18</span>Tags</a>
         <a class="count categories"><span>0</span>Categories</a>
     </div>
 </div>
@@ -551,7 +556,7 @@
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/24/9-24-1/" title="基于顺序存储结构的图书信息表的排序">基于顺序存储结构的图书信息表的排序</a>
+                    <a href="/2018/09/24/9-24-2/" title="基本编程知识（我不会的）">基本编程知识（我不会的）</a>
                 </p>
             </div>
             
@@ -565,7 +570,7 @@
                     <span>2</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/24/9-24/" title="基于顺序存储结构的图书信息表的创建和输出">基于顺序存储结构的图书信息表的创建和输出</a>
+                    <a href="/2018/09/24/9-24-1/" title="基于顺序存储结构的图书信息表的排序">基于顺序存储结构的图书信息表的排序</a>
                 </p>
             </div>
         </li>
@@ -578,7 +583,7 @@
                     <span>3</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/23/jiejue/" title="博客页面显示问题">博客页面显示问题</a>
+                    <a href="/2018/09/24/9-24/" title="基于顺序存储结构的图书信息表的创建和输出">基于顺序存储结构的图书信息表的创建和输出</a>
                 </p>
             </div>
         </li>
@@ -591,7 +596,7 @@
                     <span>4</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/23/shenri/" title="今天是我的生日">今天是我的生日</a>
+                    <a href="/2018/09/23/jiejue/" title="博客页面显示问题">博客页面显示问题</a>
                 </p>
             </div>
         </li>
@@ -604,7 +609,7 @@
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/22/tupian/" title="风语咒">风语咒</a>
+                    <a href="/2018/09/23/shenri/" title="今天是我的生日">今天是我的生日</a>
                 </p>
             </div>
         </li>
@@ -625,17 +630,17 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/顺序存储结构顺序表/">#顺序存储结构顺序表</a>
-        </div>
-        
-        
-        <div class="cube-box ">
             <a href="/tags/排序sort/">#排序sort</a>
         </div>
         
         
+        <div class="cube-box-bg ">
+            <a href="/tags/基础/">#基础</a>
+        </div>
+        
+        
         <div class="cube-box ">
-            <a href="/tags/编程经验/">#编程经验</a>
+            <a href="/tags/顺序存储结构顺序表/">#顺序存储结构顺序表</a>
         </div>
         
         
@@ -645,12 +650,17 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/Dijkstra/">#Dijkstra</a>
+            <a href="/tags/申请暑校/">#申请暑校</a>
         </div>
         
         
         <div class="cube-box-bg ">
-            <a href="/tags/申请暑校/">#申请暑校</a>
+            <a href="/tags/编程经验/">#编程经验</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/Dijkstra/">#Dijkstra</a>
         </div>
         
         
@@ -659,7 +669,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/数据结构/">#数据结构</a>
         </div>
         
@@ -690,12 +700,12 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/有趣/">#有趣</a>
+            <a href="/tags/常用学习网址/">#常用学习网址</a>
         </div>
         
         
         <div class="cube-box-bg ">
-            <a href="/tags/常用学习网址/">#常用学习网址</a>
+            <a href="/tags/有趣/">#有趣</a>
         </div>
         
         
