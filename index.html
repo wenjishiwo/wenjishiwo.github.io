@@ -150,6 +150,38 @@
     <div class="cube-content">
         <div class="cube-left">
             
+<div class="cube-excerpt" id="cube-excerpt-基于链式存储结构的图书信息表的逆序存储">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2018/10/05/10-5/">基于链式存储结构的图书信息表的逆序存储</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2018-10-05
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/数据结构/" class="cube-excerpt-tag-link">#数据结构</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>描述<br>定义一个包含图书信息（书号、书名、价格）的链表，读入相应的图书数据来完成图书信息表的创建，然后将读入的图书逆序存储，逐行输出逆序存储后每本图书的信息。</p>
+<p>输入<br>输入n+1行，第一行是图书数目n，后n行是n本图书的信息（书号、书名、价格），每本图书信息占一行，书号、书名、价格用空格分隔，价格之后没有空格。其中书号和书名为字符串类型，价格为浮点数类型。</p>
+<p>输出<br>总计n行，第i行是原有图书表中第n-i+1行的图书的信息（书号、书名、价格），每本图书信息占一行，书号、书名、价格用空格分隔。其中价格输出保留两位小数。</p>
+<p>样例输入1 复制<br>8<br>9787302257646 Data-Structure 35.00<br>9787302164340 Operating-System 50.00<br>9787302219972 Software-Engineer 32.00<br>9787302203513 Database-Principles 36.00<br>9787810827430 Discrete-Mathematics 36.00<br>9787302257800 Data-Structure 62.00<br>9787811234923 Compiler-Principles 62.00<br>9787822234110 The-C-Programming-Language 38.00<br>样例输出1<br>9787822234110 The-C-Programming-Language 38.00<br>9787811234923 Compiler-Principles 62.00<br>9787302257800 Data-Structure 62.00<br>9787810827430 Discrete-Mathematics 36.00<br>9787302203513 Database-Principles 36.00<br>9787302219972 Software-Engineer 32.00<br>9787302164340 Operating-System 50.00<br>9787302257646 Data-Structure 35.00<br>查看隐藏信息</p>
+<p>本题最开始没有理解题意，导致我先顺序存储，在进行逆序存储。<br>没有任何思路，之后看了题解，发现原来最开始就是逆序存储。<br>然后有一个优化，就是在循环里面定义LNode *p=new LNode。<br>然后其他都还好。<br>代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#define OK 1</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct </span><br><span class="line">&#123;</span><br><span class="line">	char no[20];</span><br><span class="line">	char name[50];</span><br><span class="line">	float price;</span><br><span class="line">&#125;Book;</span><br><span class="line">typedef struct LNode</span><br><span class="line">&#123;</span><br><span class="line">	Book data;</span><br><span class="line">	struct LNode *next;</span><br><span class="line">&#125;LNode,*LinkList;</span><br><span class="line">LinkList L;</span><br><span class="line">bool InintList(LinkList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">	L=new LNode;</span><br><span class="line">	L-&gt;next=NULL;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int num;</span><br><span class="line">	InintList(L);</span><br><span class="line">	L-&gt;next=NULL;</span><br><span class="line">	cin&gt;&gt;num;	</span><br><span class="line">	for(int i=0;i&lt;num;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		LNode *p=new LNode;</span><br><span class="line">		scanf(&quot;%s%s%f&quot;,p-&gt;data.no,p-&gt;data.name,&amp;p-&gt;data.price);</span><br><span class="line">		p-&gt;next=L-&gt;next;</span><br><span class="line">		L-&gt;next=p;	</span><br><span class="line">	&#125;</span><br><span class="line">	LNode *it=L-&gt;next;</span><br><span class="line">	while(it)</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;%s %s %.2f\n&quot;,it-&gt;data.no,it-&gt;data.name,it-&gt;data.price);</span><br><span class="line">		it=it-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2018/10/05/10-5/">Read More</a>
+    </footer>
+</div>
+
 <div class="cube-excerpt" id="cube-excerpt-威海归来">
     <header class="cube-excerpt-header">
         <h1><a href="/2018/10/04/10-4/">威海归来</a></h1>
@@ -437,39 +469,6 @@
     </footer>
 </div>
 
-<div class="cube-excerpt" id="cube-excerpt-基于顺序存储结构的图书信息表的排序">
-    <header class="cube-excerpt-header">
-        <h1><a href="/2018/09/24/9-24-1/">基于顺序存储结构的图书信息表的排序</a></h1>
-        <div class="cube-excerpt-header-msg">
-            <div class="cube-excerpt-date">
-                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2018-09-24
-            </div>
-            <div class="cube-excerpt-tags">
-                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-                
-                <a href="/tags/排序sort/" class="cube-excerpt-tag-link">#排序sort</a>
-                
-            </div>
-        </div>
-    </header>
-    <article class="cube-excerpt-entry cube-markdown">
-        
-        
-           <p>描述<br>定义一个包含图书信息（书号、书名、价格）的顺序表，读入相应的图书数据完成图书信息表的创建，然后将图书按照价格降序排序，逐行输出排序后每本图书的信息。</p>
-<p>输入<br>输入n+1行，前n行是n本图书的信息（书号、书名、价格），每本图书信息占一行，书号、书名、价格用空格分隔，价格之后没有空格。最后第n+1行是输入结束标志：0 0 0（空格分隔的三个0）。其中书号和书名为字符串类型，价格为浮点数类型。</p>
-<p>输出<br>总计n行，每行是一本图书的信息（书号、书名、价格），书号、书名、价格用空格分隔。其中价格输出保留两位小数。</p>
-<p>样例输入1 复制<br>9787302257646 Data-Structure 35.00<br>9787302164340 Operating-System 50.00<br>9787302219972 Software-Engineer 32.00<br>9787302203513 Database-Principles 36.00<br>9787810827430 Discrete-Mathematics 36.00<br>9787302257800 Data-Structure 62.00<br>9787811234923 Compiler-Principles 62.00<br>9787822234110 The-C-Programming-Language 38.00<br>0 0 0<br>样例输出1<br>9787302257800 Data-Structure 62.00<br>9787811234923 Compiler-Principles 62.00<br>9787302164340 Operating-System 50.00<br>9787822234110 The-C-Programming-Language 38.00<br>9787302203513 Database-Principles 36.00<br>9787810827430 Discrete-Mathematics 36.00<br>9787302257646 Data-Structure 35.00<br>9787302219972 Software-Engineer 32.00</p>
-<p>这题我在dev和vs2010上交没问题，但是oj过不了，<br>发现我校是G++4.3版本，于是我在sort的插件cmp<br>里面加入const,于是代码就过了，<br>还有，就是scanf可以直接换成cin输入，测试没问题。</p>
-<p>过的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#define MAXSIZE 10000</span><br><span class="line">#define OK 1</span><br><span class="line">#define ERROR 0</span><br><span class="line">#define OVERFLOW -2</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">	char no[20];</span><br><span class="line">	char name[50];</span><br><span class="line">	float price;</span><br><span class="line">&#125;Book;</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">	Book *elem;</span><br><span class="line">	int length;</span><br><span class="line">&#125;SqList;</span><br><span class="line">SqList L;</span><br><span class="line">bool IninList(SqList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">	L.elem=new Book[MAXSIZE];</span><br><span class="line">	if(!L.elem) exit(OVERFLOW);</span><br><span class="line">	L.length=0;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">int cmp(const Book &amp;a,const Book &amp;b)</span><br><span class="line">&#123;</span><br><span class="line">	if(a.price&gt;b.price)</span><br><span class="line">	return 1;</span><br><span class="line">	else</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	IninList(L);</span><br><span class="line">	int start=0;</span><br><span class="line">	while(scanf(&quot;%s%s%f&quot;,L.elem[start].no,L.elem[start].name,&amp;L.elem[start].price))</span><br><span class="line">	&#123;</span><br><span class="line">		if(L.elem[start].no[0]==&apos;0&apos;&amp;&amp;L.elem[start].name[0]==&apos;0&apos;&amp;&amp;(L.elem[start].price-0.0&lt;1e-6))</span><br><span class="line">		     break;</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line">			start++;</span><br><span class="line">			L.length++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	sort(L.elem,L.elem+L.length,cmp);</span><br><span class="line">	for(int i=0;i&lt;=L.length-1;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;%s %s %.2f\n&quot;,L.elem[i].no,L.elem[i].name,L.elem[i].price);</span><br><span class="line">	&#125;</span><br><span class="line">	delete [] L.elem;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-        
-    </article>
-    <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2018/09/24/9-24-1/">Read More</a>
-    </footer>
-</div>
-
 
 
 <ul class="cube-pagination cube-pagination-7">
@@ -551,7 +550,7 @@
     
     
     <div class="count">
-        <a class="count articles"><span>32</span>Article</a>
+        <a class="count articles"><span>33</span>Article</a>
         <a class="count tags"><span>20</span>Tags</a>
         <a class="count categories"><span>0</span>Categories</a>
     </div>
@@ -590,7 +589,7 @@
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/04/10-4/" title="威海归来">威海归来</a>
+                    <a href="/2018/10/05/10-5/" title="基于链式存储结构的图书信息表的逆序存储">基于链式存储结构的图书信息表的逆序存储</a>
                 </p>
             </div>
             
@@ -604,7 +603,7 @@
                     <span>2</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/28/9-28/" title="基于链式存储结构的图书信息表的排序">基于链式存储结构的图书信息表的排序</a>
+                    <a href="/2018/10/04/10-4/" title="威海归来">威海归来</a>
                 </p>
             </div>
         </li>
@@ -617,7 +616,7 @@
                     <span>3</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/27/9-26-1/" title="基于链式存储结构的图书信息表的创建和输出">基于链式存储结构的图书信息表的创建和输出</a>
+                    <a href="/2018/09/28/9-28/" title="基于链式存储结构的图书信息表的排序">基于链式存储结构的图书信息表的排序</a>
                 </p>
             </div>
         </li>
@@ -630,7 +629,7 @@
                     <span>4</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/27/9-26/" title="今天接着吧">今天接着吧</a>
+                    <a href="/2018/09/27/9-26-1/" title="基于链式存储结构的图书信息表的创建和输出">基于链式存储结构的图书信息表的创建和输出</a>
                 </p>
             </div>
         </li>
@@ -643,7 +642,7 @@
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/09/24/9-24-6/" title="博客域名的使用">博客域名的使用</a>
+                    <a href="/2018/09/27/9-26/" title="今天接着吧">今天接着吧</a>
                 </p>
             </div>
         </li>
@@ -664,7 +663,7 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/感想/">#感想</a>
+            <a href="/tags/数据结构/">#数据结构</a>
         </div>
         
         
@@ -673,13 +672,18 @@
         </div>
         
         
-        <div class="cube-box ">
-            <a href="/tags/顺序存储结构/">#顺序存储结构</a>
+        <div class="cube-box-bg ">
+            <a href="/tags/感想/">#感想</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/基础/">#基础</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/顺序存储结构/">#顺序存储结构</a>
         </div>
         
         
@@ -689,16 +693,21 @@
         
         
         <div class="cube-box ">
+            <a href="/tags/域名/">#域名</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/申请暑校/">#申请暑校</a>
+        </div>
+        
+        
+        <div class="cube-box ">
             <a href="/tags/顺序存储结构顺序表/">#顺序存储结构顺序表</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/域名/">#域名</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
             <a href="/tags/关于我自己/">#关于我自己</a>
         </div>
         
@@ -710,16 +719,6 @@
         
         <div class="cube-box ">
             <a href="/tags/Dijkstra/">#Dijkstra</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/数据结构/">#数据结构</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/申请暑校/">#申请暑校</a>
         </div>
         
         
@@ -739,22 +738,22 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/线段树/">#线段树</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
             <a href="/tags/游戏/">#游戏</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/添加博客/">#添加博客</a>
+            <a href="/tags/线段树/">#线段树</a>
         </div>
         
         
         <div class="cube-box ">
             <a href="/tags/常用学习网址/">#常用学习网址</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/添加博客/">#添加博客</a>
         </div>
         
         
