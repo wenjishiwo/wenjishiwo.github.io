@@ -9,7 +9,7 @@
     
     
     
-    <title>基于链式存储结构的图书信息表的逆序存储 | Wenji&#39;s blog</title>
+    <title>基于链式存储结构的图书信息表的最爱图书的查找 | Wenji&#39;s blog</title>
     <!-- inject:style -->
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <!-- endinject -->
@@ -150,7 +150,7 @@
     <div class="cube-content">
         <div class="cube-left">
             <div class="cube-article">
-    <h1 class="title">基于链式存储结构的图书信息表的逆序存储</h1>
+    <h1 class="title">基于链式存储结构的图书信息表的最爱图书的查找</h1>
     
     <div class="cube-article-header">
         <div class="cube-article-date">
@@ -168,11 +168,13 @@
     
     <div class="cube-article-content cube-markdown">
         
-        <p>描述<br>定义一个包含图书信息（书号、书名、价格）的链表，读入相应的图书数据来完成图书信息表的创建，然后将读入的图书逆序存储，逐行输出逆序存储后每本图书的信息。</p>
-<p>输入<br>输入n+1行，第一行是图书数目n，后n行是n本图书的信息（书号、书名、价格），每本图书信息占一行，书号、书名、价格用空格分隔，价格之后没有空格。其中书号和书名为字符串类型，价格为浮点数类型。</p>
-<p>输出<br>总计n行，第i行是原有图书表中第n-i+1行的图书的信息（书号、书名、价格），每本图书信息占一行，书号、书名、价格用空格分隔。其中价格输出保留两位小数。</p>
-<p>样例输入1 复制<br>8<br>9787302257646 Data-Structure 35.00<br>9787302164340 Operating-System 50.00<br>9787302219972 Software-Engineer 32.00<br>9787302203513 Database-Principles 36.00<br>9787810827430 Discrete-Mathematics 36.00<br>9787302257800 Data-Structure 62.00<br>9787811234923 Compiler-Principles 62.00<br>9787822234110 The-C-Programming-Language 38.00<br>样例输出1<br>9787822234110 The-C-Programming-Language 38.00<br>9787811234923 Compiler-Principles 62.00<br>9787302257800 Data-Structure 62.00<br>9787810827430 Discrete-Mathematics 36.00<br>9787302203513 Database-Principles 36.00<br>9787302219972 Software-Engineer 32.00<br>9787302164340 Operating-System 50.00<br>9787302257646 Data-Structure 35.00<br>查看隐藏信息</p>
-<p>本题最开始没有理解题意，导致我先顺序存储，在进行逆序存储。<br>没有任何思路，之后看了题解，发现原来最开始就是逆序存储。<br>然后有一个优化，就是在循环里面定义LNode *p=new LNode。<br>然后其他都还好。<br>代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#define OK 1</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct </span><br><span class="line">&#123;</span><br><span class="line">	char no[20];</span><br><span class="line">	char name[50];</span><br><span class="line">	float price;</span><br><span class="line">&#125;Book;</span><br><span class="line">typedef struct LNode</span><br><span class="line">&#123;</span><br><span class="line">	Book data;</span><br><span class="line">	struct LNode *next;</span><br><span class="line">&#125;LNode,*LinkList;</span><br><span class="line">LinkList L;</span><br><span class="line">bool InintList(LinkList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">	L=new LNode;</span><br><span class="line">	L-&gt;next=NULL;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int num;</span><br><span class="line">	InintList(L);</span><br><span class="line">	L-&gt;next=NULL;</span><br><span class="line">	cin&gt;&gt;num;	</span><br><span class="line">	for(int i=0;i&lt;num;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		LNode *p=new LNode;</span><br><span class="line">		scanf(&quot;%s%s%f&quot;,p-&gt;data.no,p-&gt;data.name,&amp;p-&gt;data.price);</span><br><span class="line">		p-&gt;next=L-&gt;next;</span><br><span class="line">		L-&gt;next=p;	</span><br><span class="line">	&#125;</span><br><span class="line">	LNode *it=L-&gt;next;</span><br><span class="line">	while(it)</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;%s %s %.2f\n&quot;,it-&gt;data.no,it-&gt;data.name,it-&gt;data.price);</span><br><span class="line">		it=it-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <p>描述<br>定义一个包含图书信息（书号、书名、价格）的链表，读入相应的图书数据来完成图书信息表的创建，然后根据指定的最爱图书的名字，查找最爱的图书，输出相应图书的信息。</p>
+<p>输入<br>总计n+m+2行。首先输入n+1行，其中，第一行是图书数目n，后n行是n本图书的信息（书号、书名、价格），每本图书信息占一行，书号、书名、价格用空格分隔，价格之后没有空格。其中书号和书名为字符串类型，价格为浮点数类型。然后输入m+1行，其中，第一行是一个整数m，代表查找m次，后m行是每次待查找的最爱图书名字。</p>
+<p>输出<br>若查找成功：</p>
+<p>总计输出m*（k+1）行，对于每一次查找，第一行是最爱图书数目（同一书名的图书可能有多本），后k行是最爱图书的信息（书号、书名、价格），每本图书信息占一行，书号、书名、价格用空格分隔，其中价格输出保留两位小数。</p>
+<p>若查找失败：</p>
+<p>只输出以下提示：抱歉，没有你的最爱！</p>
+<p>样例输入1 复制<br>8<br>9787302257646 Data-Structure 35.00<br>9787302164340 Operating-System 50.00<br>9787302219972 Software-Engineer 32.00<br>9787302203513 Database-Principles 36.00<br>9787810827430 Discrete-Mathematics 36.00<br>9787302257800 Data-Structure 62.00<br>9787811234923 Compiler-Principles 62.00<br>9787822234110 The-C-Programming-Language 38.00<br>2<br>Java-Programming-Language<br>Data-Structure<br>样例输出1<br>Sorry，there is no your favourite!<br>2<br>9787302257646 Data-Structure 35.00<br>9787302257800 Data-Structure 62.00<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#define OK 1</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct </span><br><span class="line">&#123;</span><br><span class="line">	char no[20];</span><br><span class="line">	char name[50];</span><br><span class="line">	float price;</span><br><span class="line">&#125;Book;</span><br><span class="line">typedef struct LNode</span><br><span class="line">&#123;</span><br><span class="line">	Book data;</span><br><span class="line">	struct LNode *next;</span><br><span class="line">&#125;LNode,*LinkList;</span><br><span class="line">LinkList L;</span><br><span class="line">bool InintList(LinkList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">	L=new LNode;</span><br><span class="line">	L-&gt;next=NULL;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int num;</span><br><span class="line">	InintList(L);</span><br><span class="line">	cin&gt;&gt;num;	</span><br><span class="line">	LNode *p=new LNode;</span><br><span class="line">	L-&gt;next=p;</span><br><span class="line">	for(int i=0;i&lt;num;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		scanf(&quot;%s%s%f&quot;,p-&gt;data.no,p-&gt;data.name,&amp;p-&gt;data.price);</span><br><span class="line">		p-&gt;next=new LNode;</span><br><span class="line">		p=p-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	int NUM=0;</span><br><span class="line">	cin&gt;&gt;NUM;</span><br><span class="line">	char NAME[50];</span><br><span class="line">	while(NUM--)</span><br><span class="line">	&#123;</span><br><span class="line">		LinkList S;</span><br><span class="line">		InintList(S);</span><br><span class="line">		scanf(&quot;%s&quot;,NAME);</span><br><span class="line">		int count=0;</span><br><span class="line">		LNode *p1=new LNode;</span><br><span class="line">		S-&gt;next=p1; </span><br><span class="line">		//LNode *p1=S-&gt;next; //有问题，这样写不够。要写 </span><br><span class="line">		LNode *it=L-&gt;next;</span><br><span class="line">			while(it)</span><br><span class="line">			&#123;</span><br><span class="line">				if(strcmp(it-&gt;data.name,NAME)==0)</span><br><span class="line">				&#123;</span><br><span class="line">					count++;</span><br><span class="line">					strcpy(p1-&gt;data.no,it-&gt;data.no);</span><br><span class="line">					strcpy(p1-&gt;data.name,it-&gt;data.name);</span><br><span class="line">					p1-&gt;data.price=it-&gt;data.price;</span><br><span class="line">					p1-&gt;next=new LNode;</span><br><span class="line">					p1=p1-&gt;next;</span><br><span class="line">				&#125;</span><br><span class="line">				it=it-&gt;next;</span><br><span class="line">			&#125;</span><br><span class="line">			if(count==0)</span><br><span class="line">			&#123;</span><br><span class="line">				printf(&quot;Sorry，there is no your favourite!\n&quot;);</span><br><span class="line">			&#125;</span><br><span class="line">			else</span><br><span class="line">			&#123;</span><br><span class="line">				cout&lt;&lt;count&lt;&lt;endl;</span><br><span class="line">				LNode *p2=S-&gt;next;</span><br><span class="line">				while(count--)</span><br><span class="line">				&#123;</span><br><span class="line">					printf(&quot;%s %s %.2f\n&quot;,p2-&gt;data.no,p2-&gt;data.name,p2-&gt;data.price);</span><br><span class="line">					p2=p2-&gt;next;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
     </div>
 </div>
@@ -181,16 +183,16 @@
     <ul>
         
         <li class="prev">
-            <a href="/2018/10/05/10-5-1/">
+            <a href="/2018/10/07/10-7/">
                 <i class="cube-icon cube-prev" aria-hidden="true"></i>
-                基于链式存储结构的图书信息表的最爱图书的查找
+                基于链式存储结构的图书信息表的新图书的入库
             </a>
         </li>
         
         
         <li class="next">
-            <a href="/2018/10/04/10-4/">
-                威海归来
+            <a href="/2018/10/05/10-5/">
+                基于链式存储结构的图书信息表的逆序存储
                 <i class="cube-icon cube-next" aria-hidden="true"></i>
             </a>
         </li>
@@ -372,7 +374,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/排序sort/">#排序sort</a>
         </div>
         
@@ -382,17 +384,17 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/关于我自己/">#关于我自己</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/域名/">#域名</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/顺序存储结构顺序表/">#顺序存储结构顺序表</a>
         </div>
         
@@ -402,7 +404,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/Dijkstra/">#Dijkstra</a>
         </div>
         
@@ -412,7 +414,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/编程经验/">#编程经验</a>
         </div>
         
@@ -422,12 +424,12 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/并查集/">#并查集</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/游戏/">#游戏</a>
         </div>
         
@@ -437,12 +439,12 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/常用学习网址/">#常用学习网址</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/添加博客/">#添加博客</a>
         </div>
         
