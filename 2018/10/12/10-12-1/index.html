@@ -9,7 +9,7 @@
     
     
     
-    <title>基于链式存储结构的图书信息表的旧图书的出库 | Wenji&#39;s blog</title>
+    <title>多项式运算(北林oj) | Wenji&#39;s blog</title>
     <!-- inject:style -->
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <!-- endinject -->
@@ -150,49 +150,42 @@
     <div class="cube-content">
         <div class="cube-left">
             <div class="cube-article">
-    <h1 class="title">基于链式存储结构的图书信息表的旧图书的出库</h1>
+    <h1 class="title">多项式运算(北林oj)</h1>
     
     <div class="cube-article-header">
         <div class="cube-article-date">
             <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
             <!-- moment.js对象 -->
-            2018-10-07
+            2018-10-12
         </div>
         <div class="cube-article-tags">
     <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
     
-    <a href="/tags/数据结构/">#数据结构</a>
+    <a href="/tags/多项式/">#多项式</a>
     
 </div>
     </div>
     
     <div class="cube-article-content cube-markdown">
         
-        <p>描述<br>定义一个包含图书信息（书号、书名、价格）的链表，读入相应的图书数据来完成图书信息表的创建，然后根据指定的待出库的旧图书的位置，将该图书从图书表中删除，最后输出该图书出库后的所有图书的信息。</p>
-<p>输入<br>总计n+2行。首先输入n+1行，其中，第一行是图书数目n，后n行是n本图书的信息（书号、书名、价格），每本图书信息占一行，书号、书名、价格用空格分隔，价格之后没有空格。其中书号和书名为字符串类型，价格为浮点数类型。之后输入第n+2行，内容仅为一个整数，代表待删除的旧图书的位置序号。</p>
-<p>输出<br>若删除成功：</p>
-<p>输出旧图书出库后所有图书的信息（书号、书名、价格），总计n-1行，每行是一本图书的信息，书号、书名、价格用空格分隔。其中价格输出保留两位小数。</p>
-<p>若删除失败：</p>
-<p>只输出以下一行提示：抱歉，出库位置非法！</p>
-<p>样例输入1 复制<br>8<br>9787302257646 Data-Structure 35.00<br>9787302164340 Operating-System 50.00<br>9787302219972 Software-Engineer 32.00<br>9787302203513 Database-Principles 36.00<br>9787810827430 Discrete-Mathematics 36.00<br>9787302257800 Data-Structure 62.00<br>9787811234923 Compiler-Principles 62.00<br>9787822234110 The-C-Programming-Language 38.00<br>2<br>样例输出1<br>9787302257646 Data-Structure 35.00<br>9787302219972 Software-Engineer 32.00<br>9787302203513 Database-Principles 36.00<br>9787810827430 Discrete-Mathematics 36.00<br>9787302257800 Data-Structure 62.00<br>9787811234923 Compiler-Principles 62.00<br>9787822234110 The-C-Programming-Language 38.00</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#define OK 1</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct </span><br><span class="line">&#123;</span><br><span class="line">	char no[20];</span><br><span class="line">	char name[50];</span><br><span class="line">	float price;</span><br><span class="line">&#125;Book;</span><br><span class="line">typedef struct LNode</span><br><span class="line">&#123;</span><br><span class="line">	Book data;</span><br><span class="line">	struct LNode *next;</span><br><span class="line">&#125;LNode,*LinkList;</span><br><span class="line">LinkList L;</span><br><span class="line">bool InintList(LinkList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">	L=new LNode;</span><br><span class="line">	L-&gt;next=NULL;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int num;</span><br><span class="line">	InintList(L);</span><br><span class="line">	cin&gt;&gt;num;	</span><br><span class="line">	LNode *pre=L;//pre非常关键，这个是为了让链表最后一端为NULL </span><br><span class="line">	for(int i=0;i&lt;num;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		LNode *p=new LNode;</span><br><span class="line">		scanf(&quot;%s%s%f&quot;,p-&gt;data.no,p-&gt;data.name,&amp;p-&gt;data.price);</span><br><span class="line">		pre-&gt;next=p;</span><br><span class="line">		pre=p;</span><br><span class="line">	&#125;</span><br><span class="line">	pre-&gt;next=NULL;</span><br><span class="line">	int position=0;</span><br><span class="line">	cin&gt;&gt;position;</span><br><span class="line">	pre=L;</span><br><span class="line">	LNode *it=L-&gt;next;</span><br><span class="line">	if(position&lt;=0||position&gt;=num)</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;Sorry, the storage location is illegal!\n&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	else</span><br><span class="line">	&#123;//之前创建的链表没有NULL节点，不太好，这里会有问题，但是现在有NULL了 </span><br><span class="line">	for(int i=1;i&lt;=num;i++,pre=pre-&gt;next,it=it-&gt;next)</span><br><span class="line">	&#123;</span><br><span class="line">		if(i==position)</span><br><span class="line">		&#123;</span><br><span class="line">			pre-&gt;next=it-&gt;next;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	it=L-&gt;next;</span><br><span class="line">	while(it)</span><br><span class="line">		&#123;</span><br><span class="line">			printf(&quot;%s %s %.2f\n&quot;,it-&gt;data.no,it-&gt;data.name,it-&gt;data.price);</span><br><span class="line">			it=it-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>此题有很多点，比较麻烦，主要是自己确实想的比较简单，不过最终通过各种限制还是做出来了。<br>描述<br>据说每一个搞ACM的上辈子都是脑细胞死光钻到牛角尖里出不来的天使哦，可ACMer也会经常遇到些很简单的难题，比如a+b，找数列最大值……bluestone最近就遇到了这样的简单难题，Professor给她出了道一元多项式运算的题，但是bluestone做了一天没能做出来，于是她前来请教在座聪明的各位，看谁最先能帮bluestone解决这个problem？？她会灰常感激的哦~</p>
+<p>bluestone给大家提个醒：类似以下式子的称为一元多项式：</p>
+<p>f(x)=a<em>x^n+b</em>x^m+……+k</p>
+<p>如果给出x的值，我们马上就能算出f(x)了吧~</p>
+<p>输入<br>输入第一行，是一个整数T(0&lt;T&lt;=100)，表示一共有T组测试数据，以下紧跟T组测试数据，每组第一行是一个X（0&lt;=X&lt;=10000），表示X的值；第二行是一个一元多项式，多项式的长度不会超过100。只进行多项式加减运算，保证最后运算的结果始终在int范围内，输入格式请参见样例。</p>
+<p>输出<br>每组测试数据输出占一行，输出最后的结果，具体格式请严格参考样例（注意空格）</p>
+<p>样例输入1 复制<br>2<br>2<br>2X^2+3X+1<br>3<br>X+1<br>样例输出1<br>Case #1:15<br>Case #2:4</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;algorithm&gt; </span><br><span class="line">using namespace std;</span><br><span class="line">string s;</span><br><span class="line">int deal(int x,int start,int end)</span><br><span class="line">&#123;</span><br><span class="line">	if(start&gt;end)//处理特殊情况，处理+或-号在多项式最前端或最后端 </span><br><span class="line">	return 0;</span><br><span class="line">	int s1=1;    //处理前面系数乘数，如果为省略1时则为1 </span><br><span class="line">	int i=start;</span><br><span class="line">	if(s[start]!=&apos;X&apos;)    </span><br><span class="line">		&#123;s1=s[start]-&apos;0&apos;;       //如果不省略，记下大小 </span><br><span class="line">	for(i=start+1;i&lt;=end&amp;&amp;s[i]!=&apos;X&apos;;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		s1=s1*10+s[i]-&apos;0&apos;;</span><br><span class="line">	&#125;&#125;</span><br><span class="line">	int s2;</span><br><span class="line">	if(s[i]==&apos;X&apos;||s[start]==&apos;X&apos;)   //处理含有X的项时候默认为乘方1 </span><br><span class="line">		s2=1;</span><br><span class="line">	else s2=0;                     //不含有X，那X乘方为0 </span><br><span class="line">	if((i+2)&lt;=end)                //处理乘方数 </span><br><span class="line">	s2=s[i+2]-&apos;0&apos;; </span><br><span class="line">	for(int u=i+3;u&lt;=end;u++)</span><br><span class="line">	&#123;</span><br><span class="line">		s2=s2*10+s[u]-&apos;0&apos;;         //乘方数大小 </span><br><span class="line">	&#125;</span><br><span class="line">	int s3=1;                      //如果X不存在，默认为1。如果乘方为0，默认也为1 </span><br><span class="line">	while(s2--)                     //如果X存在，进行相关乘方处理 </span><br><span class="line">		&#123;</span><br><span class="line">			s3=s3*x;</span><br><span class="line">		&#125;</span><br><span class="line">	if(s1==0)                      //特殊情况乘数为0 </span><br><span class="line">	return 0;</span><br><span class="line">	else</span><br><span class="line">	return s1*s3;                   </span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int n;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	int NUM=1;</span><br><span class="line">	for(int i=1;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		s.clear();</span><br><span class="line">		int x;</span><br><span class="line">		cin&gt;&gt;x;</span><br><span class="line">		cin&gt;&gt;s;</span><br><span class="line">		int start=0;</span><br><span class="line">		int end=0;</span><br><span class="line">		int sum=0;</span><br><span class="line">		int flag=1;              //进行第一个符号处理设的 ,+为1，-为0 </span><br><span class="line">		for(int u=0;u&lt;s.length();u++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(s[u]==&apos;+&apos;||s[u]==&apos;-&apos;)     // 遇到符号，对符号之前的式子处理 </span><br><span class="line">			&#123;</span><br><span class="line">			 	end=u-1;                  //定位之前的end </span><br><span class="line">			 	if(flag)                  //式子之前的符号 </span><br><span class="line">			 	&#123;</span><br><span class="line">			 		sum+=deal(x,start,end);</span><br><span class="line">				&#125;</span><br><span class="line">				else</span><br><span class="line">				&#123;</span><br><span class="line">					sum-=deal(x,start,end);</span><br><span class="line">				&#125;</span><br><span class="line">				start=u+1;</span><br><span class="line">				if(s[u]==&apos;+&apos;)               //为下一个式子准备 </span><br><span class="line">				flag=1;</span><br><span class="line">				else</span><br><span class="line">				flag=0;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		end=s.length()-1;                    //式子末尾特殊处理 </span><br><span class="line">		if(flag)                             </span><br><span class="line">		sum+=deal(x,start,end);</span><br><span class="line">		else</span><br><span class="line">		sum-=deal(x,start,end);</span><br><span class="line">		printf(&quot;Case #%d:%d\n&quot;,NUM,sum);</span><br><span class="line">		NUM++;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 </div>
 
 <div class="cube-article-nav">
     <ul>
         
-        <li class="prev">
-            <a href="/2018/10/07/10-7-2/">
-                <i class="cube-icon cube-prev" aria-hidden="true"></i>
-                基于链存储结构的图书信息表的图书去重
-            </a>
-        </li>
-        
         
         <li class="next">
-            <a href="/2018/10/07/10-7/">
-                基于链式存储结构的图书信息表的新图书的入库
+            <a href="/2018/10/12/10-12/">
+                猴子选大王问题（循环链表和删除）
                 <i class="cube-icon cube-next" aria-hidden="true"></i>
             </a>
         </li>
@@ -364,12 +357,12 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/数据结构/">#数据结构</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/感想/">#感想</a>
         </div>
         
@@ -379,7 +372,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/基础/">#基础</a>
         </div>
         
@@ -389,7 +382,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/无/">#无</a>
         </div>
         
@@ -409,7 +402,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/申请暑校/">#申请暑校</a>
         </div>
         
@@ -434,7 +427,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/bfs和dfs/">#bfs和dfs</a>
         </div>
         
@@ -444,12 +437,12 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/游戏/">#游戏</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/有趣/">#有趣</a>
         </div>
         

@@ -9,7 +9,7 @@
     
     
     
-    <title>基于链式存储结构的图书信息表的旧图书的出库 | Wenji&#39;s blog</title>
+    <title>Tags: 多项式 | Wenji&#39;s blog</title>
     <!-- inject:style -->
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <!-- endinject -->
@@ -149,62 +149,29 @@
     
     <div class="cube-content">
         <div class="cube-left">
-            <div class="cube-article">
-    <h1 class="title">基于链式存储结构的图书信息表的旧图书的出库</h1>
+            <style>
+    @media(max-width: 768px) {
+        body {
+            background-color: #fff!important;
+        }
+    }
+</style>
+<div class="cube-archives">
     
-    <div class="cube-article-header">
-        <div class="cube-article-date">
-            <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-            <!-- moment.js对象 -->
-            2018-10-07
-        </div>
-        <div class="cube-article-tags">
-    <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-    
-    <a href="/tags/数据结构/">#数据结构</a>
-    
-</div>
+    <div class="cube-archive" style="margin-top: 0;">
+        <h1 class="title">多项式</h1>
+        
+        <ul class="posts">
+            
+            <li class="post">
+                <a href="/2018/10/12/10-12-1/">多项式运算(北林oj)</a>
+            </li>
+            
+        </ul>
+        
     </div>
     
-    <div class="cube-article-content cube-markdown">
-        
-        <p>描述<br>定义一个包含图书信息（书号、书名、价格）的链表，读入相应的图书数据来完成图书信息表的创建，然后根据指定的待出库的旧图书的位置，将该图书从图书表中删除，最后输出该图书出库后的所有图书的信息。</p>
-<p>输入<br>总计n+2行。首先输入n+1行，其中，第一行是图书数目n，后n行是n本图书的信息（书号、书名、价格），每本图书信息占一行，书号、书名、价格用空格分隔，价格之后没有空格。其中书号和书名为字符串类型，价格为浮点数类型。之后输入第n+2行，内容仅为一个整数，代表待删除的旧图书的位置序号。</p>
-<p>输出<br>若删除成功：</p>
-<p>输出旧图书出库后所有图书的信息（书号、书名、价格），总计n-1行，每行是一本图书的信息，书号、书名、价格用空格分隔。其中价格输出保留两位小数。</p>
-<p>若删除失败：</p>
-<p>只输出以下一行提示：抱歉，出库位置非法！</p>
-<p>样例输入1 复制<br>8<br>9787302257646 Data-Structure 35.00<br>9787302164340 Operating-System 50.00<br>9787302219972 Software-Engineer 32.00<br>9787302203513 Database-Principles 36.00<br>9787810827430 Discrete-Mathematics 36.00<br>9787302257800 Data-Structure 62.00<br>9787811234923 Compiler-Principles 62.00<br>9787822234110 The-C-Programming-Language 38.00<br>2<br>样例输出1<br>9787302257646 Data-Structure 35.00<br>9787302219972 Software-Engineer 32.00<br>9787302203513 Database-Principles 36.00<br>9787810827430 Discrete-Mathematics 36.00<br>9787302257800 Data-Structure 62.00<br>9787811234923 Compiler-Principles 62.00<br>9787822234110 The-C-Programming-Language 38.00</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#define OK 1</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct </span><br><span class="line">&#123;</span><br><span class="line">	char no[20];</span><br><span class="line">	char name[50];</span><br><span class="line">	float price;</span><br><span class="line">&#125;Book;</span><br><span class="line">typedef struct LNode</span><br><span class="line">&#123;</span><br><span class="line">	Book data;</span><br><span class="line">	struct LNode *next;</span><br><span class="line">&#125;LNode,*LinkList;</span><br><span class="line">LinkList L;</span><br><span class="line">bool InintList(LinkList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">	L=new LNode;</span><br><span class="line">	L-&gt;next=NULL;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int num;</span><br><span class="line">	InintList(L);</span><br><span class="line">	cin&gt;&gt;num;	</span><br><span class="line">	LNode *pre=L;//pre非常关键，这个是为了让链表最后一端为NULL </span><br><span class="line">	for(int i=0;i&lt;num;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		LNode *p=new LNode;</span><br><span class="line">		scanf(&quot;%s%s%f&quot;,p-&gt;data.no,p-&gt;data.name,&amp;p-&gt;data.price);</span><br><span class="line">		pre-&gt;next=p;</span><br><span class="line">		pre=p;</span><br><span class="line">	&#125;</span><br><span class="line">	pre-&gt;next=NULL;</span><br><span class="line">	int position=0;</span><br><span class="line">	cin&gt;&gt;position;</span><br><span class="line">	pre=L;</span><br><span class="line">	LNode *it=L-&gt;next;</span><br><span class="line">	if(position&lt;=0||position&gt;=num)</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;Sorry, the storage location is illegal!\n&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	else</span><br><span class="line">	&#123;//之前创建的链表没有NULL节点，不太好，这里会有问题，但是现在有NULL了 </span><br><span class="line">	for(int i=1;i&lt;=num;i++,pre=pre-&gt;next,it=it-&gt;next)</span><br><span class="line">	&#123;</span><br><span class="line">		if(i==position)</span><br><span class="line">		&#123;</span><br><span class="line">			pre-&gt;next=it-&gt;next;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	it=L-&gt;next;</span><br><span class="line">	while(it)</span><br><span class="line">		&#123;</span><br><span class="line">			printf(&quot;%s %s %.2f\n&quot;,it-&gt;data.no,it-&gt;data.name,it-&gt;data.price);</span><br><span class="line">			it=it-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-    </div>
 </div>
-
-<div class="cube-article-nav">
-    <ul>
-        
-        <li class="prev">
-            <a href="/2018/10/07/10-7-2/">
-                <i class="cube-icon cube-prev" aria-hidden="true"></i>
-                基于链存储结构的图书信息表的图书去重
-            </a>
-        </li>
-        
-        
-        <li class="next">
-            <a href="/2018/10/07/10-7/">
-                基于链式存储结构的图书信息表的新图书的入库
-                <i class="cube-icon cube-next" aria-hidden="true"></i>
-            </a>
-        </li>
-        
-    </ul>
-</div>
-
-
-<!-- TODO 根据theme.comment的内容进行入口选择 -->
-
-
-
         </div>
         <div class="cube-right">
             
@@ -364,7 +331,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/数据结构/">#数据结构</a>
         </div>
         
@@ -374,12 +341,12 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/排序sort/">#排序sort</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/基础/">#基础</a>
         </div>
         
@@ -389,12 +356,12 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/无/">#无</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/域名/">#域名</a>
         </div>
         
@@ -409,7 +376,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/申请暑校/">#申请暑校</a>
         </div>
         
@@ -429,12 +396,12 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/并查集/">#并查集</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/bfs和dfs/">#bfs和dfs</a>
         </div>
         
@@ -444,12 +411,12 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/游戏/">#游戏</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/有趣/">#有趣</a>
         </div>
         
@@ -459,7 +426,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/常用学习网址/">#常用学习网址</a>
         </div>
         
