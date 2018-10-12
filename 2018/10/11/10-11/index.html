@@ -9,7 +9,7 @@
     
     
     
-    <title>线段树板子 | Wenji&#39;s blog</title>
+    <title>北林oj公司营收 | Wenji&#39;s blog</title>
     <!-- inject:style -->
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <!-- endinject -->
@@ -150,42 +150,46 @@
     <div class="cube-content">
         <div class="cube-left">
             <div class="cube-article">
-    <h1 class="title">线段树板子</h1>
+    <h1 class="title">北林oj公司营收</h1>
     
     <div class="cube-article-header">
         <div class="cube-article-date">
             <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
             <!-- moment.js对象 -->
-            2018-09-21
+            2018-10-11
         </div>
         <div class="cube-article-tags">
     <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
     
-    <a href="/tags/线段树/">#线段树</a>
+    <a href="/tags/易错和struct/">#易错和struct</a>
     
 </div>
     </div>
     
     <div class="cube-article-content cube-markdown">
         
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int maxn=1000010;</span><br><span class="line">int A[maxn];</span><br><span class="line">struct dian</span><br><span class="line">&#123;</span><br><span class="line">    int l,r;</span><br><span class="line">    int d;</span><br><span class="line">    int lazy;</span><br><span class="line">&#125;sum[maxn&lt;&lt;2];</span><br><span class="line">void pushup(int rt)</span><br><span class="line">&#123;</span><br><span class="line">    sum[rt].d=max(sum[rt&lt;&lt;1].d,sum[rt&lt;&lt;1|1].d);</span><br><span class="line">&#125;</span><br><span class="line">void build(int l,int r,int rt)</span><br><span class="line">&#123;</span><br><span class="line">    sum[rt].l=l;</span><br><span class="line">    sum[rt].r=r;</span><br><span class="line">    sum[rt].d=0;</span><br><span class="line">    sum[rt].lazy = 0;</span><br><span class="line">    if(l!=r)</span><br><span class="line">    &#123;</span><br><span class="line">        int mid=(l+r)&gt;&gt;1;</span><br><span class="line">        build(l,mid,rt&lt;&lt;1);</span><br><span class="line">        build(mid+1,r,rt&lt;&lt;1|1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">void xiachuan(int rt)</span><br><span class="line">&#123;</span><br><span class="line">        sum[rt&lt;&lt;1].lazy+=sum[rt].lazy;</span><br><span class="line">        sum[rt&lt;&lt;1|1].lazy+=sum[rt].lazy;</span><br><span class="line">        sum[rt&lt;&lt;1].d+=sum[rt].lazy;</span><br><span class="line">        sum[rt&lt;&lt;1|1].d+=sum[rt].lazy;</span><br><span class="line">        sum[rt].lazy=0;</span><br><span class="line">&#125;</span><br><span class="line">void cha(int l,int r,int rt)</span><br><span class="line">&#123;</span><br><span class="line">    if(sum[rt].l==l&amp;&amp;sum[rt].r==r)</span><br><span class="line">    &#123;</span><br><span class="line">        sum[rt].d++;</span><br><span class="line">        sum[rt].lazy++;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if(sum[rt].lazy)</span><br><span class="line">    xiachuan(rt);</span><br><span class="line">    int mid=(sum[rt].l+sum[rt].r)&gt;&gt;1;</span><br><span class="line">    if(r&lt;=mid)</span><br><span class="line">        cha(l,r,rt&lt;&lt;1);</span><br><span class="line">    else if(l&gt;mid)</span><br><span class="line">        cha(l,r,rt&lt;&lt;1|1);</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        cha(l,mid,rt&lt;&lt;1);</span><br><span class="line">        cha(mid+1,r,rt&lt;&lt;1|1);</span><br><span class="line">    &#125;</span><br><span class="line">    pushup(rt);</span><br><span class="line">&#125;</span><br><span class="line">int query(int l,int r,int rt)</span><br><span class="line">&#123;</span><br><span class="line">    if(sum[rt].l==l&amp;&amp;sum[rt].r==r)</span><br><span class="line">        return sum[rt].d;</span><br><span class="line">    if(sum[rt].lazy) </span><br><span class="line">    xiachuan(rt);</span><br><span class="line">    int mid=(sum[rt].r+sum[rt].l)&gt;&gt;1;</span><br><span class="line">    if(r&lt;=mid)</span><br><span class="line">        return query(l,r,rt&lt;&lt;1);</span><br><span class="line">    else if(l&gt;mid)</span><br><span class="line">        return query(l,r,rt&lt;&lt;1|1);</span><br><span class="line">    else</span><br><span class="line">        return max(query(l,mid,rt&lt;&lt;1),query(mid+1,r,rt&lt;&lt;1|1));</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">		int k,m;</span><br><span class="line">		int a,b;</span><br><span class="line">		memset(A,0,sizeof(A));</span><br><span class="line">        scanf(&quot;%d%d&quot;,&amp;k,&amp;m);</span><br><span class="line">        build(1,1000000,1);</span><br><span class="line">        int id=0;</span><br><span class="line">        for(int i=0;i&lt;m;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf(&quot;%d%d&quot;,&amp;a,&amp;b);</span><br><span class="line">            b--;</span><br><span class="line">            if(query(a,b,1)&lt;k)</span><br><span class="line">            &#123;</span><br><span class="line">                A[id++]=i+1;</span><br><span class="line">                cha(a,b,1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=0;i&lt;id;i++)</span><br><span class="line">        printf(&quot;%d &quot;,A[i]);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>公司营收<br>发布时间: 2018年3月22日 14:56   最后更新: 2018年3月22日 14:56   时间限制: 1000ms   内存限制: 128M</p>
+<p>描述<br>一些公司之间有合作关系，会计小张想了解大家的贸易额的多少。在这个问题中的各家公司都有一个固定的资产输出，而这些资产输出将被平均分给和这家公司有贸易公司的人。但是，这些公司中，有些公司的资产输出较多，有些则较少。给出小张要统计的公司名称（均小于20字符），给出每个公司的资产输出和与这家公司有贸易关系的公司列表，请确定每家公司贸易收入大于贸易支出的数量。</p>
+<p>输入<br>输入第1行为一个T，表示公司数量（2≤T≤10），输入第2~T+1行，表示所有的公司名称，每行对应一个公司名称。<br>第T+2行到最后，为多组输入数据：每组中第一行为公司名，第二行包含两个数据，分别是第一行对应公司的贸易输出额度（0-4000），第二个数据是这家公司有贸易的公司数量K，接下来K行，每行分别写了这K个公司中的一个的名称。（对其余公司的贸易输出额度可以理解为输出总额度除以其余公司的数量取整，若除不尽，则多出来的额度不用算进贸易输出额度中）</p>
+<p>输出<br>输出T行，每行是一个公司名以及它的贸易收入比贸易支出多的额度，以空格隔开。</p>
+<p>样例输入1 复制<br>5<br>KFC<br>Subway<br>ETS<br>Intel<br>AMD</p>
+<p>KFC<br>200 3<br>Subway<br>ETS<br>Intel</p>
+<p>ETS<br>500 1<br>KFC</p>
+<p>AMD<br>150 2<br>Intel<br>ETS</p>
+<p>Subway<br>0 2<br>AMD<br>Intel</p>
+<p>Intel<br>0 0<br>样例输出1<br>KFC 302<br>Subway 66<br>ETS -359<br>Intel 141<br>AMD -150</p>
+<p>注意里面几个点，还是一道简单题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">struct gongshi</span><br><span class="line">&#123;</span><br><span class="line">	string name;</span><br><span class="line">    int ziran;</span><br><span class="line">&#125;go[12];</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int n;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	for(int i=1;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		cin&gt;&gt;go[i].name;</span><br><span class="line">		go[i].ziran=0;</span><br><span class="line">	&#125;</span><br><span class="line">	string s1;</span><br><span class="line">	int sum;</span><br><span class="line">	int m;</span><br><span class="line">	string s2;</span><br><span class="line">	int k=1;</span><br><span class="line">	while(k&lt;=n&amp;&amp;cin&gt;&gt;s1)//这个k&lt;=n要在&amp;&amp;前面，不能在&amp;&amp;后面否则会很搞笑，由于执行的顺寻 </span><br><span class="line">	&#123;</span><br><span class="line">		cin&gt;&gt;sum&gt;&gt;m;</span><br><span class="line">		k++;</span><br><span class="line">		if(m==0)//m=0的情况要考虑 </span><br><span class="line">		continue;</span><br><span class="line">		int Sum=sum/m;</span><br><span class="line">		int yushu=sum-Sum*m;</span><br><span class="line">		for(int i=1;i&lt;=n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(go[i].name==s1)</span><br><span class="line">			&#123;</span><br><span class="line">				go[i].ziran=go[i].ziran+yushu-sum;//这里容易把之前的ziran忘记加 </span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		for(int i=1;i&lt;=m;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cin&gt;&gt;s2;</span><br><span class="line">			for(int u=1;u&lt;=n;u++)</span><br><span class="line">			&#123;</span><br><span class="line">				if(go[u].name==s2)</span><br><span class="line">				&#123;</span><br><span class="line">					go[u].ziran+=Sum;</span><br><span class="line">					break;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	for(int i=1;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;go[i].name&lt;&lt;&quot; &quot;&lt;&lt;go[i].ziran&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 </div>
 
 <div class="cube-article-nav">
     <ul>
         
-        <li class="prev">
-            <a href="/2018/09/21/du9/">
-                <i class="cube-icon cube-prev" aria-hidden="true"></i>
-                Dijkstra 最短路 有向图版本板子 无向图就是双重附边
-            </a>
-        </li>
-        
         
         <li class="next">
-            <a href="/2018/09/21/du7/">
-                contest1 hdu3635 drahonball 并查集升级版本 理解并查集基本概念和应用
+            <a href="/2018/10/07/10-7-2/">
+                基于链存储结构的图书信息表的图书去重
                 <i class="cube-icon cube-next" aria-hidden="true"></i>
             </a>
         </li>
@@ -347,17 +351,17 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/易错和struct/">#易错和struct</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/数据结构/">#数据结构</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/感想/">#感想</a>
         </div>
         
@@ -372,7 +376,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/无/">#无</a>
         </div>
         
@@ -387,27 +391,27 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/域名/">#域名</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/申请暑校/">#申请暑校</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/顺序存储结构顺序表/">#顺序存储结构顺序表</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/编程经验/">#编程经验</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/Dijkstra/">#Dijkstra</a>
         </div>
         
@@ -417,7 +421,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/prime/">#prime</a>
         </div>
         
@@ -442,7 +446,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/有趣/">#有趣</a>
         </div>
         

@@ -150,6 +150,34 @@
     <div class="cube-content">
         <div class="cube-left">
             
+<div class="cube-excerpt" id="cube-excerpt-poj2377 最小生成树 负数化变成最大生成树 prime算法实践">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2018/09/21/du11/">poj2377 最小生成树 负数化变成最大生成树 prime算法实践</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2018-09-21
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/prime/" class="cube-excerpt-tag-link">#prime</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#define INF 1&lt;&lt;30</span><br><span class="line">#define maxn 1010</span><br><span class="line">using namespace std;</span><br><span class="line">int G[maxn+1][maxn+1];</span><br><span class="line">int intree[maxn];</span><br><span class="line">int minweight[maxn];</span><br><span class="line">int sumweight;</span><br><span class="line">int flag=0;</span><br><span class="line">void chushihua()</span><br><span class="line">&#123;</span><br><span class="line">	memset(intree,0,sizeof(intree));</span><br><span class="line">	memset(minweight,0,sizeof(minweight));</span><br><span class="line">	flag=0;</span><br><span class="line">	for(int i=0;i&lt;maxn;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		for(int j=0;j&lt;=maxn;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			G[i][j]=INF;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	sumweight=0;</span><br><span class="line">&#125;</span><br><span class="line">void prime(int n)</span><br><span class="line">&#123;</span><br><span class="line">	int node,Minweight;</span><br><span class="line">	for(int i=1;i&lt;=n;i++)</span><br><span class="line">		minweight[i]=G[1][i];</span><br><span class="line">	intree[1]=1;</span><br><span class="line">	for(int i=2;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		Minweight=INF;</span><br><span class="line">		for(int j=1;j&lt;=n;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(minweight[j]&lt;Minweight&amp;&amp;!intree[j])</span><br><span class="line">			&#123;</span><br><span class="line">				Minweight=minweight[j];</span><br><span class="line">				node=j;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		intree[node]=1;</span><br><span class="line">		sumweight+=Minweight;</span><br><span class="line">		for(int j=1;j&lt;=n;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(!intree[j]&amp;&amp;minweight[j]&gt;G[node][j])</span><br><span class="line">			&#123;</span><br><span class="line">				minweight[j]=G[node][j];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">int  main()</span><br><span class="line">&#123;</span><br><span class="line">	int n,m;</span><br><span class="line">	while(scanf(&quot;%d%d&quot;,&amp;n,&amp;m)!=EOF)</span><br><span class="line">	&#123;</span><br><span class="line">		int a1,a2,v;</span><br><span class="line">		chushihua();</span><br><span class="line">		for(int i=1;i&lt;=m;i++)	</span><br><span class="line">		&#123;</span><br><span class="line">			scanf(&quot;%d%d%d&quot;,&amp;a1,&amp;a2,&amp;v);</span><br><span class="line">			G[a1][a2]=-v;</span><br><span class="line">			G[a2][a1]=-v;</span><br><span class="line">		&#125;</span><br><span class="line">		prime(n);</span><br><span class="line">		for(int i=1;i&lt;=n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(intree[i]==0)</span><br><span class="line">				&#123;flag=1;</span><br><span class="line">				break;&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if(flag)</span><br><span class="line">		printf(&quot;-1\n&quot;);</span><br><span class="line">		else</span><br><span class="line">		printf(&quot;%d\n&quot;,-sumweight);</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2018/09/21/du11/">Read More</a>
+    </footer>
+</div>
+
 <div class="cube-excerpt" id="cube-excerpt-hdu2066 Dijkstra 最短路 无向图版本 板子修改">
     <header class="cube-excerpt-header">
         <h1><a href="/2018/09/21/du10/">hdu2066 Dijkstra 最短路 无向图版本 板子修改</a></h1>
@@ -403,43 +431,6 @@
     </footer>
 </div>
 
-<div class="cube-excerpt" id="cube-excerpt-priority_queue 练习">
-    <header class="cube-excerpt-header">
-        <h1><a href="/2018/09/19/du3-1/">priority_queue 练习</a></h1>
-        <div class="cube-excerpt-header-msg">
-            <div class="cube-excerpt-date">
-                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2018-09-19
-            </div>
-            <div class="cube-excerpt-tags">
-                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-                
-                <a href="/tags/数据结构/" class="cube-excerpt-tag-link">#数据结构</a>
-                
-            </div>
-        </div>
-    </header>
-    <article class="cube-excerpt-entry cube-markdown">
-        
-        
-           <p>##代码  greater算子</p>
-<p>#include<iostream></iostream></p>
-<p>#include<queue><br>using namespace std;<br>class T<br>{<br>    public:<br>    int x,y,z;<br>    T(int a,int b,int c):x(a),y(b),z(c)<br>    {</queue></p>
-<pre><code>}    
-</code></pre><p>};<br>bool operator &gt;(const T &amp;t1,const T &amp;t2)<br>{<br>    return t1.z&gt;t2.z;<br>}<br>int main()<br>{<br>    priority_queue&lt;T,vector<t>,greater<t> &gt; q;<br>    q.push(T(4,4,3));<br>    q.push(T(2,2,5));<br>    q.push(T(1,5,4));<br>    q.push(T(3,3,6));<br>    while(!q.empty())<br>    {<br>        T t=q.top();<br>        q.pop();<br>        cout&lt;&lt;t.x&lt;&lt;” “&lt;&lt;t.y&lt;&lt;” “&lt;&lt;t.z&lt;&lt;endl;<br>    }<br>    return 0;<br>}</t></t></p>
-<p>##代码 less 算子</p>
-<p>#include<iostream></iostream></p>
-<p>#include<queue><br>using namespace std;<br>class T<br>{<br>    public:<br>    int x,y,z;<br>    T(int a,int b,int c):x(a),y(b),z(c)<br>    {</queue></p>
-<pre><code>}    
-</code></pre><p>};<br>bool operator &lt;(const T &amp;t1,const T &amp;t2)<br>{<br>    return t1.z&lt;t2.z;<br>}<br>int main()<br>{<br>    priority_queue<t> q;<br>    q.push(T(4,4,3));<br>    q.push(T(2,2,5));<br>    q.push(T(1,5,4));<br>    q.push(T(3,3,6));<br>    while(!q.empty())<br>    {<br>        T t=q.top();<br>        q.pop();<br>        cout&lt;&lt;t.x&lt;&lt;” “&lt;&lt;t.y&lt;&lt;” “&lt;&lt;t.z&lt;&lt;endl;<br>    }<br>    return 0;<br>}</t></p>
-
-        
-    </article>
-    <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2018/09/19/du3-1/">Read More</a>
-    </footer>
-</div>
-
 
 
 <ul class="cube-pagination cube-pagination-7">
@@ -521,8 +512,8 @@
     
     
     <div class="count">
-        <a class="count articles"><span>37</span>Article</a>
-        <a class="count tags"><span>20</span>Tags</a>
+        <a class="count articles"><span>38</span>Article</a>
+        <a class="count tags"><span>21</span>Tags</a>
         <a class="count categories"><span>0</span>Categories</a>
     </div>
 </div>
@@ -560,7 +551,7 @@
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/07/10-7-2/" title="基于链存储结构的图书信息表的图书去重">基于链存储结构的图书信息表的图书去重</a>
+                    <a href="/2018/10/11/10-11/" title="北林oj公司营收">北林oj公司营收</a>
                 </p>
             </div>
             
@@ -574,7 +565,7 @@
                     <span>2</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/07/10-7-1/" title="基于链式存储结构的图书信息表的旧图书的出库">基于链式存储结构的图书信息表的旧图书的出库</a>
+                    <a href="/2018/10/07/10-7-2/" title="基于链存储结构的图书信息表的图书去重">基于链存储结构的图书信息表的图书去重</a>
                 </p>
             </div>
         </li>
@@ -587,7 +578,7 @@
                     <span>3</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/07/10-7/" title="基于链式存储结构的图书信息表的新图书的入库">基于链式存储结构的图书信息表的新图书的入库</a>
+                    <a href="/2018/10/07/10-7-1/" title="基于链式存储结构的图书信息表的旧图书的出库">基于链式存储结构的图书信息表的旧图书的出库</a>
                 </p>
             </div>
         </li>
@@ -600,7 +591,7 @@
                     <span>4</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/05/10-5-1/" title="基于链式存储结构的图书信息表的最爱图书的查找">基于链式存储结构的图书信息表的最爱图书的查找</a>
+                    <a href="/2018/10/07/10-7/" title="基于链式存储结构的图书信息表的新图书的入库">基于链式存储结构的图书信息表的新图书的入库</a>
                 </p>
             </div>
         </li>
@@ -613,7 +604,7 @@
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/05/10-5/" title="基于链式存储结构的图书信息表的逆序存储">基于链式存储结构的图书信息表的逆序存储</a>
+                    <a href="/2018/10/05/10-5-1/" title="基于链式存储结构的图书信息表的最爱图书的查找">基于链式存储结构的图书信息表的最爱图书的查找</a>
                 </p>
             </div>
         </li>
@@ -634,7 +625,7 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/感想/">#感想</a>
+            <a href="/tags/易错和struct/">#易错和struct</a>
         </div>
         
         
@@ -644,22 +635,27 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/基础/">#基础</a>
+            <a href="/tags/感想/">#感想</a>
         </div>
         
         
-        <div class="cube-box ">
-            <a href="/tags/顺序存储结构/">#顺序存储结构</a>
-        </div>
-        
-        
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/排序sort/">#排序sort</a>
         </div>
         
         
         <div class="cube-box ">
+            <a href="/tags/基础/">#基础</a>
+        </div>
+        
+        
+        <div class="cube-box ">
             <a href="/tags/无/">#无</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/顺序存储结构/">#顺序存储结构</a>
         </div>
         
         
@@ -673,23 +669,13 @@
         </div>
         
         
-        <div class="cube-box ">
-            <a href="/tags/顺序存储结构顺序表/">#顺序存储结构顺序表</a>
-        </div>
-        
-        
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/申请暑校/">#申请暑校</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/Dijkstra/">#Dijkstra</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/prime/">#prime</a>
+            <a href="/tags/顺序存储结构顺序表/">#顺序存储结构顺序表</a>
         </div>
         
         
@@ -699,12 +685,17 @@
         
         
         <div class="cube-box ">
+            <a href="/tags/Dijkstra/">#Dijkstra</a>
+        </div>
+        
+        
+        <div class="cube-box ">
             <a href="/tags/bfs和dfs/">#bfs和dfs</a>
         </div>
         
         
         <div class="cube-box-bg ">
-            <a href="/tags/并查集/">#并查集</a>
+            <a href="/tags/prime/">#prime</a>
         </div>
         
         
@@ -714,22 +705,27 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/线段树/">#线段树</a>
+            <a href="/tags/并查集/">#并查集</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/常用学习网址/">#常用学习网址</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/添加博客/">#添加博客</a>
+            <a href="/tags/线段树/">#线段树</a>
         </div>
         
         
         <div class="cube-box ">
             <a href="/tags/有趣/">#有趣</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/添加博客/">#添加博客</a>
         </div>
         
     </div>
