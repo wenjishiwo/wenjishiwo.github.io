@@ -9,7 +9,7 @@
     
     
     
-    <title>Tags: Dijkstra | Wenji&#39;s blog</title>
+    <title>猴子选大王问题（循环链表和删除） | Wenji&#39;s blog</title>
     <!-- inject:style -->
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <!-- endinject -->
@@ -149,33 +149,53 @@
     
     <div class="cube-content">
         <div class="cube-left">
-            <style>
-    @media(max-width: 768px) {
-        body {
-            background-color: #fff!important;
-        }
-    }
-</style>
-<div class="cube-archives">
+            <div class="cube-article">
+    <h1 class="title">猴子选大王问题（循环链表和删除）</h1>
     
-    <div class="cube-archive" style="margin-top: 0;">
-        <h1 class="title">Dijkstra</h1>
-        
-        <ul class="posts">
-            
-            <li class="post">
-                <a href="/2018/09/21/du10/">hdu2066 Dijkstra 最短路 无向图版本 板子修改</a>
-            </li>
-            
-            <li class="post">
-                <a href="/2018/09/21/du9/">Dijkstra 最短路 有向图版本板子 无向图就是双重附边</a>
-            </li>
-            
-        </ul>
-        
-    </div>
+    <div class="cube-article-header">
+        <div class="cube-article-date">
+            <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+            <!-- moment.js对象 -->
+            2018-10-12
+        </div>
+        <div class="cube-article-tags">
+    <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+    
+    <a href="/tags/数据结构/">#数据结构</a>
     
 </div>
+    </div>
+    
+    <div class="cube-article-content cube-markdown">
+        
+        <p>描述<br>一堆猴子都有编号，编号是1，2，3 …m，这群猴子（m个）按照1~m的顺序围坐一圈，从第1开始数，每数到第n个，该猴子就要离开此圈，这样依次下来，直到圈中只剩下最后一只猴子，则该猴子为大王。利用单向循环链表模拟此过程，依次输出出圈的猴子编号。</p>
+<p>输入<br>多组数据，每组数据占一行，包括两个数据m和n。m代表猴子个数，n代表步数，m=0且n=0时输入结束。</p>
+<p>输出<br>依次输出出圈的猴子编号，编号之间用空格隔开。</p>
+<p>样例输入1 复制<br>10 4<br>8 3<br>0 0<br>样例输出1<br>4 8 2 7 3 10 9 1 6 5<br>3 6 1 5 2 8 4 7</p>
+<p>其中有几点错误，这些错误应该在仔细分析后找到，但是自己总是异想天开。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#define OK 1</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct </span><br><span class="line">&#123;</span><br><span class="line">	int id;</span><br><span class="line">&#125;Houzhi;</span><br><span class="line">typedef struct LNode</span><br><span class="line">&#123;</span><br><span class="line">	Houzhi data;</span><br><span class="line">	struct LNode *next;</span><br><span class="line">&#125;LNode,*LinkList;</span><br><span class="line">LinkList L;</span><br><span class="line">bool InintList(LinkList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">	L=new LNode;</span><br><span class="line">	L-&gt;next=NULL;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int n;//猴子数 </span><br><span class="line">	int m;//步数	</span><br><span class="line">	while(scanf(&quot;%d%d&quot;,&amp;n,&amp;m))</span><br><span class="line">	&#123;</span><br><span class="line">		InintList(L);</span><br><span class="line">		L-&gt;next=new LNode;</span><br><span class="line">		LNode *p=L-&gt;next;</span><br><span class="line">		LNode *pre=L;</span><br><span class="line">		if(n==0&amp;&amp;m==0)</span><br><span class="line">		&#123;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line">			for(int i=1;i&lt;=n;i++)//循环链表建立 </span><br><span class="line">			&#123;</span><br><span class="line">				p-&gt;data.id=i;</span><br><span class="line">				p-&gt;next=new LNode;</span><br><span class="line">				p=p-&gt;next;</span><br><span class="line">				pre=pre-&gt;next;</span><br><span class="line">			&#125;</span><br><span class="line">			pre-&gt;next=L;    //连接 </span><br><span class="line">		&#125;</span><br><span class="line">		int num=0;</span><br><span class="line">		LNode *p2=L;</span><br><span class="line">		LNode *pre2=pre;                //尾节点 </span><br><span class="line">		while(L!=L-&gt;next)               //循环条件 </span><br><span class="line">		&#123;</span><br><span class="line">			for(int i=1;i&lt;=m;i++)</span><br><span class="line">			&#123;</span><br><span class="line">				p2=p2-&gt;next;</span><br><span class="line">				if(pre2-&gt;next!=p2)      //这个一定要判断，不然在删除结点后，pre2会和p2重叠 </span><br><span class="line">				pre2=pre2-&gt;next;</span><br><span class="line">				if(p2==L)               //头节点的原因 </span><br><span class="line">				&#123;</span><br><span class="line">					p2=p2-&gt;next;</span><br><span class="line">					pre2=pre2-&gt;next;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			num++;</span><br><span class="line">			if(num&lt;n)</span><br><span class="line">			cout&lt;&lt;p2-&gt;data.id&lt;&lt;&quot; &quot;;</span><br><span class="line">			else if(num==n)</span><br><span class="line">			&#123;</span><br><span class="line">				cout&lt;&lt;p2-&gt;data.id&lt;&lt;endl;//这个endl易掉，不然过不了 </span><br><span class="line">			&#125;</span><br><span class="line">			pre2-&gt;next=p2-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+</div>
+
+<div class="cube-article-nav">
+    <ul>
+        
+        
+        <li class="next">
+            <a href="/2018/10/11/10-11/">
+                北林oj公司营收
+                <i class="cube-icon cube-next" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+<!-- TODO 根据theme.comment的内容进行入口选择 -->
+
+
+
         </div>
         <div class="cube-right">
             
@@ -340,7 +360,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/排序sort/">#排序sort</a>
         </div>
         
@@ -350,12 +370,12 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/基础/">#基础</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/顺序存储结构顺序表/">#顺序存储结构顺序表</a>
         </div>
         
@@ -395,7 +415,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/并查集/">#并查集</a>
         </div>
         
@@ -405,7 +425,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/线段树/">#线段树</a>
         </div>
         
@@ -420,7 +440,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/有趣/">#有趣</a>
         </div>
         

@@ -150,6 +150,38 @@
     <div class="cube-content">
         <div class="cube-left">
             
+<div class="cube-excerpt" id="cube-excerpt-猴子选大王问题（循环链表和删除）">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2018/10/12/10-12/">猴子选大王问题（循环链表和删除）</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2018-10-12
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/数据结构/" class="cube-excerpt-tag-link">#数据结构</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>描述<br>一堆猴子都有编号，编号是1，2，3 …m，这群猴子（m个）按照1~m的顺序围坐一圈，从第1开始数，每数到第n个，该猴子就要离开此圈，这样依次下来，直到圈中只剩下最后一只猴子，则该猴子为大王。利用单向循环链表模拟此过程，依次输出出圈的猴子编号。</p>
+<p>输入<br>多组数据，每组数据占一行，包括两个数据m和n。m代表猴子个数，n代表步数，m=0且n=0时输入结束。</p>
+<p>输出<br>依次输出出圈的猴子编号，编号之间用空格隔开。</p>
+<p>样例输入1 复制<br>10 4<br>8 3<br>0 0<br>样例输出1<br>4 8 2 7 3 10 9 1 6 5<br>3 6 1 5 2 8 4 7</p>
+<p>其中有几点错误，这些错误应该在仔细分析后找到，但是自己总是异想天开。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#define OK 1</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct </span><br><span class="line">&#123;</span><br><span class="line">	int id;</span><br><span class="line">&#125;Houzhi;</span><br><span class="line">typedef struct LNode</span><br><span class="line">&#123;</span><br><span class="line">	Houzhi data;</span><br><span class="line">	struct LNode *next;</span><br><span class="line">&#125;LNode,*LinkList;</span><br><span class="line">LinkList L;</span><br><span class="line">bool InintList(LinkList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">	L=new LNode;</span><br><span class="line">	L-&gt;next=NULL;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int n;//猴子数 </span><br><span class="line">	int m;//步数	</span><br><span class="line">	while(scanf(&quot;%d%d&quot;,&amp;n,&amp;m))</span><br><span class="line">	&#123;</span><br><span class="line">		InintList(L);</span><br><span class="line">		L-&gt;next=new LNode;</span><br><span class="line">		LNode *p=L-&gt;next;</span><br><span class="line">		LNode *pre=L;</span><br><span class="line">		if(n==0&amp;&amp;m==0)</span><br><span class="line">		&#123;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line">			for(int i=1;i&lt;=n;i++)//循环链表建立 </span><br><span class="line">			&#123;</span><br><span class="line">				p-&gt;data.id=i;</span><br><span class="line">				p-&gt;next=new LNode;</span><br><span class="line">				p=p-&gt;next;</span><br><span class="line">				pre=pre-&gt;next;</span><br><span class="line">			&#125;</span><br><span class="line">			pre-&gt;next=L;    //连接 </span><br><span class="line">		&#125;</span><br><span class="line">		int num=0;</span><br><span class="line">		LNode *p2=L;</span><br><span class="line">		LNode *pre2=pre;                //尾节点 </span><br><span class="line">		while(L!=L-&gt;next)               //循环条件 </span><br><span class="line">		&#123;</span><br><span class="line">			for(int i=1;i&lt;=m;i++)</span><br><span class="line">			&#123;</span><br><span class="line">				p2=p2-&gt;next;</span><br><span class="line">				if(pre2-&gt;next!=p2)      //这个一定要判断，不然在删除结点后，pre2会和p2重叠 </span><br><span class="line">				pre2=pre2-&gt;next;</span><br><span class="line">				if(p2==L)               //头节点的原因 </span><br><span class="line">				&#123;</span><br><span class="line">					p2=p2-&gt;next;</span><br><span class="line">					pre2=pre2-&gt;next;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			num++;</span><br><span class="line">			if(num&lt;n)</span><br><span class="line">			cout&lt;&lt;p2-&gt;data.id&lt;&lt;&quot; &quot;;</span><br><span class="line">			else if(num==n)</span><br><span class="line">			&#123;</span><br><span class="line">				cout&lt;&lt;p2-&gt;data.id&lt;&lt;endl;//这个endl易掉，不然过不了 </span><br><span class="line">			&#125;</span><br><span class="line">			pre2-&gt;next=p2-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2018/10/12/10-12/">Read More</a>
+    </footer>
+</div>
+
 <div class="cube-excerpt" id="cube-excerpt-北林oj公司营收">
     <header class="cube-excerpt-header">
         <h1><a href="/2018/10/11/10-11/">北林oj公司营收</a></h1>
@@ -444,35 +476,6 @@
     </footer>
 </div>
 
-<div class="cube-excerpt" id="cube-excerpt-今天接着吧">
-    <header class="cube-excerpt-header">
-        <h1><a href="/2018/09/27/9-26/">今天接着吧</a></h1>
-        <div class="cube-excerpt-header-msg">
-            <div class="cube-excerpt-date">
-                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2018-09-27
-            </div>
-            <div class="cube-excerpt-tags">
-                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-                
-                <a href="/tags/感想/" class="cube-excerpt-tag-link">#感想</a>
-                
-            </div>
-        </div>
-    </header>
-    <article class="cube-excerpt-entry cube-markdown">
-        
-        
-           <p>这几天有点忙，但是不是说没有时间写blog,其实这几天还是有很多东西用<br>电脑记下来。所以今天会继续写一点。争取每天更新一点东西。</p>
-<p>过去一直被拉着走，这次我想自己跑快点！<br>加油！</p>
-
-        
-    </article>
-    <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2018/09/27/9-26/">Read More</a>
-    </footer>
-</div>
-
 
 
 <ul class="cube-pagination cube-pagination-7">
@@ -554,7 +557,7 @@
     
     
     <div class="count">
-        <a class="count articles"><span>38</span>Article</a>
+        <a class="count articles"><span>39</span>Article</a>
         <a class="count tags"><span>21</span>Tags</a>
         <a class="count categories"><span>0</span>Categories</a>
     </div>
@@ -593,7 +596,7 @@
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/11/10-11/" title="北林oj公司营收">北林oj公司营收</a>
+                    <a href="/2018/10/12/10-12/" title="猴子选大王问题（循环链表和删除）">猴子选大王问题（循环链表和删除）</a>
                 </p>
             </div>
             
@@ -607,7 +610,7 @@
                     <span>2</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/07/10-7-2/" title="基于链存储结构的图书信息表的图书去重">基于链存储结构的图书信息表的图书去重</a>
+                    <a href="/2018/10/11/10-11/" title="北林oj公司营收">北林oj公司营收</a>
                 </p>
             </div>
         </li>
@@ -620,7 +623,7 @@
                     <span>3</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/07/10-7-1/" title="基于链式存储结构的图书信息表的旧图书的出库">基于链式存储结构的图书信息表的旧图书的出库</a>
+                    <a href="/2018/10/07/10-7-2/" title="基于链存储结构的图书信息表的图书去重">基于链存储结构的图书信息表的图书去重</a>
                 </p>
             </div>
         </li>
@@ -633,7 +636,7 @@
                     <span>4</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/07/10-7/" title="基于链式存储结构的图书信息表的新图书的入库">基于链式存储结构的图书信息表的新图书的入库</a>
+                    <a href="/2018/10/07/10-7-1/" title="基于链式存储结构的图书信息表的旧图书的出库">基于链式存储结构的图书信息表的旧图书的出库</a>
                 </p>
             </div>
         </li>
@@ -646,7 +649,7 @@
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/05/10-5-1/" title="基于链式存储结构的图书信息表的最爱图书的查找">基于链式存储结构的图书信息表的最爱图书的查找</a>
+                    <a href="/2018/10/07/10-7/" title="基于链式存储结构的图书信息表的新图书的入库">基于链式存储结构的图书信息表的新图书的入库</a>
                 </p>
             </div>
         </li>
@@ -667,7 +670,7 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/易错和struct/">#易错和struct</a>
+            <a href="/tags/感想/">#感想</a>
         </div>
         
         
@@ -676,8 +679,8 @@
         </div>
         
         
-        <div class="cube-box ">
-            <a href="/tags/感想/">#感想</a>
+        <div class="cube-box-bg ">
+            <a href="/tags/易错和struct/">#易错和struct</a>
         </div>
         
         
@@ -687,17 +690,27 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/基础/">#基础</a>
+            <a href="/tags/顺序存储结构/">#顺序存储结构</a>
         </div>
         
         
         <div class="cube-box-bg ">
+            <a href="/tags/基础/">#基础</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/顺序存储结构顺序表/">#顺序存储结构顺序表</a>
+        </div>
+        
+        
+        <div class="cube-box ">
             <a href="/tags/无/">#无</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/顺序存储结构/">#顺序存储结构</a>
+            <a href="/tags/域名/">#域名</a>
         </div>
         
         
@@ -707,7 +720,12 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/域名/">#域名</a>
+            <a href="/tags/Dijkstra/">#Dijkstra</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/编程经验/">#编程经验</a>
         </div>
         
         
@@ -716,28 +734,23 @@
         </div>
         
         
-        <div class="cube-box ">
-            <a href="/tags/顺序存储结构顺序表/">#顺序存储结构顺序表</a>
+        <div class="cube-box-bg ">
+            <a href="/tags/prime/">#prime</a>
         </div>
         
         
         <div class="cube-box-bg ">
-            <a href="/tags/编程经验/">#编程经验</a>
+            <a href="/tags/并查集/">#并查集</a>
         </div>
         
         
-        <div class="cube-box ">
-            <a href="/tags/Dijkstra/">#Dijkstra</a>
-        </div>
-        
-        
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/bfs和dfs/">#bfs和dfs</a>
         </div>
         
         
         <div class="cube-box-bg ">
-            <a href="/tags/prime/">#prime</a>
+            <a href="/tags/线段树/">#线段树</a>
         </div>
         
         
@@ -747,27 +760,17 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/并查集/">#并查集</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
-            <a href="/tags/常用学习网址/">#常用学习网址</a>
+            <a href="/tags/添加博客/">#添加博客</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/线段树/">#线段树</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
             <a href="/tags/有趣/">#有趣</a>
         </div>
         
         
         <div class="cube-box-bg ">
-            <a href="/tags/添加博客/">#添加博客</a>
+            <a href="/tags/常用学习网址/">#常用学习网址</a>
         </div>
         
     </div>
