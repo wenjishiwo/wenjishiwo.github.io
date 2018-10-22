@@ -150,6 +150,68 @@
     <div class="cube-content">
         <div class="cube-left">
             
+<div class="cube-excerpt" id="cube-excerpt-基于顺序存储结构的图书信息表的创建和输出">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2018/09/24/9-24/">基于顺序存储结构的图书信息表的创建和输出</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2018-09-24
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/顺序存储结构顺序表/" class="cube-excerpt-tag-link">#顺序存储结构顺序表</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>描述<br>定义一个包含图书信息（书号、书名、价格）的顺序表，读入相应的<br>图书数据来完成图书信息表的创建，然后统计图书表中的图书个数，<br>同时逐行输出每本图书的信息。</p>
+<p>输入<br>输入n+1行，其中前n行是n本图书的信息（书号、书名、价格），<br>每本图书信息占一行，书号、书名、价格用空格分隔，价格之后<br>没有空格。最后第n+1行是输入结束标志：0 0 0（空格分隔的三个0）<br>。其中书号和书名为字符串类型，价格为浮点数类型。</p>
+<p>输出<br>总计n+1行，第1行是所创建的图书表中的图书个数，后n行是n本图书<br>的信息（书号、书名、价格），每本图书信息占一行，书号、书名、<br>价格用空格分隔。其中价格输出保留两位小数。</p>
+<p>样例输入1 复制<br>9787302257646 Data-Structure 35.00<br>9787302164340 Operating-System 50.00<br>9787302219972 Software-Engineer 32.00<br>9787302203513 Database-Principles 36.00<br>9787810827430 Discrete-Mathematics 36.00<br>9787302257800 Data-Structure 62.00<br>9787811234923 Compiler-Principles 62.00<br>9787822234110 The-C-Programming-Language 38.00<br>0 0 0<br>样例输出1<br>8<br>9787302257646 Data-Structure 35.00<br>9787302164340 Operating-System 50.00<br>9787302219972 Software-Engineer 32.00<br>9787302203513 Database-Principles 36.00<br>9787810827430 Discrete-Mathematics 36.00<br>9787302257800 Data-Structure 62.00<br>9787811234923 Compiler-Principles 62.00<br>9787822234110 The-C-Programming-Language 38.00</p>
+<p>runtime代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#define MAXSIZE 10000</span><br><span class="line">#define OK 1</span><br><span class="line">#define ERROR 0</span><br><span class="line">#define OVERFLOW -2</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">	char no[20];</span><br><span class="line">	char name[50];</span><br><span class="line">	float price;</span><br><span class="line">&#125;Book;</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">	Book *elem;</span><br><span class="line">	int length;</span><br><span class="line">&#125;SqList;</span><br><span class="line">SqList L;</span><br><span class="line">bool IninList(SqList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">	L.elem=new Book[MAXSIZE];</span><br><span class="line">	if(!L.elem) exit(OVERFLOW);</span><br><span class="line">	L.length=0;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	IninList(L);</span><br><span class="line">	char a[20];</span><br><span class="line">	char b[20];</span><br><span class="line">	float c;</span><br><span class="line">	int start=0;</span><br><span class="line">	while(scanf(&quot;%s%s%f&quot;,&amp;a,&amp;b,&amp;c)&amp;&amp;strcmp(a,&quot;0&quot;)&amp;&amp;strcmp(b,&quot;0&quot;)&amp;&amp;c!=0)</span><br><span class="line">	&#123;</span><br><span class="line">		strcpy(L.elem[start].no,a);</span><br><span class="line">		strcpy(L.elem[start].name,b);</span><br><span class="line">		L.elem[start].price=c;</span><br><span class="line">		L.length++;</span><br><span class="line">		start++;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;L.length&lt;&lt;endl;</span><br><span class="line">	for(int i=0;i&lt;=L.length-1;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;%s %s %.2f\n&quot;,L.elem[i].no,L.elem[i].name,L.elem[i].price);</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>经过分析，可能是处理的不够合理，一个点是strcmp,还有个精度（关于0）问题，<br>还有delete，，还有预定义OVERFLOE存在。最后这都不是主要问题，原来是b[20]开的<br>小了，不细心啊。原题是name[50],最后改了就能过了。</p>
+<p>然后还有就是虽然改了就能过，但是写的还是不好，下面是最终的<br>严谨版本。不是说之前的思路有问题，只是代码吗，还是严谨点好。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#define MAXSIZE 10000</span><br><span class="line">#define OK 1</span><br><span class="line">#define ERROR 0</span><br><span class="line">#define OVERFLOW -2</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">	char no[20];</span><br><span class="line">	char name[50];</span><br><span class="line">	float price;</span><br><span class="line">&#125;Book;</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">	Book *elem;</span><br><span class="line">	int length;</span><br><span class="line">&#125;SqList;</span><br><span class="line">SqList L;</span><br><span class="line">bool IninList(SqList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">	L.elem=new Book[MAXSIZE];</span><br><span class="line">	if(!L.elem) exit(OVERFLOW);</span><br><span class="line">	L.length=0;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	IninList(L);</span><br><span class="line">	int start=0;</span><br><span class="line">	while(scanf(&quot;%s%s%f&quot;,L.elem[start].no,L.elem[start].name,&amp;L.elem[start].price))</span><br><span class="line">	&#123;</span><br><span class="line">		if(L.elem[start].no[0]==&apos;0&apos;&amp;&amp;L.elem[start].name[0]==&apos;0&apos;&amp;&amp;(L.elem[start].price-0.0&lt;1e-6))</span><br><span class="line">		     break;</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line">			start++;</span><br><span class="line">			L.length++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;L.length&lt;&lt;endl;</span><br><span class="line">	for(int i=0;i&lt;=L.length-1;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;%s %s %.2f\n&quot;,L.elem[i].no,L.elem[i].name,L.elem[i].price);</span><br><span class="line">	&#125;</span><br><span class="line">	delete [] L.elem;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2018/09/24/9-24/">Read More</a>
+    </footer>
+</div>
+
+<div class="cube-excerpt" id="cube-excerpt-博客页面显示问题">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2018/09/23/jiejue/">博客页面显示问题</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2018-09-23
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/有趣/" class="cube-excerpt-tag-link">#有趣</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>更新一条：为了不让其自适应，也就是说博客内容的宽度<br>不要超过这个最大宽度，所以之后的博客都以之前的宽度<br>为准。<br>关于博客页面在移动端<br>和pc端的页面显示不全的解决方法真的非常搞笑的一件事情，我的博<br>客在移动端和pc端会出现非常大的差异。由于hexo自身渲染的原因，<br></p>
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2018/09/23/jiejue/">Read More</a>
+    </footer>
+</div>
+
 <div class="cube-excerpt" id="cube-excerpt-今天是我的生日">
     <header class="cube-excerpt-header">
         <h1><a href="/2018/09/23/shenri/">今天是我的生日</a></h1>
@@ -370,67 +432,9 @@
     </footer>
 </div>
 
-<div class="cube-excerpt" id="cube-excerpt-contest1 hdu1873优先队列的结构体应用题">
-    <header class="cube-excerpt-header">
-        <h1><a href="/2018/09/21/du6/">contest1 hdu1873优先队列的结构体应用题</a></h1>
-        <div class="cube-excerpt-header-msg">
-            <div class="cube-excerpt-date">
-                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2018-09-21
-            </div>
-            <div class="cube-excerpt-tags">
-                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-                
-                <a href="/tags/数据结构/" class="cube-excerpt-tag-link">#数据结构</a>
-                
-            </div>
-        </div>
-    </header>
-    <article class="cube-excerpt-entry cube-markdown">
-        
-        
-           <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">class bingren</span><br><span class="line">&#123;</span><br><span class="line">public:</span><br><span class="line">	int id;</span><br><span class="line">	int youxianji;</span><br><span class="line">	friend bool operator &lt; (const bingren &amp;a,const bingren &amp;b)	//比较奇怪的一个地方，只有加上const 才可以过，也可以直接(bingren a,bingren b); </span><br><span class="line">&#123;</span><br><span class="line">	if(a.youxianji!=b.youxianji)</span><br><span class="line">	return a.youxianji&lt;b.youxianji;</span><br><span class="line">	else</span><br><span class="line">	return a.id&gt;b.id;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line">int num=0;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int N;</span><br><span class="line">	while(cin&gt;&gt;N)</span><br><span class="line">	&#123;</span><br><span class="line">		num=0;</span><br><span class="line">		priority_queue&lt;bingren&gt; q[4];</span><br><span class="line">		string s1;</span><br><span class="line">		int a,b;</span><br><span class="line">		while(N--)</span><br><span class="line">		&#123;</span><br><span class="line">			cin&gt;&gt;s1;</span><br><span class="line">			if(s1==&quot;IN&quot;)</span><br><span class="line">			&#123;</span><br><span class="line">				cin&gt;&gt;a&gt;&gt;b;</span><br><span class="line">				bingren tt;</span><br><span class="line">				num++;</span><br><span class="line">				tt.youxianji=b;</span><br><span class="line">				tt.id=num;</span><br><span class="line">				q[a].push(tt); //队列入队时push,不是input </span><br><span class="line">			&#125;</span><br><span class="line">			else</span><br><span class="line">			&#123;</span><br><span class="line">				cin&gt;&gt;a;</span><br><span class="line">				if(!q[a].empty())</span><br><span class="line">				&#123;</span><br><span class="line">					bingren tm=q[a].top();</span><br><span class="line">					q[a].pop();</span><br><span class="line">					cout&lt;&lt;tm.id&lt;&lt;endl;</span><br><span class="line">				&#125;</span><br><span class="line">				else</span><br><span class="line">				&#123;</span><br><span class="line">					cout&lt;&lt;&quot;EMPTY&quot;&lt;&lt;endl;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-        
-    </article>
-    <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2018/09/21/du6/">Read More</a>
-    </footer>
-</div>
-
-<div class="cube-excerpt" id="cube-excerpt-set练习题">
-    <header class="cube-excerpt-header">
-        <h1><a href="/2018/09/21/du5/">set练习题</a></h1>
-        <div class="cube-excerpt-header-msg">
-            <div class="cube-excerpt-date">
-                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2018-09-21
-            </div>
-            <div class="cube-excerpt-tags">
-                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-                
-                <a href="/tags/数据结构/" class="cube-excerpt-tag-link">#数据结构</a>
-                
-            </div>
-        </div>
-    </header>
-    <article class="cube-excerpt-entry cube-markdown">
-        
-        
-           <h2 id="丑数-优先队列和set查重count练习"><a href="#丑数-优先队列和set查重count练习" class="headerlink" title="丑数 优先队列和set查重count练习"></a>丑数 优先队列和set查重count练习</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;set&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;//此题易错是long long 不是int </span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	ll n;</span><br><span class="line">	int factor[3]=&#123;2,3,5&#125;;</span><br><span class="line">	while(cin&gt;&gt;n&amp;&amp;n!=0)</span><br><span class="line">	&#123;</span><br><span class="line">		priority_queue&lt;ll,vector&lt;ll&gt;, greater&lt;ll&gt; &gt; q1;</span><br><span class="line">		set&lt;ll&gt; q2;</span><br><span class="line">		q1.push(1);</span><br><span class="line">		q2.insert(1);</span><br><span class="line">		ll i;</span><br><span class="line">		for(i=1;;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			ll m1=q1.top();</span><br><span class="line">			q1.pop();</span><br><span class="line">			if(i==n)</span><br><span class="line">			&#123;</span><br><span class="line">				printf(&quot;%lld\n&quot;,m1);</span><br><span class="line">				break;</span><br><span class="line">			&#125; </span><br><span class="line">			for(int j=0;j&lt;3;j++)</span><br><span class="line">			&#123;</span><br><span class="line">					ll m2=m1*factor[j];</span><br><span class="line">					if(!q2.count(m2))</span><br><span class="line">					&#123;</span><br><span class="line">						q1.push(m2);</span><br><span class="line">						q2.insert(m2);	</span><br><span class="line">					&#125;			</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="set对结构体排序的常见用法和排序插件cmp的用法"><a href="#set对结构体排序的常见用法和排序插件cmp的用法" class="headerlink" title="set对结构体排序的常见用法和排序插件cmp的用法"></a>set对结构体排序的常见用法和排序插件cmp的用法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;set&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">struct Student</span><br><span class="line">&#123;</span><br><span class="line">	int id;</span><br><span class="line">	string name;</span><br><span class="line">&#125;stu1,stu2,stu3;</span><br><span class="line">struct setcmp//set容器的插件,来确定set内部的排序 </span><br><span class="line">&#123;</span><br><span class="line">	bool operator()(Student a,Student b)</span><br><span class="line">	&#123;</span><br><span class="line">	return a.id&gt;b.id;					//这个大括号不可以省略，不然会报错的										</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">struct Setcmp</span><br><span class="line">&#123;</span><br><span class="line">	bool operator()(Student a,Student b)</span><br><span class="line">	&#123;</span><br><span class="line">	return a.id&lt;b.id;	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;; </span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	set&lt;Student,setcmp&gt; my;</span><br><span class="line">	set&lt;Student&gt;::iterator it; </span><br><span class="line">	stu1.id=1000;</span><br><span class="line">	stu2.id=2000;</span><br><span class="line">	stu3.id=3000;</span><br><span class="line">	stu1.name=&quot;ddd&quot;;</span><br><span class="line">	stu2.name=&quot;www&quot;;</span><br><span class="line">	stu3.name=&quot;aaa&quot;;</span><br><span class="line">	my.insert(stu1);</span><br><span class="line">	my.insert(stu2);</span><br><span class="line">	my.insert(stu3);	</span><br><span class="line">	for(it=my.begin();it!=my.end();it++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;it-&gt;id&lt;&lt;&quot; &quot;&lt;&lt;it-&gt;name&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	set&lt;Student,Setcmp&gt; mm;</span><br><span class="line">	mm.insert(stu1);</span><br><span class="line">	mm.insert(stu2);</span><br><span class="line">	mm.insert(stu3);</span><br><span class="line">	for(it=mm.begin();it!=mm.end();it++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;it-&gt;id&lt;&lt;&quot; &quot;&lt;&lt;it-&gt;name&lt;&lt;endl;</span><br><span class="line">	&#125;	</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="uva10815-set练习以及输入流sstream中的stringstream"><a href="#uva10815-set练习以及输入流sstream中的stringstream" class="headerlink" title="uva10815 set练习以及输入流sstream中的stringstream"></a>uva10815 set练习以及输入流sstream中的stringstream</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;sstream&gt;</span><br><span class="line">#include&lt;set&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	set&lt;string&gt; str;</span><br><span class="line">	string s;</span><br><span class="line">	while(cin&gt;&gt;s)</span><br><span class="line">	&#123;</span><br><span class="line">		for(int i=0;i&lt;s.length();i++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(isalpha(s[i]))</span><br><span class="line">			&#123;</span><br><span class="line">				s[i]=tolower(s[i]);</span><br><span class="line">			&#125;</span><br><span class="line">			else</span><br><span class="line">			&#123;</span><br><span class="line">				s[i]=&apos; &apos;;//一个字符空格时&apos; &apos;不是&quot; &quot;; 输入的非字符转换为空格，作为单词的分界点</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		stringstream ss(s);//流 ;</span><br><span class="line">		//构造时就写进，因为时对象的原因，将s加入ss流类里面,就类似于文件里面的输入文件一样 </span><br><span class="line">		string s2;</span><br><span class="line">		while(ss&gt;&gt;s2)</span><br><span class="line">		&#123;</span><br><span class="line">			str.insert(s2); </span><br><span class="line">		&#125; </span><br><span class="line">	&#125;</span><br><span class="line">	for(set&lt;string&gt;::iterator it=str.begin();it!=str.end();it++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;*it&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-        
-    </article>
-    <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2018/09/21/du5/">Read More</a>
-    </footer>
-</div>
 
 
-
-<ul class="cube-pagination cube-pagination-7">
+<ul class="cube-pagination cube-pagination-9">
     
     <li class="cube-pagination-prev">
         <a href="/page/3/">« Prev</a>
@@ -438,34 +442,36 @@
     
     
         
+                <li class="cube-pagination-index">
+                    <a href="/">1</a>
+                </li>
+                <li class="cube-pagination-ellipses">
+                    <span>...</span>
+                </li>
             
-            <li class="cube-pagination-index">
-                <a href="/">1</a>
-            </li>
+                
+                <li class="cube-pagination-index">
+                    <a href="/page/3">3</a>
+                </li>
+                
             
-        
+                
+                <li class="cube-pagination-index disabled">
+                    <span>4</span>
+                </li>
+                
             
-            <li class="cube-pagination-index">
-                <a href="/page/2">2</a>
-            </li>
+                
+                <li class="cube-pagination-index">
+                    <a href="/page/5">5</a>
+                </li>
+                
             
-        
-            
-            <li class="cube-pagination-index">
-                <a href="/page/3">3</a>
-            </li>
-            
-        
-            
-            <li class="cube-pagination-index disabled">
-                <span>4</span>
-            </li>
-            
-        
-            
-            <li class="cube-pagination-index">
-                <a href="/page/5">5</a>
-            </li>
+                
+                <li class="cube-pagination-index">
+                    <a href="/page/6">6</a>
+                </li>
+                
             
         
     
@@ -515,7 +521,7 @@
     
     
     <div class="count">
-        <a class="count articles"><span>50</span>Article</a>
+        <a class="count articles"><span>52</span>Article</a>
         <a class="count tags"><span>22</span>Tags</a>
         <a class="count categories"><span>0</span>Categories</a>
     </div>
@@ -554,7 +560,7 @@
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/22/10-22-3/" title="基于链表的两个非递减有序序列的合并(精修版本，完美版本)">基于链表的两个非递减有序序列的合并(精修版本，完美版本)</a>
+                    <a href="/2018/10/22/10-22-8/" title="删除链表中满足区间值的结点">删除链表中满足区间值的结点</a>
                 </p>
             </div>
             
@@ -568,7 +574,7 @@
                     <span>2</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/22/10-22-2/" title="将两个递增链表合并为一个递增链表（最终版，利用所有已有链表空间，且释放掉其他空间，且用后插法创建链表）">将两个递增链表合并为一个递增链表（最终版，利用所有已有链表空间，且释放掉其他空间，且用后插法创建链表）</a>
+                    <a href="/2018/10/22/10-22-7/" title="链表的逆转(前插法逆转)">链表的逆转(前插法逆转)</a>
                 </p>
             </div>
         </li>
@@ -581,7 +587,7 @@
                     <span>3</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/22/10-22-1/" title="继续练习后插法建立链表（比自己的pre指针创建链表好吗？）">继续练习后插法建立链表（比自己的pre指针创建链表好吗？）</a>
+                    <a href="/2018/10/22/10-22-3/" title="基于链表的两个非递减有序序列的合并(精修版本，完美版本)">基于链表的两个非递减有序序列的合并(精修版本，完美版本)</a>
                 </p>
             </div>
         </li>
@@ -594,7 +600,7 @@
                     <span>4</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/22/10-22/" title="查找链表中的最大值">查找链表中的最大值</a>
+                    <a href="/2018/10/22/10-22-2/" title="将两个递增链表合并为一个递增链表（最终版，利用所有已有链表空间，且释放掉其他空间，且用后插法创建链表）">将两个递增链表合并为一个递增链表（最终版，利用所有已有链表空间，且释放掉其他空间，且用后插法创建链表）</a>
                 </p>
             </div>
         </li>
@@ -607,7 +613,7 @@
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/22/10-21-2/" title="基于链表的两个非递减有序序列的合并">基于链表的两个非递减有序序列的合并</a>
+                    <a href="/2018/10/22/10-22-1/" title="继续练习后插法建立链表（比自己的pre指针创建链表好吗？）">继续练习后插法建立链表（比自己的pre指针创建链表好吗？）</a>
                 </p>
             </div>
         </li>
@@ -628,17 +634,17 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/数据结构/">#数据结构</a>
-        </div>
-        
-        
-        <div class="cube-box ">
             <a href="/tags/易错和struct/">#易错和struct</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/多项式/">#多项式</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/数据结构/">#数据结构</a>
         </div>
         
         
@@ -652,7 +658,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/基础/">#基础</a>
         </div>
         
@@ -673,22 +679,17 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/关于我自己/">#关于我自己</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
             <a href="/tags/顺序存储结构顺序表/">#顺序存储结构顺序表</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/申请暑校/">#申请暑校</a>
+            <a href="/tags/关于我自己/">#关于我自己</a>
         </div>
         
         
-        <div class="cube-box ">
-            <a href="/tags/编程经验/">#编程经验</a>
+        <div class="cube-box-bg ">
+            <a href="/tags/申请暑校/">#申请暑校</a>
         </div>
         
         
@@ -698,11 +699,16 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/prime/">#prime</a>
+            <a href="/tags/编程经验/">#编程经验</a>
         </div>
         
         
         <div class="cube-box ">
+            <a href="/tags/prime/">#prime</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
             <a href="/tags/bfs和dfs/">#bfs和dfs</a>
         </div>
         
@@ -712,8 +718,13 @@
         </div>
         
         
-        <div class="cube-box-bg ">
-            <a href="/tags/常用学习网址/">#常用学习网址</a>
+        <div class="cube-box ">
+            <a href="/tags/线段树/">#线段树</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/添加博客/">#添加博客</a>
         </div>
         
         
@@ -722,18 +733,13 @@
         </div>
         
         
-        <div class="cube-box ">
-            <a href="/tags/线段树/">#线段树</a>
-        </div>
-        
-        
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/有趣/">#有趣</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/添加博客/">#添加博客</a>
+            <a href="/tags/常用学习网址/">#常用学习网址</a>
         </div>
         
     </div>
