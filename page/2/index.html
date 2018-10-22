@@ -150,6 +150,141 @@
     <div class="cube-content">
         <div class="cube-left">
             
+<div class="cube-excerpt" id="cube-excerpt-多项式运算(北林oj)">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2018/10/12/10-12-1/">多项式运算(北林oj)</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2018-10-12
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/多项式/" class="cube-excerpt-tag-link">#多项式</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>此题有很多点，比较麻烦，主要是自己确实想的比较简单，不过最终通过各种限制还是做出来了。<br>描述<br>据说每一个搞ACM的上辈子都是脑细胞死光钻到牛角尖里出不来的天使哦，可ACMer也会经常遇到些很简单的难题，比如a+b，找数列最大值……bluestone最近就遇到了这样的简单难题，Professor给她出了道一元多项式运算的题，但是bluestone做了一天没能做出来，于是她前来请教在座聪明的各位，看谁最先能帮bluestone解决这个problem？？她会灰常感激的哦~</p>
+<p>bluestone给大家提个醒：类似以下式子的称为一元多项式：</p>
+<p>f(x)=a<em>x^n+b</em>x^m+……+k</p>
+<p>如果给出x的值，我们马上就能算出f(x)了吧~</p>
+<p>输入<br>输入第一行，是一个整数T(0&lt;T&lt;=100)，表示一共有T组测试数据，以下紧跟T组测试数据，每组第一行是一个X（0&lt;=X&lt;=10000），表示X的值；第二行是一个一元多项式，多项式的长度不会超过100。只进行多项式加减运算，保证最后运算的结果始终在int范围内，输入格式请参见样例。</p>
+<p>输出<br>每组测试数据输出占一行，输出最后的结果，具体格式请严格参考样例（注意空格）</p>
+<p>样例输入1 复制<br>2<br>2<br>2X^2+3X+1<br>3<br>X+1<br>样例输出1<br>Case #1:15<br>Case #2:4</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;algorithm&gt; </span><br><span class="line">using namespace std;</span><br><span class="line">string s;</span><br><span class="line">int deal(int x,int start,int end)</span><br><span class="line">&#123;</span><br><span class="line">	if(start&gt;end)//处理特殊情况，处理+或-号在多项式最前端或最后端 </span><br><span class="line">	return 0;</span><br><span class="line">	int s1=1;    //处理前面系数乘数，如果为省略1时则为1 </span><br><span class="line">	int i=start;</span><br><span class="line">	if(s[start]!=&apos;X&apos;)    </span><br><span class="line">		&#123;s1=s[start]-&apos;0&apos;;       //如果不省略，记下大小 </span><br><span class="line">	for(i=start+1;i&lt;=end&amp;&amp;s[i]!=&apos;X&apos;;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		s1=s1*10+s[i]-&apos;0&apos;;</span><br><span class="line">	&#125;&#125;</span><br><span class="line">	int s2;</span><br><span class="line">	if(s[i]==&apos;X&apos;||s[start]==&apos;X&apos;)   //处理含有X的项时候默认为乘方1 </span><br><span class="line">		s2=1;</span><br><span class="line">	else s2=0;                     //不含有X，那X乘方为0 </span><br><span class="line">	if((i+2)&lt;=end)                //处理乘方数 </span><br><span class="line">	s2=s[i+2]-&apos;0&apos;; </span><br><span class="line">	for(int u=i+3;u&lt;=end;u++)</span><br><span class="line">	&#123;</span><br><span class="line">		s2=s2*10+s[u]-&apos;0&apos;;         //乘方数大小 </span><br><span class="line">	&#125;</span><br><span class="line">	int s3=1;                      //如果X不存在，默认为1。如果乘方为0，默认也为1 </span><br><span class="line">	while(s2--)                     //如果X存在，进行相关乘方处理 </span><br><span class="line">		&#123;</span><br><span class="line">			s3=s3*x;</span><br><span class="line">		&#125;</span><br><span class="line">	if(s1==0)                      //特殊情况乘数为0 </span><br><span class="line">	return 0;</span><br><span class="line">	else</span><br><span class="line">	return s1*s3;                   </span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int n;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	int NUM=1;</span><br><span class="line">	for(int i=1;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		s.clear();</span><br><span class="line">		int x;</span><br><span class="line">		cin&gt;&gt;x;</span><br><span class="line">		cin&gt;&gt;s;</span><br><span class="line">		int start=0;</span><br><span class="line">		int end=0;</span><br><span class="line">		int sum=0;</span><br><span class="line">		int flag=1;              //进行第一个符号处理设的 ,+为1，-为0 </span><br><span class="line">		for(int u=0;u&lt;s.length();u++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(s[u]==&apos;+&apos;||s[u]==&apos;-&apos;)     // 遇到符号，对符号之前的式子处理 </span><br><span class="line">			&#123;</span><br><span class="line">			 	end=u-1;                  //定位之前的end </span><br><span class="line">			 	if(flag)                  //式子之前的符号 </span><br><span class="line">			 	&#123;</span><br><span class="line">			 		sum+=deal(x,start,end);</span><br><span class="line">				&#125;</span><br><span class="line">				else</span><br><span class="line">				&#123;</span><br><span class="line">					sum-=deal(x,start,end);</span><br><span class="line">				&#125;</span><br><span class="line">				start=u+1;</span><br><span class="line">				if(s[u]==&apos;+&apos;)               //为下一个式子准备 </span><br><span class="line">				flag=1;</span><br><span class="line">				else</span><br><span class="line">				flag=0;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		end=s.length()-1;                    //式子末尾特殊处理 </span><br><span class="line">		if(flag)                             </span><br><span class="line">		sum+=deal(x,start,end);</span><br><span class="line">		else</span><br><span class="line">		sum-=deal(x,start,end);</span><br><span class="line">		printf(&quot;Case #%d:%d\n&quot;,NUM,sum);</span><br><span class="line">		NUM++;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2018/10/12/10-12-1/">Read More</a>
+    </footer>
+</div>
+
+<div class="cube-excerpt" id="cube-excerpt-猴子选大王问题（循环链表和删除）">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2018/10/12/10-12/">猴子选大王问题（循环链表和删除）</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2018-10-12
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/数据结构/" class="cube-excerpt-tag-link">#数据结构</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>描述<br>一堆猴子都有编号，编号是1，2，3 …m，这群猴子（m个）按照1~m的顺序围坐一圈，从第1开始数，每数到第n个，该猴子就要离开此圈，这样依次下来，直到圈中只剩下最后一只猴子，则该猴子为大王。利用单向循环链表模拟此过程，依次输出出圈的猴子编号。</p>
+<p>输入<br>多组数据，每组数据占一行，包括两个数据m和n。m代表猴子个数，n代表步数，m=0且n=0时输入结束。</p>
+<p>输出<br>依次输出出圈的猴子编号，编号之间用空格隔开。</p>
+<p>样例输入1 复制<br>10 4<br>8 3<br>0 0<br>样例输出1<br>4 8 2 7 3 10 9 1 6 5<br>3 6 1 5 2 8 4 7</p>
+<p>其中有几点错误，这些错误应该在仔细分析后找到，但是自己总是异想天开。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#define OK 1</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct </span><br><span class="line">&#123;</span><br><span class="line">	int id;</span><br><span class="line">&#125;Houzhi;</span><br><span class="line">typedef struct LNode</span><br><span class="line">&#123;</span><br><span class="line">	Houzhi data;</span><br><span class="line">	struct LNode *next;</span><br><span class="line">&#125;LNode,*LinkList;</span><br><span class="line">LinkList L;</span><br><span class="line">bool InintList(LinkList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">	L=new LNode;</span><br><span class="line">	L-&gt;next=NULL;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int n;//猴子数 </span><br><span class="line">	int m;//步数	</span><br><span class="line">	while(scanf(&quot;%d%d&quot;,&amp;n,&amp;m))</span><br><span class="line">	&#123;</span><br><span class="line">		InintList(L);</span><br><span class="line">		L-&gt;next=new LNode;</span><br><span class="line">		LNode *p=L-&gt;next;</span><br><span class="line">		LNode *pre=L;</span><br><span class="line">		if(n==0&amp;&amp;m==0)</span><br><span class="line">		&#123;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line">			for(int i=1;i&lt;=n;i++)//循环链表建立 </span><br><span class="line">			&#123;</span><br><span class="line">				p-&gt;data.id=i;</span><br><span class="line">				p-&gt;next=new LNode;</span><br><span class="line">				p=p-&gt;next;</span><br><span class="line">				pre=pre-&gt;next;</span><br><span class="line">			&#125;</span><br><span class="line">			pre-&gt;next=L;    //连接 </span><br><span class="line">		&#125;</span><br><span class="line">		int num=0;</span><br><span class="line">		LNode *p2=L;</span><br><span class="line">		LNode *pre2=pre;                //尾节点 </span><br><span class="line">		while(L!=L-&gt;next)               //循环条件 </span><br><span class="line">		&#123;</span><br><span class="line">			for(int i=1;i&lt;=m;i++)</span><br><span class="line">			&#123;</span><br><span class="line">				p2=p2-&gt;next;</span><br><span class="line">				if(pre2-&gt;next!=p2)      //这个一定要判断，不然在删除结点后，pre2会和p2重叠 </span><br><span class="line">				pre2=pre2-&gt;next;</span><br><span class="line">				if(p2==L)               //头节点的原因 </span><br><span class="line">				&#123;</span><br><span class="line">					p2=p2-&gt;next;</span><br><span class="line">					pre2=pre2-&gt;next;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			num++;</span><br><span class="line">			if(num&lt;n)</span><br><span class="line">			cout&lt;&lt;p2-&gt;data.id&lt;&lt;&quot; &quot;;</span><br><span class="line">			else if(num==n)</span><br><span class="line">			&#123;</span><br><span class="line">				cout&lt;&lt;p2-&gt;data.id&lt;&lt;endl;//这个endl易掉，不然过不了 </span><br><span class="line">			&#125;</span><br><span class="line">			pre2-&gt;next=p2-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2018/10/12/10-12/">Read More</a>
+    </footer>
+</div>
+
+<div class="cube-excerpt" id="cube-excerpt-北林oj公司营收">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2018/10/11/10-11/">北林oj公司营收</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2018-10-11
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/易错和struct/" class="cube-excerpt-tag-link">#易错和struct</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>公司营收<br>发布时间: 2018年3月22日 14:56   最后更新: 2018年3月22日 14:56   时间限制: 1000ms   内存限制: 128M</p>
+<p>描述<br>一些公司之间有合作关系，会计小张想了解大家的贸易额的多少。在这个问题中的各家公司都有一个固定的资产输出，而这些资产输出将被平均分给和这家公司有贸易公司的人。但是，这些公司中，有些公司的资产输出较多，有些则较少。给出小张要统计的公司名称（均小于20字符），给出每个公司的资产输出和与这家公司有贸易关系的公司列表，请确定每家公司贸易收入大于贸易支出的数量。</p>
+<p>输入<br>输入第1行为一个T，表示公司数量（2≤T≤10），输入第2~T+1行，表示所有的公司名称，每行对应一个公司名称。<br>第T+2行到最后，为多组输入数据：每组中第一行为公司名，第二行包含两个数据，分别是第一行对应公司的贸易输出额度（0-4000），第二个数据是这家公司有贸易的公司数量K，接下来K行，每行分别写了这K个公司中的一个的名称。（对其余公司的贸易输出额度可以理解为输出总额度除以其余公司的数量取整，若除不尽，则多出来的额度不用算进贸易输出额度中）</p>
+<p>输出<br>输出T行，每行是一个公司名以及它的贸易收入比贸易支出多的额度，以空格隔开。</p>
+<p>样例输入1 复制<br>5<br>KFC<br>Subway<br>ETS<br>Intel<br>AMD</p>
+<p>KFC<br>200 3<br>Subway<br>ETS<br>Intel</p>
+<p>ETS<br>500 1<br>KFC</p>
+<p>AMD<br>150 2<br>Intel<br>ETS</p>
+<p>Subway<br>0 2<br>AMD<br>Intel</p>
+<p>Intel<br>0 0<br>样例输出1<br>KFC 302<br>Subway 66<br>ETS -359<br>Intel 141<br>AMD -150</p>
+<p>注意里面几个点，还是一道简单题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">struct gongshi</span><br><span class="line">&#123;</span><br><span class="line">	string name;</span><br><span class="line">    int ziran;</span><br><span class="line">&#125;go[12];</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int n;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	for(int i=1;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		cin&gt;&gt;go[i].name;</span><br><span class="line">		go[i].ziran=0;</span><br><span class="line">	&#125;</span><br><span class="line">	string s1;</span><br><span class="line">	int sum;</span><br><span class="line">	int m;</span><br><span class="line">	string s2;</span><br><span class="line">	int k=1;</span><br><span class="line">	while(k&lt;=n&amp;&amp;cin&gt;&gt;s1)//这个k&lt;=n要在&amp;&amp;前面，不能在&amp;&amp;后面否则会很搞笑，由于执行的顺寻 </span><br><span class="line">	&#123;</span><br><span class="line">		cin&gt;&gt;sum&gt;&gt;m;</span><br><span class="line">		k++;</span><br><span class="line">		if(m==0)//m=0的情况要考虑 </span><br><span class="line">		continue;</span><br><span class="line">		int Sum=sum/m;</span><br><span class="line">		int yushu=sum-Sum*m;</span><br><span class="line">		for(int i=1;i&lt;=n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(go[i].name==s1)</span><br><span class="line">			&#123;</span><br><span class="line">				go[i].ziran=go[i].ziran+yushu-sum;//这里容易把之前的ziran忘记加 </span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		for(int i=1;i&lt;=m;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cin&gt;&gt;s2;</span><br><span class="line">			for(int u=1;u&lt;=n;u++)</span><br><span class="line">			&#123;</span><br><span class="line">				if(go[u].name==s2)</span><br><span class="line">				&#123;</span><br><span class="line">					go[u].ziran+=Sum;</span><br><span class="line">					break;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	for(int i=1;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;go[i].name&lt;&lt;&quot; &quot;&lt;&lt;go[i].ziran&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2018/10/11/10-11/">Read More</a>
+    </footer>
+</div>
+
+<div class="cube-excerpt" id="cube-excerpt-基于链存储结构的图书信息表的图书去重">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2018/10/07/10-7-2/">基于链存储结构的图书信息表的图书去重</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2018-10-07
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/数据结构/" class="cube-excerpt-tag-link">#数据结构</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>这道题有个continue会跳过for的第三段，是去重的关键<br>描述<br>出版社出版的任何一本图书的书号（ISBN）都是唯一的，即图书表中不允许包含书号重复的图书。定义一个包含图书信息（书号、书名、价格）的链表，读入相应的图书数据来完成图书信息表的创建（书号可能重复），然后进行图书的去重，即删除书号重复的图书（只保留第一本），最后输出去重后所有图书的信息。</p>
+<p>输入<br>总计输入n+1行，其中，第一行是图书数目n，后n行是n本图书的信息（书号、书名、价格），每本图书信息占一行，书号、书名、价格用空格分隔，价格之后没有空格（书号可能重复）。其中书号和书名为字符串类型，价格为浮点数类型。</p>
+<p>输出<br>总计输出m+1行（m≤n），其中，第一行是去重后的图书数目，后m行是去重后图书的信息（书号、书名、价格），每本图书信息占一行，书号、书名、价格用空格分隔，其中价格输出保留两位小数。</p>
+<p>样例输入1 复制<br>9<br>9787302257646 Data-Structure 35.00<br>9787302164340 Operating-System 50.00<br>9787302219972 Software-Engineer 32.00<br>9787302203513 Database-Principles 36.00<br>9787810827430 Discrete-Mathematics 36.00<br>9787302257800 Data-Structure 62.00<br>9787811234923 Compiler-Principles 62.00<br>9787811234923 Compiler-Principles 62.00<br>9787822234110 The-C-Programming-Language 38.00<br>样例输出1<br>8<br>9787302257646 Data-Structure 35.00<br>9787302164340 Operating-System 50.00<br>9787302219972 Software-Engineer 32.00<br>9787302203513 Database-Principles 36.00<br>9787810827430 Discrete-Mathematics 36.00<br>9787302257800 Data-Structure 62.00<br>9787811234923 Compiler-Principles 62.00<br>9787822234110 The-C-Programming-Language 38.00<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#define OK 1</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct </span><br><span class="line">&#123;</span><br><span class="line">	char no[20];</span><br><span class="line">	char name[50];</span><br><span class="line">	float price;</span><br><span class="line">&#125;Book;</span><br><span class="line">typedef struct LNode</span><br><span class="line">&#123;</span><br><span class="line">	Book data;</span><br><span class="line">	struct LNode *next;</span><br><span class="line">&#125;LNode,*LinkList;</span><br><span class="line">LinkList L;</span><br><span class="line">bool InintList(LinkList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">	L=new LNode;</span><br><span class="line">	L-&gt;next=NULL;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int num;</span><br><span class="line">	InintList(L);</span><br><span class="line">	cin&gt;&gt;num;	</span><br><span class="line">	LNode *pre=L;//pre非常关键，这个是为了让链表最后一端为NULL </span><br><span class="line">	for(int i=0;i&lt;num;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		LNode *p=new LNode;</span><br><span class="line">		scanf(&quot;%s%s%f&quot;,p-&gt;data.no,p-&gt;data.name,&amp;p-&gt;data.price);</span><br><span class="line">		pre-&gt;next=p;</span><br><span class="line">		pre=p;</span><br><span class="line">	&#125;</span><br><span class="line">	pre-&gt;next=NULL;//结尾加入NULL</span><br><span class="line">	 //之前创建的链表没有NULL节点，不太好，这里会有问题，但是现在有NULL了</span><br><span class="line">	LNode *it=L-&gt;next-&gt;next; </span><br><span class="line">	pre=L-&gt;next;</span><br><span class="line">	for(;it!=NULL;it=it-&gt;next,pre=pre-&gt;next)</span><br><span class="line">		&#123;</span><br><span class="line">			if(strcmp(pre-&gt;data.no,it-&gt;data.no)==0)</span><br><span class="line">			&#123;</span><br><span class="line">				pre-&gt;next=it-&gt;next;</span><br><span class="line">				it=it-&gt;next;</span><br><span class="line">				num--; </span><br><span class="line">				continue;//这里会跳过接下来的操作，也就是说for第三段的也不执行 </span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	it=L-&gt;next;</span><br><span class="line">	cout&lt;&lt;num&lt;&lt;endl;</span><br><span class="line">	while(it)</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;%s %s %.2f\n&quot;,it-&gt;data.no,it-&gt;data.name,it-&gt;data.price);</span><br><span class="line">		it=it-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2018/10/07/10-7-2/">Read More</a>
+    </footer>
+</div>
+
 <div class="cube-excerpt" id="cube-excerpt-基于链式存储结构的图书信息表的旧图书的出库">
     <header class="cube-excerpt-header">
         <h1><a href="/2018/10/07/10-7-1/">基于链式存储结构的图书信息表的旧图书的出库</a></h1>
@@ -345,130 +480,6 @@
     </footer>
 </div>
 
-<div class="cube-excerpt" id="cube-excerpt-基于链式存储结构的图书信息表的创建和输出">
-    <header class="cube-excerpt-header">
-        <h1><a href="/2018/09/27/9-26-1/">基于链式存储结构的图书信息表的创建和输出</a></h1>
-        <div class="cube-excerpt-header-msg">
-            <div class="cube-excerpt-date">
-                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2018-09-27
-            </div>
-            <div class="cube-excerpt-tags">
-                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-                
-            </div>
-        </div>
-    </header>
-    <article class="cube-excerpt-entry cube-markdown">
-        
-        
-           <p>描述<br>定义一个包含图书信息（书号、书名、价格）的链表，读入相应的图书数据来完成图书信息表的创建，然后统计图书表中的图书个数，同时逐行输出每本图书的信息。</p>
-<p>输入<br>输入n+1行，其中前n行是n本图书的信息（书号、书名、价格），每本图书信息占一行，书号、书名、价格用空格分隔，价格之后没有空格。最后第n+1行是输入结束标志：0 0 0（空格分隔的三个0）。其中书号和书名为字符串类型，价格为浮点数类型。</p>
-<p>输出<br>总计n+1行，第1行是所创建的图书表中的图书个数，后n行是n本图书的信息（书号、书名、价格），每本图书信息占一行，书号、书名、价格用空格分隔。其中价格输出保留两位小数。</p>
-<p>样例输入1 复制<br>9787302257646 Data-Structure 35.00<br>9787302164340 Operating-System 50.00<br>9787302219972 Software-Engineer 32.00<br>9787302203513 Database-Principles 36.00<br>9787810827430 Discrete-Mathematics 36.00<br>9787302257800 Data-Structure 62.00<br>9787811234923 Compiler-Principles 62.00<br>9787822234110 The-C-Programming-Language 38.00<br>0 0 0<br>样例输出1<br>8<br>9787302257646 Data-Structure 35.00<br>9787302164340 Operating-System 50.00<br>9787302219972 Software-Engineer 32.00<br>9787302203513 Database-Principles 36.00<br>9787810827430 Discrete-Mathematics 36.00<br>9787302257800 Data-Structure 62.00<br>9787811234923 Compiler-Principles 62.00<br>9787822234110 The-C-Programming-Language 38.00</p>
-<p>代码<br>LinkList p与LNode *p等价<br>L为头节点<br>pre是保存上一个节点<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#define OK 1</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct </span><br><span class="line">&#123;</span><br><span class="line">	char no[20];</span><br><span class="line">	char name[50];</span><br><span class="line">	float price;</span><br><span class="line">&#125;Book;</span><br><span class="line">typedef struct LNode</span><br><span class="line">&#123;</span><br><span class="line">	Book data;</span><br><span class="line">	struct LNode *next;</span><br><span class="line">&#125;LNode,*LinkList;</span><br><span class="line">LinkList L;</span><br><span class="line">LNode *pre;</span><br><span class="line">bool InintList(LinkList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">	L=new LNode;</span><br><span class="line">	L-&gt;next=NULL;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int num=0;</span><br><span class="line">	InintList(L);</span><br><span class="line">	LNode *p=new LNode;</span><br><span class="line">	L-&gt;next=p;	</span><br><span class="line">	while(scanf(&quot;%s%s%f&quot;,p-&gt;data.no,p-&gt;data.name,&amp;p-&gt;data.price))</span><br><span class="line">	&#123;</span><br><span class="line">		</span><br><span class="line">		if(p-&gt;data.no[0]==&apos;0&apos;&amp;&amp;p-&gt;data.name[0]==&apos;0&apos;&amp;&amp;((p-&gt;data.price-0.0)&lt;1e-6))</span><br><span class="line">			&#123;</span><br><span class="line">				delete p;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line">				pre=p;</span><br><span class="line">				p-&gt;next=new LNode;</span><br><span class="line">				p=p-&gt;next;</span><br><span class="line">				num++;</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;</span><br><span class="line">	pre-&gt;next=NULL;</span><br><span class="line">	cout&lt;&lt;num&lt;&lt;endl;</span><br><span class="line">	LNode *it=L-&gt;next;</span><br><span class="line">	while(it)</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;%s %s %.2f\n&quot;,it-&gt;data.no,it-&gt;data.name,it-&gt;data.price);</span><br><span class="line">		it=it-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-        
-    </article>
-    <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2018/09/27/9-26-1/">Read More</a>
-    </footer>
-</div>
-
-<div class="cube-excerpt" id="cube-excerpt-今天接着吧">
-    <header class="cube-excerpt-header">
-        <h1><a href="/2018/09/27/9-26/">今天接着吧</a></h1>
-        <div class="cube-excerpt-header-msg">
-            <div class="cube-excerpt-date">
-                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2018-09-27
-            </div>
-            <div class="cube-excerpt-tags">
-                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-                
-                <a href="/tags/感想/" class="cube-excerpt-tag-link">#感想</a>
-                
-            </div>
-        </div>
-    </header>
-    <article class="cube-excerpt-entry cube-markdown">
-        
-        
-           <p>这几天有点忙，但是不是说没有时间写blog,其实这几天还是有很多东西用<br>电脑记下来。所以今天会继续写一点。争取每天更新一点东西。</p>
-<p>过去一直被拉着走，这次我想自己跑快点！<br>加油！</p>
-
-        
-    </article>
-    <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2018/09/27/9-26/">Read More</a>
-    </footer>
-</div>
-
-<div class="cube-excerpt" id="cube-excerpt-博客域名的使用">
-    <header class="cube-excerpt-header">
-        <h1><a href="/2018/09/24/9-24-6/">博客域名的使用</a></h1>
-        <div class="cube-excerpt-header-msg">
-            <div class="cube-excerpt-date">
-                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2018-09-24
-            </div>
-            <div class="cube-excerpt-tags">
-                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-                
-                <a href="/tags/域名/" class="cube-excerpt-tag-link">#域名</a>
-                
-            </div>
-        </div>
-    </header>
-    <article class="cube-excerpt-entry cube-markdown">
-        
-        
-           <p>DNS服务器<br>DNS（Domain Name Server，域名服务器）是进行域名(domain name)和与之相对应的IP地址 (IP address)转换的服务器。DNS中保存了一张域名(domain name)和与之相对应的IP地址 (IP address)的表，以解析消息的域名。<br>3.更改hexo</p>
-<p>打开本地文件地址，在source文件夹下添加CHANGE文件（==注意 没有后缀名==），里面的内容为你的域名<br>然后在你的仓库的代码里面的setting里面进行custom domain 里面加入你的审核通过的域名<br>然后就可以了。还有你的阿里云里面的解析ip必须是ping了我的wenjishiwo.github.io获得的ip地址。<br>相关的具体操作阿里云解释的都很清楚。</p>
-<p>阿里云免费DNS其实就是万网原来自带的DNS系统，阿里云把万网收入囊中后改了一下DNS网页中文名字，连域名也懒得换了，直接套用万网的根域名，加一个DNS的二级域名然后就成了阿里云DNS了，前不久开放给了所有用户使用，非万网的用户也可以注册使用。</p>
-<p>阿里云免费DNS域名解析服务支持A、CNAME、NS、MX、TXT、SRV、AAAA、URL等解析类型，新增解析记录，实时生效的，提供联通、电信、移动、教育网和海外线路的智能解析，URL转发功能目前只支持网站有BA号且接入商是万网的域名转发需求。</p>
-<p>总得来说，万网被阿里云新的推广策略和新的形象包装成功实现了转型，建议国内那些传统IDC商们赶紧学着阿里云的做法，否则再过几年就晚了。</p>
-<p>万网的dns都是只能自家的域名用,自从阿里收购了万网之后.在很多方便都有很大的发展,而阿里云dns就是一大成果,虽然目前处于发展状态,跟腾讯的DNSPOD还是有稍许的差距,以后或许会更强大吧,自从腾讯收购了dnspod推出很多收费套餐后,新用户的解析功能越来越不中用了.本来还有几个域名在dnspod不小心删除重新添加之后什么功能都没个毛线了.反正功能上都差不多,还不如尝试下阿里云的dns解析功能.DNS解析本质上差距不是很大,阿里的提供有免费的短信提醒,对于中型甚至大型网站来说提醒还是很有用的,而且阿里云提供有免费的100G硬防.对于dnspod来说,记得好像是只要有针对DNS解析的攻击就直接停掉域名了.</p>
-<p>还有一个腾讯云的相关操作，这个我就不在做相关的理解了<br>但是我可以提供相关的网址来进行更一步的学习。</p>
-<p>dnspod是腾讯的，万网是阿里自带，dns服务器看你用哪个服务器帮你解析。</p>
-<p><a href="https://www.cnblogs.com/ryanleee/p/8274314.html" target="_blank" rel="noopener">https://www.cnblogs.com/ryanleee/p/8274314.html</a></p>
-<p>关于域名我还想再谈谈，就是之前我是再阿里云这个地方注册的域名。<br>dns服务器国内有两个提供支持，一个是腾讯dnspod,一个是万网自带，这个<br>万网就是阿里收购的dns服务器。<br>上面的链接说明用dnspod来解析的，然后配置一个@和www的，<br>意思是一个是wenji.site,一个是<a href="http://www.wenji.site" target="_blank" rel="noopener">www.wenji.site</a><br>之后由于在github的wenjishiwo.github.io仓库设置的是wenji.site,<br>所以最后只能通过这个wen.site进行访问。<br>以后我会试试用www的能否修改。下次再更新。<br>发现没问题，修改后没问题。<br>也可以用<a href="http://www.wenji.site来访问了。" target="_blank" rel="noopener">www.wenji.site来访问了。</a></p>
-
-        
-    </article>
-    <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2018/09/24/9-24-6/">Read More</a>
-    </footer>
-</div>
-
-<div class="cube-excerpt" id="cube-excerpt-中秋节快乐">
-    <header class="cube-excerpt-header">
-        <h1><a href="/2018/09/24/9-24-5/">中秋节快乐</a></h1>
-        <div class="cube-excerpt-header-msg">
-            <div class="cube-excerpt-date">
-                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2018-09-24
-            </div>
-            <div class="cube-excerpt-tags">
-                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-                
-                <a href="/tags/无/" class="cube-excerpt-tag-link">#无</a>
-                
-            </div>
-        </div>
-    </header>
-    <article class="cube-excerpt-entry cube-markdown">
-        
-        
-           <p><img src="/2018/09/24/9-24-5/kuaile.jpg" alt="吃月饼吧"></p>
-
-        
-    </article>
-    <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2018/09/24/9-24-5/">Read More</a>
-    </footer>
-</div>
-
 
 
 <ul class="cube-pagination cube-pagination-7">
@@ -556,7 +567,7 @@
     
     
     <div class="count">
-        <a class="count articles"><span>46</span>Article</a>
+        <a class="count articles"><span>50</span>Article</a>
         <a class="count tags"><span>22</span>Tags</a>
         <a class="count categories"><span>0</span>Categories</a>
     </div>
@@ -595,7 +606,7 @@
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/22/10-21-2/" title="基于链表的两个非递减有序序列的合并">基于链表的两个非递减有序序列的合并</a>
+                    <a href="/2018/10/22/10-22-3/" title="基于链表的两个非递减有序序列的合并(精修版本，完美版本)">基于链表的两个非递减有序序列的合并(精修版本，完美版本)</a>
                 </p>
             </div>
             
@@ -609,7 +620,7 @@
                     <span>2</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/21/10-21-1/" title="查找链表中倒数第k个结点">查找链表中倒数第k个结点</a>
+                    <a href="/2018/10/22/10-22-2/" title="将两个递增链表合并为一个递增链表（最终版，利用所有已有链表空间，且释放掉其他空间，且用后插法创建链表）">将两个递增链表合并为一个递增链表（最终版，利用所有已有链表空间，且释放掉其他空间，且用后插法创建链表）</a>
                 </p>
             </div>
         </li>
@@ -622,7 +633,7 @@
                     <span>3</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/21/10-21/" title="基于链表的两个递增有序序列的合并">基于链表的两个递增有序序列的合并</a>
+                    <a href="/2018/10/22/10-22-1/" title="继续练习后插法建立链表（比自己的pre指针创建链表好吗？）">继续练习后插法建立链表（比自己的pre指针创建链表好吗？）</a>
                 </p>
             </div>
         </li>
@@ -635,7 +646,7 @@
                     <span>4</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/14/10-14-2/" title="后插法创建单链表（顺序存储）">后插法创建单链表（顺序存储）</a>
+                    <a href="/2018/10/22/10-22/" title="查找链表中的最大值">查找链表中的最大值</a>
                 </p>
             </div>
         </li>
@@ -648,7 +659,7 @@
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/14/10-14-1/" title="后插法创建单链表(逆序存储)">后插法创建单链表(逆序存储)</a>
+                    <a href="/2018/10/22/10-21-2/" title="基于链表的两个非递减有序序列的合并">基于链表的两个非递减有序序列的合并</a>
                 </p>
             </div>
         </li>
@@ -669,21 +680,21 @@
         
         
         <div class="cube-box ">
+            <a href="/tags/数据结构/">#数据结构</a>
+        </div>
+        
+        
+        <div class="cube-box ">
             <a href="/tags/易错和struct/">#易错和struct</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/多项式/">#多项式</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/数据结构/">#数据结构</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
             <a href="/tags/感想/">#感想</a>
         </div>
         
@@ -693,8 +704,13 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/基础/">#基础</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/顺序存储结构/">#顺序存储结构</a>
         </div>
         
         
@@ -704,22 +720,17 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/顺序存储结构/">#顺序存储结构</a>
-        </div>
-        
-        
-        <div class="cube-box ">
             <a href="/tags/域名/">#域名</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/顺序存储结构顺序表/">#顺序存储结构顺序表</a>
+            <a href="/tags/关于我自己/">#关于我自己</a>
         </div>
         
         
-        <div class="cube-box-bg ">
-            <a href="/tags/关于我自己/">#关于我自己</a>
+        <div class="cube-box ">
+            <a href="/tags/顺序存储结构顺序表/">#顺序存储结构顺序表</a>
         </div>
         
         
@@ -729,21 +740,21 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/Dijkstra/">#Dijkstra</a>
-        </div>
-        
-        
-        <div class="cube-box ">
             <a href="/tags/编程经验/">#编程经验</a>
         </div>
         
         
         <div class="cube-box-bg ">
-            <a href="/tags/prime/">#prime</a>
+            <a href="/tags/Dijkstra/">#Dijkstra</a>
         </div>
         
         
         <div class="cube-box ">
+            <a href="/tags/prime/">#prime</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
             <a href="/tags/bfs和dfs/">#bfs和dfs</a>
         </div>
         
@@ -754,17 +765,17 @@
         
         
         <div class="cube-box-bg ">
+            <a href="/tags/常用学习网址/">#常用学习网址</a>
+        </div>
+        
+        
+        <div class="cube-box ">
             <a href="/tags/游戏/">#游戏</a>
         </div>
         
         
         <div class="cube-box ">
             <a href="/tags/线段树/">#线段树</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/常用学习网址/">#常用学习网址</a>
         </div>
         
         

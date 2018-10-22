@@ -9,7 +9,7 @@
     
     
     
-    <title>并查集基础题hdu1232畅通工程详解附带模板 | Wenji&#39;s blog</title>
+    <title>查找链表中的最大值 | Wenji&#39;s blog</title>
     <!-- inject:style -->
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <!-- endinject -->
@@ -150,26 +150,29 @@
     <div class="cube-content">
         <div class="cube-left">
             <div class="cube-article">
-    <h1 class="title">并查集基础题hdu1232畅通工程详解附带模板</h1>
+    <h1 class="title">查找链表中的最大值</h1>
     
     <div class="cube-article-header">
         <div class="cube-article-date">
             <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
             <!-- moment.js对象 -->
-            2018-09-21
+            2018-10-22
         </div>
         <div class="cube-article-tags">
     <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
     
-    <a href="/tags/并查集/">#并查集</a>
+    <a href="/tags/数据结构/">#数据结构</a>
     
 </div>
     </div>
     
     <div class="cube-article-content cube-markdown">
         
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cstring&gt; </span><br><span class="line">using namespace std;</span><br><span class="line">int pre[1010];</span><br><span class="line">int flag[1010];//判断是否是根节点 </span><br><span class="line">int find(int x)</span><br><span class="line">&#123;</span><br><span class="line">	int r=x;</span><br><span class="line">	while(pre[r]!=r)</span><br><span class="line">	&#123;</span><br><span class="line">		r=pre[r];</span><br><span class="line">	&#125;</span><br><span class="line">	int i=x;</span><br><span class="line">	int j;</span><br><span class="line">	while(i!=r)			//路径压缩 </span><br><span class="line">	&#123;</span><br><span class="line">		j=pre[i];</span><br><span class="line">		pre[i]=r;</span><br><span class="line">		i=j;</span><br><span class="line">	&#125;</span><br><span class="line">	return r;</span><br><span class="line">&#125;</span><br><span class="line">void join(int x,int y)			//判断是否均为联通分支，并且进行合并 </span><br><span class="line">&#123;</span><br><span class="line">	int fx=find(x);</span><br><span class="line">	int fy=find(y);</span><br><span class="line">	if(fx!=fy)</span><br><span class="line">	&#123;</span><br><span class="line">		pre[fx]=fy;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int N,M;</span><br><span class="line">	int a,b;</span><br><span class="line">	int total;</span><br><span class="line">	while(scanf(&quot;%d%d&quot;,&amp;N,&amp;M)&amp;&amp;N)</span><br><span class="line">	&#123;</span><br><span class="line">		for(int i=1;i&lt;=N;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			pre[i]=i;</span><br><span class="line">		&#125;</span><br><span class="line">		for(int i=1;i&lt;=M;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			</span><br><span class="line">			scanf(&quot;%d%d&quot;,&amp;a,&amp;b);</span><br><span class="line">			join(a,b);</span><br><span class="line">		&#125;</span><br><span class="line">		memset(flag,0,sizeof(flag));</span><br><span class="line">		for(int i=1;i&lt;=N;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			int gen=find(i);</span><br><span class="line">			flag[gen]=1;</span><br><span class="line">		&#125;</span><br><span class="line">		total=0;</span><br><span class="line">		int shu=0;//根节点的数目 </span><br><span class="line">		for(int i=1;i&lt;=N;i++)</span><br><span class="line">		&#123;</span><br><span class="line">				if(flag[i])</span><br><span class="line">				&#123;</span><br><span class="line">					shu++;</span><br><span class="line">				&#125; </span><br><span class="line">		&#125;</span><br><span class="line">		total=shu-1;//易错，不能写成shu--,因为运算的优先性 </span><br><span class="line">		printf(&quot;%d\n&quot;,total);</span><br><span class="line">	&#125; </span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="contest1-rumor-并查集基础变式练习"><a href="#contest1-rumor-并查集基础变式练习" class="headerlink" title="contest1 rumor 并查集基础变式练习"></a>contest1 rumor 并查集基础变式练习</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;cmath&gt; </span><br><span class="line">typedef long long ll;</span><br><span class="line">using namespace std;</span><br><span class="line">int pre[100010];</span><br><span class="line">ll gold[100010];</span><br><span class="line">int vis[100010];//判断是否是根节点 </span><br><span class="line">int find(int x)</span><br><span class="line">&#123;</span><br><span class="line">	int r=x;</span><br><span class="line">	while(pre[r]!=r)</span><br><span class="line">	&#123;</span><br><span class="line">		r=pre[r];</span><br><span class="line">	&#125;</span><br><span class="line">	int i=x,j;</span><br><span class="line">	while(i!=r)</span><br><span class="line">	&#123;</span><br><span class="line">		j=pre[i];</span><br><span class="line">		pre[i]=r;//易错，不是r=pre[i],而是pre[i]=r; </span><br><span class="line">		i=j;</span><br><span class="line">	&#125;</span><br><span class="line">	return r;</span><br><span class="line">&#125;</span><br><span class="line">void join(int a,int b)</span><br><span class="line">&#123;</span><br><span class="line">	int fx=find(a);</span><br><span class="line">	int fy=find(b);</span><br><span class="line">	if(fx!=fy)</span><br><span class="line">	&#123;</span><br><span class="line">			pre[fx]=fy;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int N,M;</span><br><span class="line">	ll total;</span><br><span class="line">	while(cin&gt;&gt;N&gt;&gt;M)</span><br><span class="line">	&#123;</span><br><span class="line">	 	for(int i=1;i&lt;=N;i++)</span><br><span class="line">	 	&#123;</span><br><span class="line">	 		cin&gt;&gt;gold[i];//lld的输入不用scanf,而是用cin,或者是%I64d这样。 </span><br><span class="line">		&#125;</span><br><span class="line">		for(int i=1;i&lt;=N;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			pre[i]=i;</span><br><span class="line">		&#125; </span><br><span class="line">		for(int i=1;i&lt;=M;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			int a,b;</span><br><span class="line">			cin&gt;&gt;a&gt;&gt;b;</span><br><span class="line">			join(a,b);</span><br><span class="line">		&#125;</span><br><span class="line">		memset(vis,0,sizeof(vis)); </span><br><span class="line">		for(int i=1;i&lt;=N;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			int gen=find(i);</span><br><span class="line">			vis[gen]=1;</span><br><span class="line">			gold[gen]=min(gold[gen],gold[i]);//本题易错，这里是一个易错点。 </span><br><span class="line">		&#125;</span><br><span class="line">		total=0;</span><br><span class="line">		for(int i=1;i&lt;=N;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(vis[i])</span><br><span class="line">			&#123;</span><br><span class="line">				total+=gold[i];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		cout&lt;&lt;total&lt;&lt;endl; </span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>描述<br>利用单链表表示一个整数序列，通过一趟遍历在单链表中确定值最大的结点。</p>
+<p>输入<br>多组数据，每组数据有两行，第一行为链表的长度n，第二行为链表的n个元素（元素之间用空格分隔）。当n=0时输入结束。</p>
+<p>输出<br>对于每组数据分别输出一行，输出每个链表的最大值。</p>
+<p>样例输入1 复制<br>5<br>2 1 3 5 4<br>6<br>2 3 10 4 5 1<br>4<br>-1 -2 -3 -4<br>0<br>样例输出1<br>5<br>10<br>-1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#define OK 1</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct LNode   //这个LNode不能省略 </span><br><span class="line">&#123;</span><br><span class="line">	int data;</span><br><span class="line">	struct LNode *next;</span><br><span class="line">&#125;LNode,*LinkList;</span><br><span class="line">bool InitList(LinkList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">	L=new LNode;</span><br><span class="line">	L-&gt;next=NULL;</span><br><span class="line">	return OK; </span><br><span class="line">&#125; </span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int num;</span><br><span class="line">	while(cin&gt;&gt;num&amp;&amp;num!=0)</span><br><span class="line">	&#123;</span><br><span class="line">		LinkList L;</span><br><span class="line">		InitList(L);</span><br><span class="line">		L-&gt;next=new LNode;//没有会报错 </span><br><span class="line">		LNode *p=L-&gt;next;</span><br><span class="line">		LNode *pre=L;</span><br><span class="line">		for(int i=1;i&lt;=num;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cin&gt;&gt;p-&gt;data;</span><br><span class="line">			p-&gt;next=new LNode;</span><br><span class="line">			p=p-&gt;next;</span><br><span class="line">			pre=pre-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		pre-&gt;next=NULL;</span><br><span class="line">		LNode *max=L-&gt;next;</span><br><span class="line">		p=L-&gt;next;</span><br><span class="line">		while(p)</span><br><span class="line">		&#123;</span><br><span class="line">			</span><br><span class="line">			if(max-&gt;data&lt;p-&gt;data)</span><br><span class="line">				max=p; </span><br><span class="line">			p=p-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		cout&lt;&lt;max-&gt;data&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 </div>
 
@@ -177,16 +180,16 @@
     <ul>
         
         <li class="prev">
-            <a href="/2018/09/21/du7/">
+            <a href="/2018/10/22/10-22-1/">
                 <i class="cube-icon cube-prev" aria-hidden="true"></i>
-                contest1 hdu3635 drahonball 并查集升级版本 理解并查集基本概念和应用
+                继续练习后插法建立链表（比自己的pre指针创建链表好吗？）
             </a>
         </li>
         
         
         <li class="next">
-            <a href="/2018/09/21/du6/">
-                contest1 hdu1873优先队列的结构体应用题
+            <a href="/2018/10/22/10-21-2/">
+                基于链表的两个非递减有序序列的合并
                 <i class="cube-icon cube-next" aria-hidden="true"></i>
             </a>
         </li>
@@ -353,7 +356,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/易错和struct/">#易错和struct</a>
         </div>
         
@@ -378,7 +381,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/顺序存储结构/">#顺序存储结构</a>
         </div>
         
@@ -388,7 +391,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/域名/">#域名</a>
         </div>
         
@@ -403,12 +406,12 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/申请暑校/">#申请暑校</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/编程经验/">#编程经验</a>
         </div>
         
@@ -423,12 +426,12 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/bfs和dfs/">#bfs和dfs</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/并查集/">#并查集</a>
         </div>
         
@@ -448,7 +451,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/有趣/">#有趣</a>
         </div>
         
