@@ -150,6 +150,37 @@
     <div class="cube-content">
         <div class="cube-left">
             
+<div class="cube-excerpt" id="cube-excerpt-基于栈的中缀算术表达式求值">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2018/11/04/11-4/">基于栈的中缀算术表达式求值</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2018-11-04
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/数据结构/" class="cube-excerpt-tag-link">#数据结构</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>描述<br>输入一个中缀算术表达式，求解表达式的值。运算符包括+、-、*、/、(、)、=，参加运算的数为double类型且为正数。（要求：直接针对中缀算术表达式进行计算，不能转换为后缀或前缀表达式再进行计算，只考虑二元运算即可。）</p>
+<p>输入<br>多组数据，每组数据一行，对应一个算术表达式，每个表达式均以“=”结尾。当表达式只有一个“=”时，输入结束。参加运算的数为double类型。</p>
+<p>输出<br>对于每组数据输出一行，为表达式的运算结果。输出保留两位小数。</p>
+<p>样例输入1 复制<br>2+2=<br>20*(4.5-3)=<br>=<br>样例输出1<br>4.00<br>30.00<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#define MAXSIZE 100</span><br><span class="line">#define OK 1</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">	char *base;</span><br><span class="line">	char *top;</span><br><span class="line">	int  stacksize;</span><br><span class="line">&#125;CharStack;//运算符 </span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">	double *base;</span><br><span class="line">	double *top;</span><br><span class="line">	int  stacksize;</span><br><span class="line">&#125;NumStack;//数字 </span><br><span class="line">bool InitStack(CharStack &amp;S)</span><br><span class="line">&#123;</span><br><span class="line">	S.base=new char[MAXSIZE];</span><br><span class="line">	S.top=S.base;</span><br><span class="line">	S.stacksize=MAXSIZE;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">bool InitStack(NumStack &amp;S)</span><br><span class="line">&#123;</span><br><span class="line">	S.base=new double[MAXSIZE];</span><br><span class="line">	S.top=S.base;</span><br><span class="line">	S.stacksize=MAXSIZE;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">bool Push(CharStack &amp;S,char e)</span><br><span class="line">&#123;</span><br><span class="line">	*S.top++=e;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">bool Push(NumStack &amp;S,double e)</span><br><span class="line">&#123;</span><br><span class="line">	*S.top++=e;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">bool Pop(CharStack &amp;S)</span><br><span class="line">&#123;</span><br><span class="line">	--S.top;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">bool Pop(NumStack &amp;S)</span><br><span class="line">&#123;</span><br><span class="line">	--S.top;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">char GetTop(CharStack &amp;S)</span><br><span class="line">&#123;</span><br><span class="line">	return *(S.top-1);     //顺序表中的可以进行加减来移位 </span><br><span class="line">&#125;</span><br><span class="line">double GetTop(NumStack &amp;S)</span><br><span class="line">&#123;</span><br><span class="line">	return *(S.top-1);</span><br><span class="line">&#125;</span><br><span class="line">char Precede(char a,char b)</span><br><span class="line">&#123;</span><br><span class="line">	if((a==&apos;(&apos;&amp;&amp;b==&apos;)&apos;)||(a==&apos;=&apos;&amp;&amp;b==&apos;=&apos;))</span><br><span class="line">		return &apos;=&apos;;</span><br><span class="line">	else if(a==&apos;(&apos;||a==&apos;=&apos;||b==&apos;(&apos;||((a==&apos;+&apos;||a==&apos;-&apos;)&amp;&amp;(b==&apos;*&apos;||b==&apos;/&apos;)))</span><br><span class="line">		return &apos;&lt;&apos;;</span><br><span class="line">	else</span><br><span class="line">		return &apos;&gt;&apos;;</span><br><span class="line">&#125;</span><br><span class="line">double Fun(double a,double b,char oper)</span><br><span class="line">&#123;</span><br><span class="line">	if(oper==&apos;+&apos;)</span><br><span class="line">		return b+a;</span><br><span class="line">	else if(oper==&apos;-&apos;)</span><br><span class="line">		return b-a;</span><br><span class="line">	else if(oper==&apos;*&apos;)</span><br><span class="line">		return b*a;</span><br><span class="line">	else if(oper==&apos;/&apos;)</span><br><span class="line">		return b/a;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	char s[100];</span><br><span class="line">	while(1)</span><br><span class="line">	&#123;</span><br><span class="line">		cin&gt;&gt;s;</span><br><span class="line">		if(s[0]==&apos;=&apos;)</span><br><span class="line">			break;</span><br><span class="line">		NumStack SNum;//数字栈 </span><br><span class="line">		CharStack SChar;//运算符栈	</span><br><span class="line">		InitStack(SNum);</span><br><span class="line">		InitStack(SChar);</span><br><span class="line">		Push(SChar,&apos;=&apos;);//表达式结束符为&apos;=&apos;,所以压进去,为了之后与表达式的&apos;=&apos;进行比较来清空SChar </span><br><span class="line">		int flag=0; </span><br><span class="line">		int x=0;</span><br><span class="line">		int e=0;//记录小数点的位置，数位 </span><br><span class="line">		double y=0;</span><br><span class="line">		double a,b;//弹出的两个数字 </span><br><span class="line">		double c;//c为a和b得出 </span><br><span class="line">		char oper;//弹出的运算符 </span><br><span class="line">		for(int i=0;s[i]!=&apos;\0&apos;;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(s[i]&gt;=&apos;0&apos;&amp;&amp;s[i]&lt;=&apos;9&apos;)</span><br><span class="line">			&#123;</span><br><span class="line">				flag=1;</span><br><span class="line">				x=x*10+s[i]-&apos;0&apos;;</span><br><span class="line">				if(e)</span><br><span class="line">				&#123;</span><br><span class="line">					e*=10;</span><br><span class="line">				&#125; </span><br><span class="line">			&#125;</span><br><span class="line">			else if(s[i]==&apos;.&apos;)</span><br><span class="line">			&#123;</span><br><span class="line">				e=1;</span><br><span class="line">			&#125;</span><br><span class="line">			else</span><br><span class="line">			&#123;</span><br><span class="line">				if(flag)</span><br><span class="line">				&#123;</span><br><span class="line">					if(e)</span><br><span class="line">						y=x*1.0/e;</span><br><span class="line">					else</span><br><span class="line">						y=x*1.0;</span><br><span class="line">					Push(SNum,y);</span><br><span class="line">					x=0;</span><br><span class="line">					e=0;</span><br><span class="line">					flag=0;</span><br><span class="line">				&#125;</span><br><span class="line">				while(1)</span><br><span class="line">				&#123;</span><br><span class="line">					if(Precede(GetTop(SChar),s[i])==&apos;&lt;&apos;)</span><br><span class="line">					&#123;</span><br><span class="line">						Push(SChar,s[i]);</span><br><span class="line">						break;</span><br><span class="line">					&#125;</span><br><span class="line">					else if(Precede(GetTop(SChar),s[i])==&apos;&gt;&apos;)</span><br><span class="line">					&#123;</span><br><span class="line">						a=GetTop(SNum);</span><br><span class="line">						Pop(SNum);</span><br><span class="line">						b=GetTop(SNum);</span><br><span class="line">						Pop(SNum);</span><br><span class="line">						oper=GetTop(SChar);</span><br><span class="line">						Pop(SChar); </span><br><span class="line">						c=Fun(a,b,oper);</span><br><span class="line">						Push(SNum,c);</span><br><span class="line">					&#125;</span><br><span class="line">					else</span><br><span class="line">					&#123;</span><br><span class="line">						Pop(SChar);</span><br><span class="line">						break;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		printf(&quot;%.2f\n&quot;,GetTop(SNum));</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2018/11/04/11-4/">Read More</a>
+    </footer>
+</div>
+
 <div class="cube-excerpt" id="cube-excerpt-删除链表中满足区间值的结点">
     <header class="cube-excerpt-header">
         <h1><a href="/2018/10/22/10-22-8/">删除链表中满足区间值的结点</a></h1>
@@ -424,33 +455,6 @@
     </footer>
 </div>
 
-<div class="cube-excerpt" id="cube-excerpt-后插法创建单链表（顺序存储）">
-    <header class="cube-excerpt-header">
-        <h1><a href="/2018/10/14/10-14-2/">后插法创建单链表（顺序存储）</a></h1>
-        <div class="cube-excerpt-header-msg">
-            <div class="cube-excerpt-date">
-                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2018-10-14
-            </div>
-            <div class="cube-excerpt-tags">
-                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-                
-                <a href="/tags/数据结构/" class="cube-excerpt-tag-link">#数据结构</a>
-                
-            </div>
-        </div>
-    </header>
-    <article class="cube-excerpt-entry cube-markdown">
-        
-        
-           <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#define OK 1</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct LNode   //这个LNode不能省略 </span><br><span class="line">&#123;</span><br><span class="line">	int data;</span><br><span class="line">	struct LNode *next;</span><br><span class="line">&#125;LNode,*LinkList;</span><br><span class="line">bool InitList(LinkList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">	L=new LNode;</span><br><span class="line">	L-&gt;next=NULL;</span><br><span class="line">	return OK; </span><br><span class="line">&#125; </span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	LinkList L;</span><br><span class="line">	InitList(L);</span><br><span class="line">	LNode *p;</span><br><span class="line">	LNode *last=L; //尾指针 </span><br><span class="line">	for(int i=0;i&lt;5;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		p=new LNode;</span><br><span class="line">		cin&gt;&gt;p-&gt;data;</span><br><span class="line">		p-&gt;next=NULL;   </span><br><span class="line">		last-&gt;next=p;   //尾指针指向它 </span><br><span class="line">		last=p; </span><br><span class="line">	&#125;</span><br><span class="line">	p=L-&gt;next;</span><br><span class="line">	while(p)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;p-&gt;data&lt;&lt;endl;</span><br><span class="line">		p=p-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-    </article>
-    <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2018/10/14/10-14-2/">Read More</a>
-    </footer>
-</div>
-
 
 
 <ul class="cube-pagination cube-pagination-9">
@@ -540,8 +544,8 @@
     
     
     <div class="count">
-        <a class="count articles"><span>52</span>Article</a>
-        <a class="count tags"><span>22</span>Tags</a>
+        <a class="count articles"><span>53</span>Article</a>
+        <a class="count tags"><span>23</span>Tags</a>
         <a class="count categories"><span>0</span>Categories</a>
     </div>
 </div>
@@ -579,7 +583,7 @@
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/22/10-22-8/" title="删除链表中满足区间值的结点">删除链表中满足区间值的结点</a>
+                    <a href="/2018/11/04/11-4/" title="基于栈的中缀算术表达式求值">基于栈的中缀算术表达式求值</a>
                 </p>
             </div>
             
@@ -593,7 +597,7 @@
                     <span>2</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/22/10-22-7/" title="链表的逆转(前插法逆转)">链表的逆转(前插法逆转)</a>
+                    <a href="/2018/10/22/10-22-8/" title="删除链表中满足区间值的结点">删除链表中满足区间值的结点</a>
                 </p>
             </div>
         </li>
@@ -606,7 +610,7 @@
                     <span>3</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/22/10-22-3/" title="基于链表的两个非递减有序序列的合并(精修版本，完美版本)">基于链表的两个非递减有序序列的合并(精修版本，完美版本)</a>
+                    <a href="/2018/10/22/10-22-7/" title="链表的逆转(前插法逆转)">链表的逆转(前插法逆转)</a>
                 </p>
             </div>
         </li>
@@ -619,7 +623,7 @@
                     <span>4</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/22/10-22-2/" title="将两个递增链表合并为一个递增链表（最终版，利用所有已有链表空间，且释放掉其他空间，且用后插法创建链表）">将两个递增链表合并为一个递增链表（最终版，利用所有已有链表空间，且释放掉其他空间，且用后插法创建链表）</a>
+                    <a href="/2018/10/22/10-22-3/" title="基于链表的两个非递减有序序列的合并(精修版本，完美版本)">基于链表的两个非递减有序序列的合并(精修版本，完美版本)</a>
                 </p>
             </div>
         </li>
@@ -632,7 +636,7 @@
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/22/10-22-1/" title="继续练习后插法建立链表（比自己的pre指针创建链表好吗？）">继续练习后插法建立链表（比自己的pre指针创建链表好吗？）</a>
+                    <a href="/2018/10/22/10-22-2/" title="将两个递增链表合并为一个递增链表（最终版，利用所有已有链表空间，且释放掉其他空间，且用后插法创建链表）">将两个递增链表合并为一个递增链表（最终版，利用所有已有链表空间，且释放掉其他空间，且用后插法创建链表）</a>
                 </p>
             </div>
         </li>
@@ -652,33 +656,23 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/易错和struct/">#易错和struct</a>
         </div>
         
         
-        <div class="cube-box-bg ">
-            <a href="/tags/多项式/">#多项式</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/数据结构/">#数据结构</a>
         </div>
         
         
         <div class="cube-box ">
+            <a href="/tags/多项式/">#多项式</a>
+        </div>
+        
+        
+        <div class="cube-box ">
             <a href="/tags/感想/">#感想</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/排序sort/">#排序sort</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/基础/">#基础</a>
         </div>
         
         
@@ -693,22 +687,27 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/域名/">#域名</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
-            <a href="/tags/顺序存储结构顺序表/">#顺序存储结构顺序表</a>
+            <a href="/tags/排序sort/">#排序sort</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/关于我自己/">#关于我自己</a>
+            <a href="/tags/基础/">#基础</a>
         </div>
         
         
-        <div class="cube-box-bg ">
-            <a href="/tags/申请暑校/">#申请暑校</a>
+        <div class="cube-box ">
+            <a href="/tags/介绍/">#介绍</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/域名/">#域名</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/顺序存储结构顺序表/">#顺序存储结构顺序表</a>
         </div>
         
         
@@ -718,12 +717,12 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/编程经验/">#编程经验</a>
+            <a href="/tags/申请暑校/">#申请暑校</a>
         </div>
         
         
-        <div class="cube-box ">
-            <a href="/tags/prime/">#prime</a>
+        <div class="cube-box-bg ">
+            <a href="/tags/编程经验/">#编程经验</a>
         </div>
         
         
@@ -733,17 +732,12 @@
         
         
         <div class="cube-box ">
+            <a href="/tags/prime/">#prime</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
             <a href="/tags/并查集/">#并查集</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/线段树/">#线段树</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/添加博客/">#添加博客</a>
         </div>
         
         
@@ -752,13 +746,28 @@
         </div>
         
         
-        <div class="cube-box ">
-            <a href="/tags/有趣/">#有趣</a>
+        <div class="cube-box-bg ">
+            <a href="/tags/线段树/">#线段树</a>
         </div>
         
         
         <div class="cube-box ">
             <a href="/tags/常用学习网址/">#常用学习网址</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/博客技巧/">#博客技巧</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/添加博客/">#添加博客</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/感想-杂谈/">#感想(杂谈)</a>
         </div>
         
     </div>

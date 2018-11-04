@@ -150,6 +150,39 @@
     <div class="cube-content">
         <div class="cube-left">
             
+<div class="cube-excerpt" id="cube-excerpt-基于顺序存储结构的图书信息表的排序">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2018/09/24/9-24-1/">基于顺序存储结构的图书信息表的排序</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2018-09-24
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/排序sort/" class="cube-excerpt-tag-link">#排序sort</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>描述<br>定义一个包含图书信息（书号、书名、价格）的顺序表，读入相应的图书数据完成图书信息表的创建，然后将图书按照价格降序排序，逐行输出排序后每本图书的信息。</p>
+<p>输入<br>输入n+1行，前n行是n本图书的信息（书号、书名、价格），每本图书信息占一行，书号、书名、价格用空格分隔，价格之后没有空格。最后第n+1行是输入结束标志：0 0 0（空格分隔的三个0）。其中书号和书名为字符串类型，价格为浮点数类型。</p>
+<p>输出<br>总计n行，每行是一本图书的信息（书号、书名、价格），书号、书名、价格用空格分隔。其中价格输出保留两位小数。</p>
+<p>样例输入1 复制<br>9787302257646 Data-Structure 35.00<br>9787302164340 Operating-System 50.00<br>9787302219972 Software-Engineer 32.00<br>9787302203513 Database-Principles 36.00<br>9787810827430 Discrete-Mathematics 36.00<br>9787302257800 Data-Structure 62.00<br>9787811234923 Compiler-Principles 62.00<br>9787822234110 The-C-Programming-Language 38.00<br>0 0 0<br>样例输出1<br>9787302257800 Data-Structure 62.00<br>9787811234923 Compiler-Principles 62.00<br>9787302164340 Operating-System 50.00<br>9787822234110 The-C-Programming-Language 38.00<br>9787302203513 Database-Principles 36.00<br>9787810827430 Discrete-Mathematics 36.00<br>9787302257646 Data-Structure 35.00<br>9787302219972 Software-Engineer 32.00</p>
+<p>这题我在dev和vs2010上交没问题，但是oj过不了，<br>发现我校是G++4.3版本，于是我在sort的插件cmp<br>里面加入const,于是代码就过了，<br>还有，就是scanf可以直接换成cin输入，测试没问题。</p>
+<p>过的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#define MAXSIZE 10000</span><br><span class="line">#define OK 1</span><br><span class="line">#define ERROR 0</span><br><span class="line">#define OVERFLOW -2</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">	char no[20];</span><br><span class="line">	char name[50];</span><br><span class="line">	float price;</span><br><span class="line">&#125;Book;</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">	Book *elem;</span><br><span class="line">	int length;</span><br><span class="line">&#125;SqList;</span><br><span class="line">SqList L;</span><br><span class="line">bool IninList(SqList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">	L.elem=new Book[MAXSIZE];</span><br><span class="line">	if(!L.elem) exit(OVERFLOW);</span><br><span class="line">	L.length=0;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">int cmp(const Book &amp;a,const Book &amp;b)</span><br><span class="line">&#123;</span><br><span class="line">	if(a.price&gt;b.price)</span><br><span class="line">	return 1;</span><br><span class="line">	else</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	IninList(L);</span><br><span class="line">	int start=0;</span><br><span class="line">	while(scanf(&quot;%s%s%f&quot;,L.elem[start].no,L.elem[start].name,&amp;L.elem[start].price))</span><br><span class="line">	&#123;</span><br><span class="line">		if(L.elem[start].no[0]==&apos;0&apos;&amp;&amp;L.elem[start].name[0]==&apos;0&apos;&amp;&amp;(L.elem[start].price-0.0&lt;1e-6))</span><br><span class="line">		     break;</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line">			start++;</span><br><span class="line">			L.length++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	sort(L.elem,L.elem+L.length,cmp);</span><br><span class="line">	for(int i=0;i&lt;=L.length-1;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;%s %s %.2f\n&quot;,L.elem[i].no,L.elem[i].name,L.elem[i].price);</span><br><span class="line">	&#125;</span><br><span class="line">	delete [] L.elem;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2018/09/24/9-24-1/">Read More</a>
+    </footer>
+</div>
+
 <div class="cube-excerpt" id="cube-excerpt-基于顺序存储结构的图书信息表的创建和输出">
     <header class="cube-excerpt-header">
         <h1><a href="/2018/09/24/9-24/">基于顺序存储结构的图书信息表的创建和输出</a></h1>
@@ -196,7 +229,7 @@
             <div class="cube-excerpt-tags">
                 <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
                 
-                <a href="/tags/有趣/" class="cube-excerpt-tag-link">#有趣</a>
+                <a href="/tags/博客技巧/" class="cube-excerpt-tag-link">#博客技巧</a>
                 
             </div>
         </div>
@@ -212,9 +245,9 @@
     </footer>
 </div>
 
-<div class="cube-excerpt" id="cube-excerpt-今天是我的生日">
+<div class="cube-excerpt" id="cube-excerpt-生日快乐">
     <header class="cube-excerpt-header">
-        <h1><a href="/2018/09/23/shenri/">今天是我的生日</a></h1>
+        <h1><a href="/2018/09/23/shenri/">生日快乐</a></h1>
         <div class="cube-excerpt-header-msg">
             <div class="cube-excerpt-date">
                 <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
@@ -231,7 +264,7 @@
     <article class="cube-excerpt-entry cube-markdown">
         
         
-           <p>不知不觉到了自己的生日，想写点什么，毕竟感觉自己真的是不小了。<br>今天收到来自同学们的祝福，内心还是挺开心的，大家平时互相帮助<br>互相共事的情景还是非常快乐的。过生肯定首先要想到家人，我妈给<br>我发个大红包，还是挺开心的。昨天还看了风语咒，感慨真的是家人<br>带给我很多东西。<br>今天生日收到我姐的月饼，也是非常开行，谢谢我姐对我的照顾，真的<br>是太感谢我姐了。<br>然后整个宿舍决定庆祝一下，最后点了肯德基来庆祝，还是非常有意思的，<br>今天还没结束，但是我还是想写下来，晚上接着出去吃！到时候再来更新！</p>
+           <p>无（追梦过啥生日）</p>
 
         
     </article>
@@ -251,7 +284,7 @@
             <div class="cube-excerpt-tags">
                 <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
                 
-                <a href="/tags/感想/" class="cube-excerpt-tag-link">#感想</a>
+                <a href="/tags/感想-杂谈/" class="cube-excerpt-tag-link">#感想(杂谈)</a>
                 
             </div>
         </div>
@@ -404,34 +437,6 @@
     </footer>
 </div>
 
-<div class="cube-excerpt" id="cube-excerpt-并查集基础题hdu1232畅通工程详解附带模板">
-    <header class="cube-excerpt-header">
-        <h1><a href="/2018/09/21/du6-1/">并查集基础题hdu1232畅通工程详解附带模板</a></h1>
-        <div class="cube-excerpt-header-msg">
-            <div class="cube-excerpt-date">
-                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2018-09-21
-            </div>
-            <div class="cube-excerpt-tags">
-                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-                
-                <a href="/tags/并查集/" class="cube-excerpt-tag-link">#并查集</a>
-                
-            </div>
-        </div>
-    </header>
-    <article class="cube-excerpt-entry cube-markdown">
-        
-        
-           <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cstring&gt; </span><br><span class="line">using namespace std;</span><br><span class="line">int pre[1010];</span><br><span class="line">int flag[1010];//判断是否是根节点 </span><br><span class="line">int find(int x)</span><br><span class="line">&#123;</span><br><span class="line">	int r=x;</span><br><span class="line">	while(pre[r]!=r)</span><br><span class="line">	&#123;</span><br><span class="line">		r=pre[r];</span><br><span class="line">	&#125;</span><br><span class="line">	int i=x;</span><br><span class="line">	int j;</span><br><span class="line">	while(i!=r)			//路径压缩 </span><br><span class="line">	&#123;</span><br><span class="line">		j=pre[i];</span><br><span class="line">		pre[i]=r;</span><br><span class="line">		i=j;</span><br><span class="line">	&#125;</span><br><span class="line">	return r;</span><br><span class="line">&#125;</span><br><span class="line">void join(int x,int y)			//判断是否均为联通分支，并且进行合并 </span><br><span class="line">&#123;</span><br><span class="line">	int fx=find(x);</span><br><span class="line">	int fy=find(y);</span><br><span class="line">	if(fx!=fy)</span><br><span class="line">	&#123;</span><br><span class="line">		pre[fx]=fy;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int N,M;</span><br><span class="line">	int a,b;</span><br><span class="line">	int total;</span><br><span class="line">	while(scanf(&quot;%d%d&quot;,&amp;N,&amp;M)&amp;&amp;N)</span><br><span class="line">	&#123;</span><br><span class="line">		for(int i=1;i&lt;=N;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			pre[i]=i;</span><br><span class="line">		&#125;</span><br><span class="line">		for(int i=1;i&lt;=M;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			</span><br><span class="line">			scanf(&quot;%d%d&quot;,&amp;a,&amp;b);</span><br><span class="line">			join(a,b);</span><br><span class="line">		&#125;</span><br><span class="line">		memset(flag,0,sizeof(flag));</span><br><span class="line">		for(int i=1;i&lt;=N;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			int gen=find(i);</span><br><span class="line">			flag[gen]=1;</span><br><span class="line">		&#125;</span><br><span class="line">		total=0;</span><br><span class="line">		int shu=0;//根节点的数目 </span><br><span class="line">		for(int i=1;i&lt;=N;i++)</span><br><span class="line">		&#123;</span><br><span class="line">				if(flag[i])</span><br><span class="line">				&#123;</span><br><span class="line">					shu++;</span><br><span class="line">				&#125; </span><br><span class="line">		&#125;</span><br><span class="line">		total=shu-1;//易错，不能写成shu--,因为运算的优先性 </span><br><span class="line">		printf(&quot;%d\n&quot;,total);</span><br><span class="line">	&#125; </span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="contest1-rumor-并查集基础变式练习"><a href="#contest1-rumor-并查集基础变式练习" class="headerlink" title="contest1 rumor 并查集基础变式练习"></a>contest1 rumor 并查集基础变式练习</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;cmath&gt; </span><br><span class="line">typedef long long ll;</span><br><span class="line">using namespace std;</span><br><span class="line">int pre[100010];</span><br><span class="line">ll gold[100010];</span><br><span class="line">int vis[100010];//判断是否是根节点 </span><br><span class="line">int find(int x)</span><br><span class="line">&#123;</span><br><span class="line">	int r=x;</span><br><span class="line">	while(pre[r]!=r)</span><br><span class="line">	&#123;</span><br><span class="line">		r=pre[r];</span><br><span class="line">	&#125;</span><br><span class="line">	int i=x,j;</span><br><span class="line">	while(i!=r)</span><br><span class="line">	&#123;</span><br><span class="line">		j=pre[i];</span><br><span class="line">		pre[i]=r;//易错，不是r=pre[i],而是pre[i]=r; </span><br><span class="line">		i=j;</span><br><span class="line">	&#125;</span><br><span class="line">	return r;</span><br><span class="line">&#125;</span><br><span class="line">void join(int a,int b)</span><br><span class="line">&#123;</span><br><span class="line">	int fx=find(a);</span><br><span class="line">	int fy=find(b);</span><br><span class="line">	if(fx!=fy)</span><br><span class="line">	&#123;</span><br><span class="line">			pre[fx]=fy;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int N,M;</span><br><span class="line">	ll total;</span><br><span class="line">	while(cin&gt;&gt;N&gt;&gt;M)</span><br><span class="line">	&#123;</span><br><span class="line">	 	for(int i=1;i&lt;=N;i++)</span><br><span class="line">	 	&#123;</span><br><span class="line">	 		cin&gt;&gt;gold[i];//lld的输入不用scanf,而是用cin,或者是%I64d这样。 </span><br><span class="line">		&#125;</span><br><span class="line">		for(int i=1;i&lt;=N;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			pre[i]=i;</span><br><span class="line">		&#125; </span><br><span class="line">		for(int i=1;i&lt;=M;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			int a,b;</span><br><span class="line">			cin&gt;&gt;a&gt;&gt;b;</span><br><span class="line">			join(a,b);</span><br><span class="line">		&#125;</span><br><span class="line">		memset(vis,0,sizeof(vis)); </span><br><span class="line">		for(int i=1;i&lt;=N;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			int gen=find(i);</span><br><span class="line">			vis[gen]=1;</span><br><span class="line">			gold[gen]=min(gold[gen],gold[i]);//本题易错，这里是一个易错点。 </span><br><span class="line">		&#125;</span><br><span class="line">		total=0;</span><br><span class="line">		for(int i=1;i&lt;=N;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(vis[i])</span><br><span class="line">			&#123;</span><br><span class="line">				total+=gold[i];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		cout&lt;&lt;total&lt;&lt;endl; </span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-    </article>
-    <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2018/09/21/du6-1/">Read More</a>
-    </footer>
-</div>
-
 
 
 <ul class="cube-pagination cube-pagination-9">
@@ -521,8 +526,8 @@
     
     
     <div class="count">
-        <a class="count articles"><span>52</span>Article</a>
-        <a class="count tags"><span>22</span>Tags</a>
+        <a class="count articles"><span>53</span>Article</a>
+        <a class="count tags"><span>23</span>Tags</a>
         <a class="count categories"><span>0</span>Categories</a>
     </div>
 </div>
@@ -560,7 +565,7 @@
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/22/10-22-8/" title="删除链表中满足区间值的结点">删除链表中满足区间值的结点</a>
+                    <a href="/2018/11/04/11-4/" title="基于栈的中缀算术表达式求值">基于栈的中缀算术表达式求值</a>
                 </p>
             </div>
             
@@ -574,7 +579,7 @@
                     <span>2</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/22/10-22-7/" title="链表的逆转(前插法逆转)">链表的逆转(前插法逆转)</a>
+                    <a href="/2018/10/22/10-22-8/" title="删除链表中满足区间值的结点">删除链表中满足区间值的结点</a>
                 </p>
             </div>
         </li>
@@ -587,7 +592,7 @@
                     <span>3</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/22/10-22-3/" title="基于链表的两个非递减有序序列的合并(精修版本，完美版本)">基于链表的两个非递减有序序列的合并(精修版本，完美版本)</a>
+                    <a href="/2018/10/22/10-22-7/" title="链表的逆转(前插法逆转)">链表的逆转(前插法逆转)</a>
                 </p>
             </div>
         </li>
@@ -600,7 +605,7 @@
                     <span>4</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/22/10-22-2/" title="将两个递增链表合并为一个递增链表（最终版，利用所有已有链表空间，且释放掉其他空间，且用后插法创建链表）">将两个递增链表合并为一个递增链表（最终版，利用所有已有链表空间，且释放掉其他空间，且用后插法创建链表）</a>
+                    <a href="/2018/10/22/10-22-3/" title="基于链表的两个非递减有序序列的合并(精修版本，完美版本)">基于链表的两个非递减有序序列的合并(精修版本，完美版本)</a>
                 </p>
             </div>
         </li>
@@ -613,7 +618,7 @@
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/22/10-22-1/" title="继续练习后插法建立链表（比自己的pre指针创建链表好吗？）">继续练习后插法建立链表（比自己的pre指针创建链表好吗？）</a>
+                    <a href="/2018/10/22/10-22-2/" title="将两个递增链表合并为一个递增链表（最终版，利用所有已有链表空间，且释放掉其他空间，且用后插法创建链表）">将两个递增链表合并为一个递增链表（最终版，利用所有已有链表空间，且释放掉其他空间，且用后插法创建链表）</a>
                 </p>
             </div>
         </li>
@@ -633,8 +638,13 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/易错和struct/">#易错和struct</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/数据结构/">#数据结构</a>
         </div>
         
         
@@ -643,23 +653,8 @@
         </div>
         
         
-        <div class="cube-box-bg ">
-            <a href="/tags/数据结构/">#数据结构</a>
-        </div>
-        
-        
         <div class="cube-box ">
             <a href="/tags/感想/">#感想</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/排序sort/">#排序sort</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
-            <a href="/tags/基础/">#基础</a>
         </div>
         
         
@@ -674,6 +669,21 @@
         
         
         <div class="cube-box ">
+            <a href="/tags/排序sort/">#排序sort</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/基础/">#基础</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/介绍/">#介绍</a>
+        </div>
+        
+        
+        <div class="cube-box ">
             <a href="/tags/域名/">#域名</a>
         </div>
         
@@ -684,17 +694,12 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/关于我自己/">#关于我自己</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
-            <a href="/tags/申请暑校/">#申请暑校</a>
+            <a href="/tags/Dijkstra/">#Dijkstra</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/Dijkstra/">#Dijkstra</a>
+            <a href="/tags/申请暑校/">#申请暑校</a>
         </div>
         
         
@@ -704,12 +709,12 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/prime/">#prime</a>
+            <a href="/tags/bfs和dfs/">#bfs和dfs</a>
         </div>
         
         
-        <div class="cube-box-bg ">
-            <a href="/tags/bfs和dfs/">#bfs和dfs</a>
+        <div class="cube-box ">
+            <a href="/tags/prime/">#prime</a>
         </div>
         
         
@@ -719,7 +724,22 @@
         
         
         <div class="cube-box ">
+            <a href="/tags/游戏/">#游戏</a>
+        </div>
+        
+        
+        <div class="cube-box ">
             <a href="/tags/线段树/">#线段树</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/常用学习网址/">#常用学习网址</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/博客技巧/">#博客技巧</a>
         </div>
         
         
@@ -729,17 +749,7 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/游戏/">#游戏</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
-            <a href="/tags/有趣/">#有趣</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/常用学习网址/">#常用学习网址</a>
+            <a href="/tags/感想-杂谈/">#感想(杂谈)</a>
         </div>
         
     </div>

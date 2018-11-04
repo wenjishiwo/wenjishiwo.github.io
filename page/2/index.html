@@ -150,9 +150,36 @@
     <div class="cube-content">
         <div class="cube-left">
             
-<div class="cube-excerpt" id="cube-excerpt-后插法创建单链表(逆序存储)">
+<div class="cube-excerpt" id="cube-excerpt-后插法创建单链表（顺序存储）">
     <header class="cube-excerpt-header">
-        <h1><a href="/2018/10/14/10-14-1/">后插法创建单链表(逆序存储)</a></h1>
+        <h1><a href="/2018/10/14/10-14-2/">后插法创建单链表（顺序存储）</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2018-10-14
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/数据结构/" class="cube-excerpt-tag-link">#数据结构</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#define OK 1</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct LNode   //这个LNode不能省略 </span><br><span class="line">&#123;</span><br><span class="line">	int data;</span><br><span class="line">	struct LNode *next;</span><br><span class="line">&#125;LNode,*LinkList;</span><br><span class="line">bool InitList(LinkList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">	L=new LNode;</span><br><span class="line">	L-&gt;next=NULL;</span><br><span class="line">	return OK; </span><br><span class="line">&#125; </span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	LinkList L;</span><br><span class="line">	InitList(L);</span><br><span class="line">	LNode *p;</span><br><span class="line">	LNode *last=L; //尾指针 </span><br><span class="line">	for(int i=0;i&lt;5;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		p=new LNode;</span><br><span class="line">		cin&gt;&gt;p-&gt;data;</span><br><span class="line">		p-&gt;next=NULL;   </span><br><span class="line">		last-&gt;next=p;   //尾指针指向它 </span><br><span class="line">		last=p; </span><br><span class="line">	&#125;</span><br><span class="line">	p=L-&gt;next;</span><br><span class="line">	while(p)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;p-&gt;data&lt;&lt;endl;</span><br><span class="line">		p=p-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2018/10/14/10-14-2/">Read More</a>
+    </footer>
+</div>
+
+<div class="cube-excerpt" id="cube-excerpt-前插法创建单链表(逆序存储)">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2018/10/14/10-14-1/">前插法创建单链表(逆序存储)</a></h1>
         <div class="cube-excerpt-header-msg">
             <div class="cube-excerpt-date">
                 <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
@@ -441,38 +468,6 @@
     </footer>
 </div>
 
-<div class="cube-excerpt" id="cube-excerpt-基于链式存储结构的图书信息表的逆序存储">
-    <header class="cube-excerpt-header">
-        <h1><a href="/2018/10/05/10-5/">基于链式存储结构的图书信息表的逆序存储</a></h1>
-        <div class="cube-excerpt-header-msg">
-            <div class="cube-excerpt-date">
-                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2018-10-05
-            </div>
-            <div class="cube-excerpt-tags">
-                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-                
-                <a href="/tags/数据结构/" class="cube-excerpt-tag-link">#数据结构</a>
-                
-            </div>
-        </div>
-    </header>
-    <article class="cube-excerpt-entry cube-markdown">
-        
-        
-           <p>描述<br>定义一个包含图书信息（书号、书名、价格）的链表，读入相应的图书数据来完成图书信息表的创建，然后将读入的图书逆序存储，逐行输出逆序存储后每本图书的信息。</p>
-<p>输入<br>输入n+1行，第一行是图书数目n，后n行是n本图书的信息（书号、书名、价格），每本图书信息占一行，书号、书名、价格用空格分隔，价格之后没有空格。其中书号和书名为字符串类型，价格为浮点数类型。</p>
-<p>输出<br>总计n行，第i行是原有图书表中第n-i+1行的图书的信息（书号、书名、价格），每本图书信息占一行，书号、书名、价格用空格分隔。其中价格输出保留两位小数。</p>
-<p>样例输入1 复制<br>8<br>9787302257646 Data-Structure 35.00<br>9787302164340 Operating-System 50.00<br>9787302219972 Software-Engineer 32.00<br>9787302203513 Database-Principles 36.00<br>9787810827430 Discrete-Mathematics 36.00<br>9787302257800 Data-Structure 62.00<br>9787811234923 Compiler-Principles 62.00<br>9787822234110 The-C-Programming-Language 38.00<br>样例输出1<br>9787822234110 The-C-Programming-Language 38.00<br>9787811234923 Compiler-Principles 62.00<br>9787302257800 Data-Structure 62.00<br>9787810827430 Discrete-Mathematics 36.00<br>9787302203513 Database-Principles 36.00<br>9787302219972 Software-Engineer 32.00<br>9787302164340 Operating-System 50.00<br>9787302257646 Data-Structure 35.00<br>查看隐藏信息</p>
-<p>本题最开始没有理解题意，导致我先顺序存储，在进行逆序存储。<br>没有任何思路，之后看了题解，发现原来最开始就是逆序存储。<br>然后有一个优化，就是在循环里面定义LNode *p=new LNode。<br>然后其他都还好。<br>代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#define OK 1</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct </span><br><span class="line">&#123;</span><br><span class="line">	char no[20];</span><br><span class="line">	char name[50];</span><br><span class="line">	float price;</span><br><span class="line">&#125;Book;</span><br><span class="line">typedef struct LNode</span><br><span class="line">&#123;</span><br><span class="line">	Book data;</span><br><span class="line">	struct LNode *next;</span><br><span class="line">&#125;LNode,*LinkList;</span><br><span class="line">LinkList L;</span><br><span class="line">bool InintList(LinkList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">	L=new LNode;</span><br><span class="line">	L-&gt;next=NULL;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int num;</span><br><span class="line">	InintList(L);</span><br><span class="line">	L-&gt;next=NULL;</span><br><span class="line">	cin&gt;&gt;num;	</span><br><span class="line">	for(int i=0;i&lt;num;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		LNode *p=new LNode;</span><br><span class="line">		scanf(&quot;%s%s%f&quot;,p-&gt;data.no,p-&gt;data.name,&amp;p-&gt;data.price);</span><br><span class="line">		p-&gt;next=L-&gt;next;</span><br><span class="line">		L-&gt;next=p;	</span><br><span class="line">	&#125;</span><br><span class="line">	LNode *it=L-&gt;next;</span><br><span class="line">	while(it)</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;%s %s %.2f\n&quot;,it-&gt;data.no,it-&gt;data.name,it-&gt;data.price);</span><br><span class="line">		it=it-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-        
-    </article>
-    <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2018/10/05/10-5/">Read More</a>
-    </footer>
-</div>
-
 
 
 <ul class="cube-pagination cube-pagination-9">
@@ -562,8 +557,8 @@
     
     
     <div class="count">
-        <a class="count articles"><span>52</span>Article</a>
-        <a class="count tags"><span>22</span>Tags</a>
+        <a class="count articles"><span>53</span>Article</a>
+        <a class="count tags"><span>23</span>Tags</a>
         <a class="count categories"><span>0</span>Categories</a>
     </div>
 </div>
@@ -601,7 +596,7 @@
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/22/10-22-8/" title="删除链表中满足区间值的结点">删除链表中满足区间值的结点</a>
+                    <a href="/2018/11/04/11-4/" title="基于栈的中缀算术表达式求值">基于栈的中缀算术表达式求值</a>
                 </p>
             </div>
             
@@ -615,7 +610,7 @@
                     <span>2</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/22/10-22-7/" title="链表的逆转(前插法逆转)">链表的逆转(前插法逆转)</a>
+                    <a href="/2018/10/22/10-22-8/" title="删除链表中满足区间值的结点">删除链表中满足区间值的结点</a>
                 </p>
             </div>
         </li>
@@ -628,7 +623,7 @@
                     <span>3</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/22/10-22-3/" title="基于链表的两个非递减有序序列的合并(精修版本，完美版本)">基于链表的两个非递减有序序列的合并(精修版本，完美版本)</a>
+                    <a href="/2018/10/22/10-22-7/" title="链表的逆转(前插法逆转)">链表的逆转(前插法逆转)</a>
                 </p>
             </div>
         </li>
@@ -641,7 +636,7 @@
                     <span>4</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/22/10-22-2/" title="将两个递增链表合并为一个递增链表（最终版，利用所有已有链表空间，且释放掉其他空间，且用后插法创建链表）">将两个递增链表合并为一个递增链表（最终版，利用所有已有链表空间，且释放掉其他空间，且用后插法创建链表）</a>
+                    <a href="/2018/10/22/10-22-3/" title="基于链表的两个非递减有序序列的合并(精修版本，完美版本)">基于链表的两个非递减有序序列的合并(精修版本，完美版本)</a>
                 </p>
             </div>
         </li>
@@ -654,7 +649,7 @@
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/22/10-22-1/" title="继续练习后插法建立链表（比自己的pre指针创建链表好吗？）">继续练习后插法建立链表（比自己的pre指针创建链表好吗？）</a>
+                    <a href="/2018/10/22/10-22-2/" title="将两个递增链表合并为一个递增链表（最终版，利用所有已有链表空间，且释放掉其他空间，且用后插法创建链表）">将两个递增链表合并为一个递增链表（最终版，利用所有已有链表空间，且释放掉其他空间，且用后插法创建链表）</a>
                 </p>
             </div>
         </li>
@@ -679,22 +674,32 @@
         </div>
         
         
-        <div class="cube-box-bg ">
-            <a href="/tags/多项式/">#多项式</a>
-        </div>
-        
-        
         <div class="cube-box ">
             <a href="/tags/数据结构/">#数据结构</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
+            <a href="/tags/多项式/">#多项式</a>
+        </div>
+        
+        
+        <div class="cube-box ">
             <a href="/tags/感想/">#感想</a>
         </div>
         
         
+        <div class="cube-box ">
+            <a href="/tags/顺序存储结构/">#顺序存储结构</a>
+        </div>
+        
+        
         <div class="cube-box-bg ">
+            <a href="/tags/无/">#无</a>
+        </div>
+        
+        
+        <div class="cube-box ">
             <a href="/tags/排序sort/">#排序sort</a>
         </div>
         
@@ -704,13 +709,8 @@
         </div>
         
         
-        <div class="cube-box-bg ">
-            <a href="/tags/顺序存储结构/">#顺序存储结构</a>
-        </div>
-        
-        
         <div class="cube-box ">
-            <a href="/tags/无/">#无</a>
+            <a href="/tags/介绍/">#介绍</a>
         </div>
         
         
@@ -719,23 +719,18 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/顺序存储结构顺序表/">#顺序存储结构顺序表</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/关于我自己/">#关于我自己</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/申请暑校/">#申请暑校</a>
+            <a href="/tags/Dijkstra/">#Dijkstra</a>
         </div>
         
         
         <div class="cube-box-bg ">
-            <a href="/tags/Dijkstra/">#Dijkstra</a>
+            <a href="/tags/申请暑校/">#申请暑校</a>
         </div>
         
         
@@ -745,12 +740,12 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/prime/">#prime</a>
+            <a href="/tags/bfs和dfs/">#bfs和dfs</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/bfs和dfs/">#bfs和dfs</a>
+            <a href="/tags/prime/">#prime</a>
         </div>
         
         
@@ -760,27 +755,32 @@
         
         
         <div class="cube-box-bg ">
-            <a href="/tags/线段树/">#线段树</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/添加博客/">#添加博客</a>
-        </div>
-        
-        
-        <div class="cube-box ">
             <a href="/tags/游戏/">#游戏</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/有趣/">#有趣</a>
+            <a href="/tags/线段树/">#线段树</a>
         </div>
         
         
         <div class="cube-box ">
             <a href="/tags/常用学习网址/">#常用学习网址</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/博客技巧/">#博客技巧</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/添加博客/">#添加博客</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/感想-杂谈/">#感想(杂谈)</a>
         </div>
         
     </div>
