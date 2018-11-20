@@ -9,7 +9,7 @@
     
     
     
-    <title>随笔 | Wenji&#39;s blog</title>
+    <title>链表的分解 | Wenji&#39;s blog</title>
     <!-- inject:style -->
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <!-- endinject -->
@@ -150,23 +150,28 @@
     <div class="cube-content">
         <div class="cube-left">
             <div class="cube-article">
-    <h1 class="title">随笔</h1>
+    <h1 class="title">链表的分解</h1>
     
     <div class="cube-article-header">
         <div class="cube-article-date">
             <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
             <!-- moment.js对象 -->
-            2018-09-17
+            2018-10-22
         </div>
         <div class="cube-article-tags">
     <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+    
+    <a href="/tags/数据结构/">#数据结构</a>
     
 </div>
     </div>
     
     <div class="cube-article-content cube-markdown">
         
-        <p>我准备整理记录一些以前做过的题，也是为了提醒自己。<br>先从基础知识开始，就从基本算法开始。</p>
+        <p>描述<br>利用单链表A表示一个非零整数序列，把A分解为两个具有相同结构的链表B和C，其中B表的结点为A表中值小于零的结点，而C表的结点为A表中值大于零的结点。要求空间复杂度为O(1)，链表B和C均利用链表A的结点空间。</p>
+<p>输入<br>多组数据，每组数据有两行，第一行为链表A的长度n，第二行为链表A的n个元素（元素之间用空格分隔）。当n=0时输入结束。</p>
+<p>输出<br>对于每组数据分别输出两行，分别对应链表B和C的元素，每个数据之间用空格分隔。</p>
+<p>样例输入1 复制<br>7<br>3 -6 1 -2 4 -3 8<br>8<br>2 5 3 -1 -2 2 6 -1<br>0<br>样例输出1<br>-6 -2 -3<br>3 1 4 8<br>-1 -2 -1<br>2 5 3 2 6<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#define OK 1</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct LNode</span><br><span class="line">&#123;</span><br><span class="line">	int data;</span><br><span class="line">	struct LNode *next;</span><br><span class="line">&#125;LNode,*LinkList;</span><br><span class="line">bool InintList(LinkList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">	L=new LNode;</span><br><span class="line">	L-&gt;next=NULL;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">void Decompose(LinkList &amp;L,LinkList &amp;La,LinkList &amp;Lb)</span><br><span class="line">&#123;</span><br><span class="line">	La=L;</span><br><span class="line">	InintList(Lb);//用了空间O(1),La继承L的头节点 </span><br><span class="line">	LNode *p=L-&gt;next;//注意从L-&gt;next开始，不是L,不然while里面会报错 </span><br><span class="line">	LNode *pa=La;</span><br><span class="line">	LNode *pb=Lb;</span><br><span class="line">	while(p)</span><br><span class="line">	&#123;</span><br><span class="line">		if(p-&gt;data&lt;0)   //题上已说非零的L链表 </span><br><span class="line">		&#123;</span><br><span class="line">			pa-&gt;next=p;</span><br><span class="line">			pa=p;</span><br><span class="line">			p=p-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line">			pb-&gt;next=p;</span><br><span class="line">			pb=p;</span><br><span class="line">			p=p-&gt;next; </span><br><span class="line">		&#125;</span><br><span class="line">	&#125; </span><br><span class="line">	pa-&gt;next=NULL;</span><br><span class="line">	pb-&gt;next=NULL;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int num;</span><br><span class="line">	while(cin&gt;&gt;num&amp;&amp;num!=0) </span><br><span class="line">	&#123; </span><br><span class="line">	LinkList L;</span><br><span class="line">	InintList(L);</span><br><span class="line">	LinkList La;</span><br><span class="line">	LinkList Lb;</span><br><span class="line">	LNode *p;</span><br><span class="line">	LNode *r;</span><br><span class="line">	r=L;</span><br><span class="line">	for(int i=1;i&lt;=num;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		p=new LNode;</span><br><span class="line">		cin&gt;&gt;p-&gt;data;</span><br><span class="line">		p-&gt;next=NULL;</span><br><span class="line">		r-&gt;next=p;</span><br><span class="line">		r=p;</span><br><span class="line">	&#125;</span><br><span class="line">	Decompose(L,La,Lb);</span><br><span class="line">	p=La-&gt;next;</span><br><span class="line">	cout&lt;&lt;p-&gt;data;</span><br><span class="line">	p=p-&gt;next;</span><br><span class="line">	while(p)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;&quot; &quot;&lt;&lt;p-&gt;data;</span><br><span class="line">		p=p-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	p=Lb-&gt;next;</span><br><span class="line">	cout&lt;&lt;p-&gt;data;</span><br><span class="line">	p=p-&gt;next;</span><br><span class="line">	while(p)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;&quot; &quot;&lt;&lt;p-&gt;data;</span><br><span class="line">		p=p-&gt;next; </span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
     </div>
 </div>
@@ -175,16 +180,16 @@
     <ul>
         
         <li class="prev">
-            <a href="/2018/09/18/du3/">
+            <a href="/2018/10/22/10-22-7/">
                 <i class="cube-icon cube-prev" aria-hidden="true"></i>
-                搜索
+                链表的逆转(前插法逆转)
             </a>
         </li>
         
         
         <li class="next">
-            <a href="/2018/09/16/search/">
-                计协会长推荐的常用网址（实时更新）
+            <a href="/2018/10/22/10-22-5/">
+                基于链表的两个集合的差集
                 <i class="cube-icon cube-next" aria-hidden="true"></i>
             </a>
         </li>
@@ -346,7 +351,7 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/易错和struct/">#易错和struct</a>
         </div>
         
@@ -376,12 +381,12 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/顺序存储结构/">#顺序存储结构</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/基础/">#基础</a>
         </div>
         
@@ -416,12 +421,12 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/Dijkstra/">#Dijkstra</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/bfs和dfs/">#bfs和dfs</a>
         </div>
         
@@ -441,12 +446,12 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/常用学习网址/">#常用学习网址</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/添加博客/">#添加博客</a>
         </div>
         
