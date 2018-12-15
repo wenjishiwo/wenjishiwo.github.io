@@ -9,7 +9,7 @@
     
     
     
-    <title>计协会长推荐的常用网址（实时更新） | Wenji&#39;s blog</title>
+    <title>基于快排思想的查找 | Wenji&#39;s blog</title>
     <!-- inject:style -->
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <!-- endinject -->
@@ -150,25 +150,28 @@
     <div class="cube-content">
         <div class="cube-left">
             <div class="cube-article">
-    <h1 class="title">计协会长推荐的常用网址（实时更新）</h1>
+    <h1 class="title">基于快排思想的查找</h1>
     
     <div class="cube-article-header">
         <div class="cube-article-date">
             <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
             <!-- moment.js对象 -->
-            2018-09-16
+            2018-12-15
         </div>
         <div class="cube-article-tags">
     <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
     
-    <a href="/tags/常用学习网址/">#常用学习网址</a>
+    <a href="/tags/数据结构/">#数据结构</a>
     
 </div>
     </div>
     
     <div class="cube-article-content cube-markdown">
         
-        <p>顶尖中文大学计算机专业课程体系<br><a href="https://study.163.com/curricula/cs.htm" target="_blank" rel="noopener">https://study.163.com/curricula/cs.htm</a><br>离散数学 北交大<br><a href="http://www.icourse163.org/course/NJTU-1002530017" target="_blank" rel="noopener">http://www.icourse163.org/course/NJTU-1002530017</a></p>
+        <p>描述<br>借助于快速排序的算法思想，在一组无序的记录中查找给定关键字值等于key的记录。设此组记录存放于数组r[l..n]中。若查找成功，则输出该记录在r数组中的位置及其值，否则显示“not find”信息。</p>
+<p>输入<br>多组数据，每组数据三行。第一行为序列的长度n，第二行为序列的n个元素（元素之间用空格分隔，元素都为正整数），第三行为要查找的key值。当n等于0时，输入结束。</p>
+<p>输出<br>每组数据输出一行。如果查找成功，输出key在数组中的位置（1到n）和key的值，两个数字之间用空格隔开。如果查找失败，输出“not find”。</p>
+<p>样例输入1 复制<br>5<br>1 2 43 5 6<br>43<br>4<br>1 9 20 3<br>21<br>7<br>20 30 40 10 1 2 3<br>10<br>0<br>样例输出1<br>3 43<br>not find<br>4 10<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int search(int r[],int low,int high,int key)</span><br><span class="line">&#123;</span><br><span class="line">	while(low&lt;high)</span><br><span class="line">	&#123;</span><br><span class="line">		while(r[low]&gt;key&amp;&amp;r[high]&lt;key)</span><br><span class="line">		&#123;</span><br><span class="line">			high--;</span><br><span class="line">			low++;</span><br><span class="line">		&#125;</span><br><span class="line">		while(low&lt;=high&amp;&amp;r[high]&gt;key) high--;</span><br><span class="line">		if(r[high]==key)</span><br><span class="line">		return high+1;</span><br><span class="line">		while(low&lt;=high&amp;&amp;r[low]&lt;key) low++;</span><br><span class="line">		if(r[low]==key) return low+1;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int a[100];</span><br><span class="line">	while(1)</span><br><span class="line">	&#123;</span><br><span class="line">		int n;</span><br><span class="line">		cin&gt;&gt;n;</span><br><span class="line">		if(n==0)</span><br><span class="line">		break;</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line">			for(int i=0;i&lt;n;i++)</span><br><span class="line">			&#123;</span><br><span class="line">				cin&gt;&gt;a[i];</span><br><span class="line">			&#125;</span><br><span class="line">			int key;</span><br><span class="line">			cin&gt;&gt;key;</span><br><span class="line">			int flag=search(a,0,n-1,key);</span><br><span class="line">			if(flag==0)</span><br><span class="line">			cout&lt;&lt;&quot;not find&quot;&lt;&lt;endl;</span><br><span class="line">			else</span><br><span class="line">			&#123;</span><br><span class="line">				cout&lt;&lt;flag&lt;&lt;&quot; &quot;&lt;&lt;key&lt;&lt;endl;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
     </div>
 </div>
@@ -176,17 +179,10 @@
 <div class="cube-article-nav">
     <ul>
         
-        <li class="prev">
-            <a href="/2018/09/17/du2/">
-                <i class="cube-icon cube-prev" aria-hidden="true"></i>
-                随笔
-            </a>
-        </li>
-        
         
         <li class="next">
-            <a href="/2018/09/15/ddd/">
-                数学和编程
+            <a href="/2018/12/15/12-15/">
+                基于双向链表的双向冒泡排序法
                 <i class="cube-icon cube-next" aria-hidden="true"></i>
             </a>
         </li>
@@ -358,7 +354,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/多项式/">#多项式</a>
         </div>
         
@@ -378,7 +374,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/顺序存储结构/">#顺序存储结构</a>
         </div>
         
@@ -393,7 +389,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/顺序存储结构顺序表/">#顺序存储结构顺序表</a>
         </div>
         
@@ -403,7 +399,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/Dijkstra/">#Dijkstra</a>
         </div>
         
@@ -423,7 +419,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/bfs和dfs/">#bfs和dfs</a>
         </div>
         
@@ -433,7 +429,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/游戏/">#游戏</a>
         </div>
         
@@ -453,12 +449,12 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/博客技巧/">#博客技巧</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/线段树/">#线段树</a>
         </div>
         

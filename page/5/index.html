@@ -150,6 +150,62 @@
     <div class="cube-content">
         <div class="cube-left">
             
+<div class="cube-excerpt" id="cube-excerpt-风语咒">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2018/09/22/tupian/">风语咒</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2018-09-22
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/感想-杂谈/" class="cube-excerpt-tag-link">#感想(杂谈)</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p><img src="/2018/09/22/tupian/fenyu.jpg" alt="被感动的一张图片"><br>今天在网上看了一下国产动漫电影《风语咒》，实话看了之后。<br>感觉还是不错的，没想到剧情还是可以的。感觉国漫有希望了，<br>和之前《大鱼海棠》比，是两种不同风格的电影。这个电影的<br>很多特效技术，说实话也就是画风真的是国内的极致。虽然从中<br>可以看到很多电影的影子，但是并没有落入俗套，看了之后，<br>尤其对其中的感人情节记忆很深，让我也感受到这部片子想带给<br>我的东西。真的不错，动漫迷真的可以看下。</p>
+
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2018/09/22/tupian/">Read More</a>
+    </footer>
+</div>
+
+<div class="cube-excerpt" id="cube-excerpt-poj2377 最小生成树 负数化变成最大生成树 prime算法实践">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2018/09/21/du11/">poj2377 最小生成树 负数化变成最大生成树 prime算法实践</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2018-09-21
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/prime/" class="cube-excerpt-tag-link">#prime</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#define INF 1&lt;&lt;30</span><br><span class="line">#define maxn 1010</span><br><span class="line">using namespace std;</span><br><span class="line">int G[maxn+1][maxn+1];</span><br><span class="line">int intree[maxn];</span><br><span class="line">int minweight[maxn];</span><br><span class="line">int sumweight;</span><br><span class="line">int flag=0;</span><br><span class="line">void chushihua()</span><br><span class="line">&#123;</span><br><span class="line">	memset(intree,0,sizeof(intree));</span><br><span class="line">	memset(minweight,0,sizeof(minweight));</span><br><span class="line">	flag=0;</span><br><span class="line">	for(int i=0;i&lt;maxn;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		for(int j=0;j&lt;=maxn;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			G[i][j]=INF;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	sumweight=0;</span><br><span class="line">&#125;</span><br><span class="line">void prime(int n)</span><br><span class="line">&#123;</span><br><span class="line">	int node,Minweight;</span><br><span class="line">	for(int i=1;i&lt;=n;i++)</span><br><span class="line">		minweight[i]=G[1][i];</span><br><span class="line">	intree[1]=1;</span><br><span class="line">	for(int i=2;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		Minweight=INF;</span><br><span class="line">		for(int j=1;j&lt;=n;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(minweight[j]&lt;Minweight&amp;&amp;!intree[j])</span><br><span class="line">			&#123;</span><br><span class="line">				Minweight=minweight[j];</span><br><span class="line">				node=j;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		intree[node]=1;</span><br><span class="line">		sumweight+=Minweight;</span><br><span class="line">		for(int j=1;j&lt;=n;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(!intree[j]&amp;&amp;minweight[j]&gt;G[node][j])</span><br><span class="line">			&#123;</span><br><span class="line">				minweight[j]=G[node][j];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">int  main()</span><br><span class="line">&#123;</span><br><span class="line">	int n,m;</span><br><span class="line">	while(scanf(&quot;%d%d&quot;,&amp;n,&amp;m)!=EOF)</span><br><span class="line">	&#123;</span><br><span class="line">		int a1,a2,v;</span><br><span class="line">		chushihua();</span><br><span class="line">		for(int i=1;i&lt;=m;i++)	</span><br><span class="line">		&#123;</span><br><span class="line">			scanf(&quot;%d%d%d&quot;,&amp;a1,&amp;a2,&amp;v);</span><br><span class="line">			G[a1][a2]=-v;</span><br><span class="line">			G[a2][a1]=-v;</span><br><span class="line">		&#125;</span><br><span class="line">		prime(n);</span><br><span class="line">		for(int i=1;i&lt;=n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(intree[i]==0)</span><br><span class="line">				&#123;flag=1;</span><br><span class="line">				break;&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if(flag)</span><br><span class="line">		printf(&quot;-1\n&quot;);</span><br><span class="line">		else</span><br><span class="line">		printf(&quot;%d\n&quot;,-sumweight);</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2018/09/21/du11/">Read More</a>
+    </footer>
+</div>
+
 <div class="cube-excerpt" id="cube-excerpt-hdu2066 Dijkstra 最短路 无向图版本 板子修改">
     <header class="cube-excerpt-header">
         <h1><a href="/2018/09/21/du10/">hdu2066 Dijkstra 最短路 无向图版本 板子修改</a></h1>
@@ -373,73 +429,6 @@
     </footer>
 </div>
 
-<div class="cube-excerpt" id="cube-excerpt-map和set">
-    <header class="cube-excerpt-header">
-        <h1><a href="/2018/09/20/du4/">map和set</a></h1>
-        <div class="cube-excerpt-header-msg">
-            <div class="cube-excerpt-date">
-                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2018-09-20
-            </div>
-            <div class="cube-excerpt-tags">
-                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-                
-                <a href="/tags/数据结构/" class="cube-excerpt-tag-link">#数据结构</a>
-                
-            </div>
-        </div>
-    </header>
-    <article class="cube-excerpt-entry cube-markdown">
-        
-        
-           <p>##map 数据结构常见用法<br>代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">#include&lt;iterator&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef map&lt;int,string,less&lt;int&gt; &gt;M_TYPE;//less greater 都是算子，针对键值来的 默认排序其实也就是key值的升序 ，也就是less&lt;int&gt; </span><br><span class="line">typedef M_TYPE::iterator M_IT;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	M_TYPE Map;</span><br><span class="line">	Map[1]=&quot;no.1&quot;;</span><br><span class="line">	Map[2]=&quot;no.2&quot;;</span><br><span class="line">	Map[3]=&quot;no.3&quot;;</span><br><span class="line">	Map[4]=&quot;no.4&quot;;</span><br><span class="line">	Map[5]=&quot;no.5&quot;;</span><br><span class="line">	M_IT it=Map.find(2);</span><br><span class="line">	cout&lt;&lt;&quot;map[2]是&quot;&lt;&lt;it-&gt;second&lt;&lt;endl;</span><br><span class="line">	Map.insert(make_pair(2,&quot;new no.2&quot;));//不能改变已有的，可以添加没有的</span><br><span class="line">	Map.insert(make_pair(6,&quot;no.6&quot;)); </span><br><span class="line">	Map.insert(pair&lt;int,string&gt;(7,&quot;no.7&quot;));</span><br><span class="line">	cout&lt;&lt;&quot;新的map[2]是&quot;&lt;&lt;it-&gt;second&lt;&lt;endl;</span><br><span class="line">	M_IT is=Map.find(2);</span><br><span class="line">	cout&lt;&lt;&quot;新的map[2]是&quot;&lt;&lt;is-&gt;second&lt;&lt;endl;</span><br><span class="line">	it-&gt;second=&quot;new new no.2&quot;;//可以修改原有的 </span><br><span class="line">	cout&lt;&lt;&quot;最新的map[2]是&quot;&lt;&lt;it-&gt;second&lt;&lt;endl;</span><br><span class="line">	for(M_IT tt= Map.begin();tt!=Map.end();tt++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;tt-&gt;second&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	Map.erase(2);</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	for(M_IT tt= Map.begin();tt!=Map.end();tt++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;tt-&gt;second&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	M_IT id=Map.find(5);</span><br><span class="line">	Map.erase(id);</span><br><span class="line">	for(M_IT tt= Map.begin();tt!=Map.end();tt++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;tt-&gt;second&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="水果hdu1263-map内部嵌套用法-简单例题"><a href="#水果hdu1263-map内部嵌套用法-简单例题" class="headerlink" title="水果hdu1263 map内部嵌套用法 简单例题"></a>水果hdu1263 map内部嵌套用法 简单例题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef map&lt;string,map&lt;string,int&gt; &gt; MA_P;</span><br><span class="line">typedef map&lt;string,int&gt; Ma_P;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int n;</span><br><span class="line">	cin&gt;&gt;n; </span><br><span class="line">	while(n--)</span><br><span class="line">	&#123;</span><br><span class="line">		int o;</span><br><span class="line">		cin&gt;&gt;o;</span><br><span class="line">		string s1,s2;</span><br><span class="line">		int k;</span><br><span class="line">		map&lt;string,map&lt;string,int&gt; &gt;q;</span><br><span class="line">		for(int i=0;i&lt;o;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cin&gt;&gt;s1&gt;&gt;s2&gt;&gt;k;</span><br><span class="line">			q[s2][s1]+=k;//亲测双重map只能这样用，不能用q.insert(make_pair(s2,make_pair(s1,k)))和pair(XX);   </span><br><span class="line">		&#125;</span><br><span class="line">		for(MA_P::iterator i=q.begin();i!=q.end();i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cout&lt;&lt;i-&gt;first&lt;&lt;endl;</span><br><span class="line">			for(Ma_P::iterator t=i-&gt;second.begin();t!=i-&gt;second.end();t++)</span><br><span class="line">			&#123;</span><br><span class="line">				cout&lt;&lt;&quot;   |----&quot;&lt;&lt;t-&gt;first&lt;&lt;&quot;(&quot;&lt;&lt;t-&gt;second&lt;&lt;&quot;)&quot;&lt;&lt;endl;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if(n&gt;0)</span><br><span class="line">		cout&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="set数据结构常见用法"><a href="#set数据结构常见用法" class="headerlink" title="set数据结构常见用法"></a>set数据结构常见用法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;set&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	set&lt;string&gt;strset;</span><br><span class="line">	set&lt;string&gt;::iterator it;</span><br><span class="line">	strset.insert(&quot;aa&quot;);</span><br><span class="line">	strset.insert(&quot;bb&quot;);</span><br><span class="line">	strset.insert(&quot;cc&quot;);</span><br><span class="line">	strset.insert(&quot;dd&quot;);</span><br><span class="line">	for(it=strset.begin();it!=strset.end();it++)//set默认排序为升序，也就是less </span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;*it&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	it=strset.begin();</span><br><span class="line">	cout&lt;&lt;&quot;set的第一个元素&quot;&lt;&lt;*it&lt;&lt;endl;</span><br><span class="line">	it=strset.end();</span><br><span class="line">	it--;</span><br><span class="line">	cout&lt;&lt;&quot;set的最后一个元素&quot;&lt;&lt;*it&lt;&lt;endl;</span><br><span class="line">	cout&lt;&lt;strset.empty()&lt;&lt;endl;</span><br><span class="line">	cout&lt;&lt;strset.size()&lt;&lt;endl; </span><br><span class="line">	cout&lt;&lt;strset.max_size()&lt;&lt;endl;//容器可能包含的元素最大个数 	</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-        
-    </article>
-    <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2018/09/20/du4/">Read More</a>
-    </footer>
-</div>
-
-<div class="cube-excerpt" id="cube-excerpt-priority_queue 练习">
-    <header class="cube-excerpt-header">
-        <h1><a href="/2018/09/19/du3-1/">priority_queue 练习</a></h1>
-        <div class="cube-excerpt-header-msg">
-            <div class="cube-excerpt-date">
-                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2018-09-19
-            </div>
-            <div class="cube-excerpt-tags">
-                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-                
-                <a href="/tags/数据结构/" class="cube-excerpt-tag-link">#数据结构</a>
-                
-            </div>
-        </div>
-    </header>
-    <article class="cube-excerpt-entry cube-markdown">
-        
-        
-           <p>##代码  greater算子</p>
-<p>#include<iostream></iostream></p>
-<p>#include<queue><br>using namespace std;<br>class T<br>{<br>    public:<br>    int x,y,z;<br>    T(int a,int b,int c):x(a),y(b),z(c)<br>    {</queue></p>
-<pre><code>}    
-</code></pre><p>};<br>bool operator &gt;(const T &amp;t1,const T &amp;t2)<br>{<br>    return t1.z&gt;t2.z;<br>}<br>int main()<br>{<br>    priority_queue&lt;T,vector<t>,greater<t> &gt; q;<br>    q.push(T(4,4,3));<br>    q.push(T(2,2,5));<br>    q.push(T(1,5,4));<br>    q.push(T(3,3,6));<br>    while(!q.empty())<br>    {<br>        T t=q.top();<br>        q.pop();<br>        cout&lt;&lt;t.x&lt;&lt;” “&lt;&lt;t.y&lt;&lt;” “&lt;&lt;t.z&lt;&lt;endl;<br>    }<br>    return 0;<br>}</t></t></p>
-<p>##代码 less 算子</p>
-<p>#include<iostream></iostream></p>
-<p>#include<queue><br>using namespace std;<br>class T<br>{<br>    public:<br>    int x,y,z;<br>    T(int a,int b,int c):x(a),y(b),z(c)<br>    {</queue></p>
-<pre><code>}    
-</code></pre><p>};<br>bool operator &lt;(const T &amp;t1,const T &amp;t2)<br>{<br>    return t1.z&lt;t2.z;<br>}<br>int main()<br>{<br>    priority_queue<t> q;<br>    q.push(T(4,4,3));<br>    q.push(T(2,2,5));<br>    q.push(T(1,5,4));<br>    q.push(T(3,3,6));<br>    while(!q.empty())<br>    {<br>        T t=q.top();<br>        q.pop();<br>        cout&lt;&lt;t.x&lt;&lt;” “&lt;&lt;t.y&lt;&lt;” “&lt;&lt;t.z&lt;&lt;endl;<br>    }<br>    return 0;<br>}</t></p>
-
-        
-    </article>
-    <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2018/09/19/du3-1/">Read More</a>
-    </footer>
-</div>
-
 
 
 <ul class="cube-pagination cube-pagination-9">
@@ -529,7 +518,7 @@
     
     
     <div class="count">
-        <a class="count articles"><span>57</span>Article</a>
+        <a class="count articles"><span>59</span>Article</a>
         <a class="count tags"><span>23</span>Tags</a>
         <a class="count categories"><span>0</span>Categories</a>
     </div>
@@ -568,7 +557,7 @@
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/11/20/11-2/" title="基于哈夫曼树的数据压缩算法">基于哈夫曼树的数据压缩算法</a>
+                    <a href="/2018/12/15/12-15-1/" title="基于快排思想的查找">基于快排思想的查找</a>
                 </p>
             </div>
             
@@ -582,7 +571,7 @@
                     <span>2</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/11/04/11-4/" title="基于栈的中缀算术表达式求值">基于栈的中缀算术表达式求值</a>
+                    <a href="/2018/12/15/12-15/" title="基于双向链表的双向冒泡排序法">基于双向链表的双向冒泡排序法</a>
                 </p>
             </div>
         </li>
@@ -595,7 +584,7 @@
                     <span>3</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/22/10-22-8/" title="删除链表中满足区间值的结点">删除链表中满足区间值的结点</a>
+                    <a href="/2018/11/20/11-2/" title="基于哈夫曼树的数据压缩算法">基于哈夫曼树的数据压缩算法</a>
                 </p>
             </div>
         </li>
@@ -608,7 +597,7 @@
                     <span>4</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/22/10-22-7/" title="链表的逆转(前插法逆转)">链表的逆转(前插法逆转)</a>
+                    <a href="/2018/11/04/11-4/" title="基于栈的中缀算术表达式求值">基于栈的中缀算术表达式求值</a>
                 </p>
             </div>
         </li>
@@ -621,7 +610,7 @@
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/22/10-22-6/" title="链表的分解">链表的分解</a>
+                    <a href="/2018/10/22/10-22-8/" title="删除链表中满足区间值的结点">删除链表中满足区间值的结点</a>
                 </p>
             </div>
         </li>
@@ -647,12 +636,12 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/多项式/">#多项式</a>
+            <a href="/tags/数据结构/">#数据结构</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/数据结构/">#数据结构</a>
+            <a href="/tags/多项式/">#多项式</a>
         </div>
         
         
@@ -661,18 +650,13 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/排序sort/">#排序sort</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/基础/">#基础</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
-            <a href="/tags/无/">#无</a>
         </div>
         
         
@@ -686,8 +670,23 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
+            <a href="/tags/无/">#无</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
             <a href="/tags/顺序存储结构顺序表/">#顺序存储结构顺序表</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/介绍/">#介绍</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/Dijkstra/">#Dijkstra</a>
         </div>
         
         
@@ -697,26 +696,16 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/介绍/">#介绍</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
             <a href="/tags/编程经验/">#编程经验</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/Dijkstra/">#Dijkstra</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
             <a href="/tags/prime/">#prime</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/bfs和dfs/">#bfs和dfs</a>
         </div>
         
@@ -732,16 +721,6 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/添加博客/">#添加博客</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
-            <a href="/tags/线段树/">#线段树</a>
-        </div>
-        
-        
-        <div class="cube-box ">
             <a href="/tags/常用学习网址/">#常用学习网址</a>
         </div>
         
@@ -751,8 +730,18 @@
         </div>
         
         
+        <div class="cube-box-bg ">
+            <a href="/tags/添加博客/">#添加博客</a>
+        </div>
+        
+        
         <div class="cube-box ">
             <a href="/tags/博客技巧/">#博客技巧</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/线段树/">#线段树</a>
         </div>
         
     </div>
