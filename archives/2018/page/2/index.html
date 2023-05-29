@@ -3,6 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="author" content="WenJi">
+	<p>访问次数：<span id="count"></span></p>
+
+<script>
+  // 从本地存储中获取计数器变量
+  let count = localStorage.getItem('count');
+
+  // 如果计数器变量不存在，则初始化为0
+  if (!count) {
+    count = 0;
+  }
+
+  // 将计数器变量递增并保存到本地存储中
+  count++;
+  localStorage.setItem('count', count);
+
+  // 将计数器变量显示在页面上
+  document.querySelector('#count').textContent = count;
+</script>
     
     
     
@@ -750,7 +768,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/多项式/">#多项式</a>
         </div>
         
@@ -775,17 +793,17 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/顺序存储结构/">#顺序存储结构</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/无/">#无</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/顺序存储结构顺序表/">#顺序存储结构顺序表</a>
         </div>
         
@@ -795,7 +813,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/申请暑校/">#申请暑校</a>
         </div>
         
@@ -810,7 +828,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/Dijkstra/">#Dijkstra</a>
         </div>
         
@@ -820,7 +838,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/bfs和dfs/">#bfs和dfs</a>
         </div>
         
@@ -835,7 +853,7 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/游戏/">#游戏</a>
         </div>
         
@@ -850,7 +868,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/常用学习网址/">#常用学习网址</a>
         </div>
         

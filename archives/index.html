@@ -3,6 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="author" content="WenJi">
+	<p>访问次数：<span id="count"></span></p>
+
+<script>
+  // 从本地存储中获取计数器变量
+  let count = localStorage.getItem('count');
+
+  // 如果计数器变量不存在，则初始化为0
+  if (!count) {
+    count = 0;
+  }
+
+  // 将计数器变量递增并保存到本地存储中
+  count++;
+  localStorage.setItem('count', count);
+
+  // 将计数器变量显示在页面上
+  document.querySelector('#count').textContent = count;
+</script>
     
     
     
@@ -760,7 +778,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/感想/">#感想</a>
         </div>
         
@@ -825,7 +843,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/并查集/">#并查集</a>
         </div>
         
@@ -835,7 +853,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/游戏/">#游戏</a>
         </div>
         
@@ -845,17 +863,17 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/添加博客/">#添加博客</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/常用学习网址/">#常用学习网址</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/感想-杂谈/">#感想(杂谈)</a>
         </div>
         

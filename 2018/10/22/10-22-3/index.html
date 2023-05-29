@@ -3,6 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="author" content="WenJi">
+	<p>访问次数：<span id="count"></span></p>
+
+<script>
+  // 从本地存储中获取计数器变量
+  let count = localStorage.getItem('count');
+
+  // 如果计数器变量不存在，则初始化为0
+  if (!count) {
+    count = 0;
+  }
+
+  // 将计数器变量递增并保存到本地存储中
+  count++;
+  localStorage.setItem('count', count);
+
+  // 将计数器变量显示在页面上
+  document.querySelector('#count').textContent = count;
+</script>
     
     
     
@@ -151,6 +169,7 @@
         <div class="cube-left">
             <div class="cube-article">
     <h1 class="title">基于链表的两个非递减有序序列的合并(精修版本，完美版本)</h1>
+
     
     <div class="cube-article-header">
         <div class="cube-article-date">
@@ -352,7 +371,7 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/易错和struct/">#易错和struct</a>
         </div>
         
@@ -377,32 +396,32 @@
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/排序sort/">#排序sort</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/顺序存储结构/">#顺序存储结构</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/无/">#无</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/顺序存储结构顺序表/">#顺序存储结构顺序表</a>
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/域名/">#域名</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/申请暑校/">#申请暑校</a>
         </div>
         
@@ -427,7 +446,7 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/bfs和dfs/">#bfs和dfs</a>
         </div>
         
