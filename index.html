@@ -150,6 +150,38 @@
     <div class="cube-content">
         <div class="cube-left">
             
+<div class="cube-excerpt" id="cube-excerpt-dwjdwjdw基于链表的两个递增有序序列的合并">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2020/10/21/test_2023_0529/">dwjdwjdw基于链表的两个递增有序序列的合并</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2020-10-21
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/数据结构/" class="cube-excerpt-tag-link">#数据结构</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>注意,这题我一直由于没搞清指针和地址的差别而出问题</p>
+<p>描述<br>给定两个递增的整数序列A和B，利用链表表示序列A和B，将A和B合并为一个递增的有序序列C，序列C不允许有重复的数据。要求空间复杂度为O(1)。</p>
+<p>输入<br>多组数据，每组数据有三行，第一行为序列A和B的长度n和m，第二行为序列A的n个元素，第三行为序列B的m个元素（元素之间用空格分隔）。n=0且m=0时输入结束。</p>
+<p>输出<br>对于每组数据输出一行，为合并后的序列，每个数据之间用空格分隔。</p>
+<p>样例输入1 复制<br>5 5<br>1 3 5 7 9<br>2 4 6 8 10<br>3 4<br>1 5 9<br>1 2 5 9<br>0 0<br>样例输出1<br>1 2 3 4 5 6 7 8 9 10<br>1 2 5 9</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#define OK 1</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct LNode</span><br><span class="line">&#123;</span><br><span class="line">	int data;</span><br><span class="line">	struct LNode *next;</span><br><span class="line">&#125;LNode,*LinkList;</span><br><span class="line">bool InintList(LinkList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">	L=new LNode;</span><br><span class="line">	L-&gt;next=NULL;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">void mergelist(LinkList &amp;L,LinkList &amp;S,LinkList &amp;T)</span><br><span class="line">&#123;</span><br><span class="line">	LNode *p1=L-&gt;next;</span><br><span class="line">	LNode *p2=S-&gt;next;</span><br><span class="line">	//LNode *p3=T-&gt;next;//误区 </span><br><span class="line">	LNode *p3=T;//因为要用next来串联 </span><br><span class="line">	LNode *p4;</span><br><span class="line">	while(p1&amp;&amp;p2)</span><br><span class="line">	&#123;</span><br><span class="line">		if(p1-&gt;data&lt;p2-&gt;data)</span><br><span class="line">		&#123;</span><br><span class="line">			/*p3=p1;</span><br><span class="line">			p3=p3-&gt;next;</span><br><span class="line">			p1=p1-&gt;next;*///始终要记住p3是一个指针，指向可以变，而每个指针的next才是真正不会变的 </span><br><span class="line">			p3-&gt;next=p1;</span><br><span class="line">			p3=p1;</span><br><span class="line">			p1=p1-&gt;next; </span><br><span class="line">		&#125;</span><br><span class="line">		else if(p1-&gt;data&gt;p2-&gt;data)</span><br><span class="line">		&#123;</span><br><span class="line">			p3-&gt;next=p2;</span><br><span class="line">			p3=p2;</span><br><span class="line">			p2=p2-&gt;next;</span><br><span class="line">	</span><br><span class="line">		&#125;</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line">			p3-&gt;next=p1;</span><br><span class="line">			p3=p1;</span><br><span class="line">			p1=p1-&gt;next;</span><br><span class="line">			p4=p2;</span><br><span class="line">			p2=p2-&gt;next;</span><br><span class="line">			delete p4;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	p3-&gt;next=p1?p1:p2;</span><br><span class="line">	delete S;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	LNode *p1;</span><br><span class="line">	LNode *p2;</span><br><span class="line">	int num1,num2;</span><br><span class="line">	while(cin&gt;&gt;num1&gt;&gt;num2&amp;&amp;!(num1==0&amp;&amp;num2==0))</span><br><span class="line">	&#123;</span><br><span class="line">		LinkList L;</span><br><span class="line">		LinkList S;</span><br><span class="line">		LinkList T;</span><br><span class="line">		InintList(L);</span><br><span class="line">		InintList(S);</span><br><span class="line">		InintList(T); </span><br><span class="line">		L-&gt;next=new LNode;</span><br><span class="line">		S-&gt;next=new LNode;</span><br><span class="line">		LNode *p1=L-&gt;next;</span><br><span class="line">		LNode *pre1=L;</span><br><span class="line">		LNode *p2=S-&gt;next;</span><br><span class="line">		LNode *pre2=S;</span><br><span class="line">		for(int i=1;i&lt;=num1;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cin&gt;&gt;p1-&gt;data;</span><br><span class="line">			p1-&gt;next=new LNode;</span><br><span class="line">			p1=p1-&gt;next;</span><br><span class="line">			pre1=pre1-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		pre1-&gt;next=NULL;</span><br><span class="line">		for(int i=1;i&lt;=num2;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cin&gt;&gt;p2-&gt;data;</span><br><span class="line">			p2-&gt;next=new LNode;</span><br><span class="line">			p2=p2-&gt;next;</span><br><span class="line">			pre2=pre2-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		pre2-&gt;next=NULL;</span><br><span class="line">		mergelist(L,S,T);</span><br><span class="line">		LNode *p=T-&gt;next;</span><br><span class="line">		cout&lt;&lt;p-&gt;data;</span><br><span class="line">		p=p-&gt;next;</span><br><span class="line">		while(p)</span><br><span class="line">		&#123;</span><br><span class="line">			cout&lt;&lt;&quot; &quot;&lt;&lt;p-&gt;data;</span><br><span class="line">			p=p-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		cout&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2020/10/21/test_2023_0529/">Read More</a>
+    </footer>
+</div>
+
 <div class="cube-excerpt" id="cube-excerpt-基于快排思想的查找">
     <header class="cube-excerpt-header">
         <h1><a href="/2018/12/15/12-15-1/">基于快排思想的查找</a></h1>
@@ -430,37 +462,6 @@
     </footer>
 </div>
 
-<div class="cube-excerpt" id="cube-excerpt-基于链表的两个非递减有序序列的合并(精修版本，完美版本)">
-    <header class="cube-excerpt-header">
-        <h1><a href="/2018/10/22/10-22-3/">基于链表的两个非递减有序序列的合并(精修版本，完美版本)</a></h1>
-        <div class="cube-excerpt-header-msg">
-            <div class="cube-excerpt-date">
-                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2018-10-22
-            </div>
-            <div class="cube-excerpt-tags">
-                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-                
-                <a href="/tags/数据结构/" class="cube-excerpt-tag-link">#数据结构</a>
-                
-            </div>
-        </div>
-    </header>
-    <article class="cube-excerpt-entry cube-markdown">
-        
-        
-           <p>描述<br>给定两个非递减的整数序列A和B，利用链表表示序列A和B，将A和B合并为一个非递增的有序序列C，序列C允许有重复的数据。要求空间复杂度为O(1)。</p>
-<p>输入<br>多组数据，每组数据有三行，第一行为序列A和B的长度n和m，第二行为序列A的n个元素，第三行为序列B的m个元素（元素之间用空格分隔）。n=0且m=0时输入结束。</p>
-<p>输出<br>对于每组数据输出一行，为合并后的序列，每个数据之间用空格分隔。</p>
-<p>样例输入1 复制<br>5 5<br>1 3 5 7 9<br>2 4 6 8 10<br>5 6<br>1 2 2 3 5<br>2 4 6 8 10 12<br>0 0<br>样例输出1<br>10 9 8 7 6 5 4 3 2 1<br>12 10 8 6 5 4 3 2 2 2 1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#define OK 1</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct LNode</span><br><span class="line">&#123;</span><br><span class="line">	int data;</span><br><span class="line">	struct LNode *next;</span><br><span class="line">&#125;LNode,*LinkList;</span><br><span class="line">bool InintList(LinkList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">	L=new LNode;</span><br><span class="line">	L-&gt;next=NULL;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">void MergeList(LinkList &amp;La,LinkList &amp;Lb,LinkList &amp;Lc)</span><br><span class="line">&#123;</span><br><span class="line">	LNode *pa;</span><br><span class="line">	LNode *pb;</span><br><span class="line">	LNode *q;//暂时存储指针 </span><br><span class="line">	pa=La-&gt;next;</span><br><span class="line">	pb=Lb-&gt;next;</span><br><span class="line">	Lc=La;</span><br><span class="line">	Lc-&gt;next=NULL;//不可以省略，pa已经保存了La-&gt;next,没有关系了 </span><br><span class="line">	while(pa||pb)</span><br><span class="line">	&#123;</span><br><span class="line">		if(!pa)  //La表为空，对Lb表处理 </span><br><span class="line">		&#123;</span><br><span class="line">			q=pb-&gt;next; </span><br><span class="line">			pb-&gt;next=Lc-&gt;next;</span><br><span class="line">			Lc-&gt;next=pb;</span><br><span class="line">			pb=q;</span><br><span class="line">		&#125;</span><br><span class="line">		else if(!pb)</span><br><span class="line">		&#123;</span><br><span class="line">			q=pa-&gt;next;</span><br><span class="line">			pa-&gt;next=Lc-&gt;next;</span><br><span class="line">			Lc-&gt;next=pa;</span><br><span class="line">			pa=q;</span><br><span class="line">		&#125;</span><br><span class="line">		else if(pa-&gt;data&lt;=pb-&gt;data)</span><br><span class="line">		&#123;    </span><br><span class="line">			q=pa-&gt;next; </span><br><span class="line">			pa-&gt;next=Lc-&gt;next;</span><br><span class="line">			Lc-&gt;next=pa;</span><br><span class="line">			pa=q;</span><br><span class="line">		&#125;</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line">			q=pb-&gt;next;</span><br><span class="line">			pb-&gt;next=Lc-&gt;next;</span><br><span class="line">			Lc-&gt;next=pb;</span><br><span class="line">			pb=q; </span><br><span class="line">		&#125; </span><br><span class="line">	&#125;</span><br><span class="line">	delete Lb;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int num1,num2; </span><br><span class="line">	while(cin&gt;&gt;num1&gt;&gt;num2&amp;&amp;!(num1==0&amp;&amp;num2==0))</span><br><span class="line">	&#123; </span><br><span class="line">	LinkList L;</span><br><span class="line">	LinkList S;</span><br><span class="line">	LinkList T;</span><br><span class="line">	InintList(L);</span><br><span class="line">	InintList(S);</span><br><span class="line">	LNode *p;</span><br><span class="line">	LNode *r;</span><br><span class="line">	r=L;</span><br><span class="line">	for(int i=1;i&lt;=num1;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		p=new LNode;</span><br><span class="line">		cin&gt;&gt;p-&gt;data;</span><br><span class="line">		p-&gt;next=NULL;</span><br><span class="line">		r-&gt;next=p;</span><br><span class="line">		r=p;</span><br><span class="line">	&#125;</span><br><span class="line">	r=S;</span><br><span class="line">	for(int i=1;i&lt;=num2;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		p=new LNode;</span><br><span class="line">		cin&gt;&gt;p-&gt;data;</span><br><span class="line">		p-&gt;next=NULL;</span><br><span class="line">		r-&gt;next=p;</span><br><span class="line">		r=p;</span><br><span class="line">	&#125;</span><br><span class="line">	MergeList(L,S,T);</span><br><span class="line">	p=T-&gt;next;</span><br><span class="line">	cout&lt;&lt;p-&gt;data;</span><br><span class="line">	p=p-&gt;next;</span><br><span class="line">	while(p)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;&quot; &quot;&lt;&lt;p-&gt;data;</span><br><span class="line">		p=p-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;endl;&#125; </span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-        
-    </article>
-    <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2018/10/22/10-22-3/">Read More</a>
-    </footer>
-</div>
-
 
 
 <ul class="cube-pagination cube-pagination-9">
@@ -550,7 +551,7 @@
     
     
     <div class="count">
-        <a class="count articles"><span>59</span>Article</a>
+        <a class="count articles"><span>60</span>Article</a>
         <a class="count tags"><span>23</span>Tags</a>
         <a class="count categories"><span>0</span>Categories</a>
     </div>
@@ -589,7 +590,7 @@
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/12/15/12-15-1/" title="基于快排思想的查找">基于快排思想的查找</a>
+                    <a href="/2020/10/21/test_2023_0529/" title="dwjdwjdw基于链表的两个递增有序序列的合并">dwjdwjdw基于链表的两个递增有序序列的合并</a>
                 </p>
             </div>
             
@@ -603,7 +604,7 @@
                     <span>2</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/12/15/12-15/" title="基于双向链表的双向冒泡排序法">基于双向链表的双向冒泡排序法</a>
+                    <a href="/2018/12/15/12-15-1/" title="基于快排思想的查找">基于快排思想的查找</a>
                 </p>
             </div>
         </li>
@@ -616,7 +617,7 @@
                     <span>3</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/11/20/11-2/" title="基于哈夫曼树的数据压缩算法">基于哈夫曼树的数据压缩算法</a>
+                    <a href="/2018/12/15/12-15/" title="基于双向链表的双向冒泡排序法">基于双向链表的双向冒泡排序法</a>
                 </p>
             </div>
         </li>
@@ -629,7 +630,7 @@
                     <span>4</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/11/04/11-4/" title="基于栈的中缀算术表达式求值">基于栈的中缀算术表达式求值</a>
+                    <a href="/2018/11/20/11-2/" title="基于哈夫曼树的数据压缩算法">基于哈夫曼树的数据压缩算法</a>
                 </p>
             </div>
         </li>
@@ -642,7 +643,7 @@
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2018/10/22/10-22-8/" title="删除链表中满足区间值的结点">删除链表中满足区间值的结点</a>
+                    <a href="/2018/11/04/11-4/" title="基于栈的中缀算术表达式求值">基于栈的中缀算术表达式求值</a>
                 </p>
             </div>
         </li>
@@ -662,18 +663,18 @@
     <div class="cube-boxs">
         
         
-        <div class="cube-box-bg ">
-            <a href="/tags/数据结构/">#数据结构</a>
+        <div class="cube-box ">
+            <a href="/tags/易错和struct/">#易错和struct</a>
         </div>
         
         
-        <div class="cube-box ">
+        <div class="cube-box-bg ">
             <a href="/tags/多项式/">#多项式</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/易错和struct/">#易错和struct</a>
+            <a href="/tags/数据结构/">#数据结构</a>
         </div>
         
         
@@ -692,13 +693,13 @@
         </div>
         
         
-        <div class="cube-box-bg ">
-            <a href="/tags/无/">#无</a>
+        <div class="cube-box ">
+            <a href="/tags/顺序存储结构/">#顺序存储结构</a>
         </div>
         
         
-        <div class="cube-box-bg ">
-            <a href="/tags/顺序存储结构/">#顺序存储结构</a>
+        <div class="cube-box ">
+            <a href="/tags/无/">#无</a>
         </div>
         
         
@@ -707,8 +708,13 @@
         </div>
         
         
-        <div class="cube-box-bg ">
+        <div class="cube-box ">
             <a href="/tags/域名/">#域名</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/申请暑校/">#申请暑校</a>
         </div>
         
         
@@ -718,7 +724,7 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/申请暑校/">#申请暑校</a>
+            <a href="/tags/编程经验/">#编程经验</a>
         </div>
         
         
@@ -738,17 +744,22 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/编程经验/">#编程经验</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
             <a href="/tags/并查集/">#并查集</a>
         </div>
         
         
         <div class="cube-box ">
+            <a href="/tags/线段树/">#线段树</a>
+        </div>
+        
+        
+        <div class="cube-box ">
             <a href="/tags/游戏/">#游戏</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/博客技巧/">#博客技巧</a>
         </div>
         
         
@@ -763,17 +774,7 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/线段树/">#线段树</a>
-        </div>
-        
-        
-        <div class="cube-box ">
             <a href="/tags/感想-杂谈/">#感想(杂谈)</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
-            <a href="/tags/博客技巧/">#博客技巧</a>
         </div>
         
     </div>

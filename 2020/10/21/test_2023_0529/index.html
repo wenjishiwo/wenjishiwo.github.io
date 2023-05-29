@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="WenJi">
+    
+    
+    
+    
+    
+    
+    <title>dwjdwjdw基于链表的两个递增有序序列的合并 | Wenji&#39;s blog</title>
+    <!-- inject:style -->
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <!-- endinject -->
+    <style>
+        .cube-loading {
+            top: 0;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url('/images/lg/loading.gif') no-repeat center center;
+            background-color: rgba(0,0,0,.7);
+        }
+
+        .cube-loading.out {
+            display: none;
+        }
+
+        .cube-loading:before {
+            display: none;
+            content: 'Loading';
+            position: relative;
+            width: 100%;
+            top: 50%;
+            right: -50%;
+            color: #fff;
+        }
+
+        @media(max-width: 768px) {
+            .cube-loading:before {
+                font-size: 1.2em;
+                transform: translate(-24px,20px);
+                -webkit-transform: translate(-24px,20px);
+                -o-transform: translate(-24px,20px);
+                -ms-transform: translate(-24px,20px);
+            }
+        }
+
+        @media(min-width: 768px) {
+            .cube-loading:before {
+
+            }
+        }
+    </style>
+    
+</head>
+<body>
+<div class="cube-body">
+    <nav id="cube-top-memu" class="cube-menu">
+    <ul class="cube-menu-collapse">
+        
+        <li>
+            <i class="cube-icon cube-icon-home" aria-hidden="true"></i>
+            <a href="https://wenjishiwo.github.io/">首页</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-archive" aria-hidden="true"></i>
+            <a href="/archives">归档</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-about" aria-hidden="true"></i>
+            <a href="https://wenjishiwo.github.io/2018/09/13/about-me/">关于我</a>
+        </li>
+        
+    </ul>
+</nav>
+<nav class="cube-side-menu" id="cube-side-menu">
+    <ul class="cube-menu-list">
+        
+        <li>
+            <a class="lrc-control">Open Lyrics</a>
+        </li>
+        
+        <li>
+            <a class="scroll-to-top">Top</a>
+        </li>
+    </ul>
+</nav>
+    <header class="cube-header" id="cube-header">
+    <img src=" https://github.com/wenjishiwo/wenjishiwo.github.io/blob/master/images/lg/feiji.jpg?raw=true " alt="头部背景图片">
+    
+    <div class="cube-type">
+        <span class="cube-typed-title">WenJi&#39;s blog</span>
+        <span class="cube-typed-cursor">|</span>
+    </div>
+    
+</header>
+
+    <style>
+        nav.cube-menu:before {
+            content: '';
+            visibility: hidden;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 44px;
+        
+            filter: blur(5px);
+            -webkit-filter: blur(5px);
+        
+            z-index: -1;
+            background-image: url('https://github.com/wenjishiwo/wenjishiwo.github.io/blob/master/images/lg/feiji.jpg?raw=true');
+            background-repeat: no-repeat;
+            background-position: center -356px;
+            background-size: cover;
+            background-color: transparent;
+        }
+
+        header.cube-background.cube-header-background {
+            visibility: hidden;
+            background-image: url('https://github.com/wenjishiwo/wenjishiwo.github.io/blob/master/images/lg/feiji.jpg?raw=true');
+            background-position: center -400px;
+        }
+    </style>
+    <header class="cube-background cube-header-background">
+        
+        <div class="cube-type">
+            <span class="cube-typed-title">WenJi&#39;s blog</span>
+            <span class="cube-typed-cursor">|</span>
+        </div>
+        
+    </header>
+    <div class="load-header-background"></div>
+    <script>
+        (function (window) {
+
+            window.headerModule = {}
+            window.headerModule.image = {
+                width: '3000',
+                height: '1414'
+            }
+
+        })(window)
+    </script>
+    
+    <div class="cube-content">
+        <div class="cube-left">
+            <div class="cube-article">
+    <h1 class="title">dwjdwjdw基于链表的两个递增有序序列的合并</h1>
+    
+    <div class="cube-article-header">
+        <div class="cube-article-date">
+            <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+            <!-- moment.js对象 -->
+            2020-10-21
+        </div>
+        <div class="cube-article-tags">
+    <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+    
+    <a href="/tags/数据结构/">#数据结构</a>
+    
+</div>
+    </div>
+    
+    <div class="cube-article-content cube-markdown">
+        
+        <p>注意,这题我一直由于没搞清指针和地址的差别而出问题</p>
+<p>描述<br>给定两个递增的整数序列A和B，利用链表表示序列A和B，将A和B合并为一个递增的有序序列C，序列C不允许有重复的数据。要求空间复杂度为O(1)。</p>
+<p>输入<br>多组数据，每组数据有三行，第一行为序列A和B的长度n和m，第二行为序列A的n个元素，第三行为序列B的m个元素（元素之间用空格分隔）。n=0且m=0时输入结束。</p>
+<p>输出<br>对于每组数据输出一行，为合并后的序列，每个数据之间用空格分隔。</p>
+<p>样例输入1 复制<br>5 5<br>1 3 5 7 9<br>2 4 6 8 10<br>3 4<br>1 5 9<br>1 2 5 9<br>0 0<br>样例输出1<br>1 2 3 4 5 6 7 8 9 10<br>1 2 5 9</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#define OK 1</span><br><span class="line">using namespace std;</span><br><span class="line">typedef struct LNode</span><br><span class="line">&#123;</span><br><span class="line">	int data;</span><br><span class="line">	struct LNode *next;</span><br><span class="line">&#125;LNode,*LinkList;</span><br><span class="line">bool InintList(LinkList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">	L=new LNode;</span><br><span class="line">	L-&gt;next=NULL;</span><br><span class="line">	return OK;</span><br><span class="line">&#125;</span><br><span class="line">void mergelist(LinkList &amp;L,LinkList &amp;S,LinkList &amp;T)</span><br><span class="line">&#123;</span><br><span class="line">	LNode *p1=L-&gt;next;</span><br><span class="line">	LNode *p2=S-&gt;next;</span><br><span class="line">	//LNode *p3=T-&gt;next;//误区 </span><br><span class="line">	LNode *p3=T;//因为要用next来串联 </span><br><span class="line">	LNode *p4;</span><br><span class="line">	while(p1&amp;&amp;p2)</span><br><span class="line">	&#123;</span><br><span class="line">		if(p1-&gt;data&lt;p2-&gt;data)</span><br><span class="line">		&#123;</span><br><span class="line">			/*p3=p1;</span><br><span class="line">			p3=p3-&gt;next;</span><br><span class="line">			p1=p1-&gt;next;*///始终要记住p3是一个指针，指向可以变，而每个指针的next才是真正不会变的 </span><br><span class="line">			p3-&gt;next=p1;</span><br><span class="line">			p3=p1;</span><br><span class="line">			p1=p1-&gt;next; </span><br><span class="line">		&#125;</span><br><span class="line">		else if(p1-&gt;data&gt;p2-&gt;data)</span><br><span class="line">		&#123;</span><br><span class="line">			p3-&gt;next=p2;</span><br><span class="line">			p3=p2;</span><br><span class="line">			p2=p2-&gt;next;</span><br><span class="line">	</span><br><span class="line">		&#125;</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line">			p3-&gt;next=p1;</span><br><span class="line">			p3=p1;</span><br><span class="line">			p1=p1-&gt;next;</span><br><span class="line">			p4=p2;</span><br><span class="line">			p2=p2-&gt;next;</span><br><span class="line">			delete p4;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	p3-&gt;next=p1?p1:p2;</span><br><span class="line">	delete S;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	LNode *p1;</span><br><span class="line">	LNode *p2;</span><br><span class="line">	int num1,num2;</span><br><span class="line">	while(cin&gt;&gt;num1&gt;&gt;num2&amp;&amp;!(num1==0&amp;&amp;num2==0))</span><br><span class="line">	&#123;</span><br><span class="line">		LinkList L;</span><br><span class="line">		LinkList S;</span><br><span class="line">		LinkList T;</span><br><span class="line">		InintList(L);</span><br><span class="line">		InintList(S);</span><br><span class="line">		InintList(T); </span><br><span class="line">		L-&gt;next=new LNode;</span><br><span class="line">		S-&gt;next=new LNode;</span><br><span class="line">		LNode *p1=L-&gt;next;</span><br><span class="line">		LNode *pre1=L;</span><br><span class="line">		LNode *p2=S-&gt;next;</span><br><span class="line">		LNode *pre2=S;</span><br><span class="line">		for(int i=1;i&lt;=num1;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cin&gt;&gt;p1-&gt;data;</span><br><span class="line">			p1-&gt;next=new LNode;</span><br><span class="line">			p1=p1-&gt;next;</span><br><span class="line">			pre1=pre1-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		pre1-&gt;next=NULL;</span><br><span class="line">		for(int i=1;i&lt;=num2;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cin&gt;&gt;p2-&gt;data;</span><br><span class="line">			p2-&gt;next=new LNode;</span><br><span class="line">			p2=p2-&gt;next;</span><br><span class="line">			pre2=pre2-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		pre2-&gt;next=NULL;</span><br><span class="line">		mergelist(L,S,T);</span><br><span class="line">		LNode *p=T-&gt;next;</span><br><span class="line">		cout&lt;&lt;p-&gt;data;</span><br><span class="line">		p=p-&gt;next;</span><br><span class="line">		while(p)</span><br><span class="line">		&#123;</span><br><span class="line">			cout&lt;&lt;&quot; &quot;&lt;&lt;p-&gt;data;</span><br><span class="line">			p=p-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		cout&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+</div>
+
+<div class="cube-article-nav">
+    <ul>
+        
+        
+        <li class="next">
+            <a href="/2018/12/15/12-15-1/">
+                基于快排思想的查找
+                <i class="cube-icon cube-next" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+<!-- TODO 根据theme.comment的内容进行入口选择 -->
+
+
+
+
+        </div>
+        <div class="cube-right">
+            
+
+<div class="cube-search cube-sidebar" id="cube-search">
+    <div class="search-container">
+        <input type="text" placeholder="Search" class="cube-search-input" id="cube-search-input">
+        <i class="cube-icon cube-icon-search cube-search-submit" aria-hidden="true"></i>
+    </div>
+    <!-- TODO 通过给window赋一个全局变量，通过脚本赋值 -->
+</div>
+<script>
+    (function (window) {
+        'use strict';
+        window.searchModule = {}
+        window.searchModule.JSONUrl = '/content.json'
+        window.searchModule.rootUrl = '/'
+    })(window)
+</script>
+<div class="cube-search-form">
+    <div class="cube-search-control">
+        <input type="text" placeholder="Search" class="search-input">
+        <a class="close-button">
+            <i class="cube-icon cube-close" aria-hidden="true"></i>
+        </a>
+    </div>
+    <div class="cube-search-result"></div>
+</div>
+
+
+<div class="cube-author cube-sidebar" id="cube-author">
+    
+    
+    <span>WenJi</span>
+    
+    
+    <div class="count">
+        <a class="count articles"><span>60</span>Article</a>
+        <a class="count tags"><span>23</span>Tags</a>
+        <a class="count categories"><span>0</span>Categories</a>
+    </div>
+</div>
+
+
+
+<div class="cube-music cube-sidebar" id="cube-music">
+    <div class="cube-player aplayer" id="cube-player"></div>
+</div>
+<script>
+    (function (window) {
+        window.musicModule = {}
+        window.musicModule.musicConfig = '{"narrow":false,"autoplay":false,"showlrc":3,"theme":"#b7daff","mutex":true,"mode":"circulation","preload":"auto","listmaxheight":"513px","music":[{"title":"Dear friends","author":"TRIPLANE","url":"http://cube-1252774894.cosgz.myqcloud.com/music/source/TRIPLANE - Dear friends.mp3","lrc":"http://cube-1252774894.cosgz.myqcloud.com/music/lrc/Dear friends - TRIPLANE.lrc","pic":"http://cube-1252774894.cosgz.myqcloud.com/music/image/TRIPLANE - Dear friends.jpg"},{"title":"Butter-Fly","author":"和田光司","url":"http://cube-1252774894.cosgz.myqcloud.com/music/source/和田光司 - Butter-Fly (ピアノヴァージョン).mp3","lrc":"http://cube-1252774894.cosgz.myqcloud.com/music/lrc/Butter-Fly (ピアノヴァージョン) - 和田光司.lrc","pic":"http://cube-1252774894.cosgz.myqcloud.com/music/image/和田光司 - Butter-Fly (ピアノヴァージョン).jpg"},{"title":"宵闇花火","author":"葉月ゆら","url":"http://cube-1252774894.cosgz.myqcloud.com/music/source/葉月ゆら - 宵闇花火.mp3","lrc":"http://cube-1252774894.cosgz.myqcloud.com/music/lrc/宵闇花火 - 葉月ゆら.lrc","pic":"http://cube-1252774894.cosgz.myqcloud.com/music/image/葉月ゆら - 宵闇花火.jpg"}]}'
+        window.musicModule.lrcConfig = {
+            open: 'Open Lyrics',
+            close: 'Close Lyrics'
+        }
+    })(window)
+</script>
+
+
+
+<div class="cube-recent-posts cube-sidebar" id="cube-recent-posts">
+    <div class="title">
+        <a>Recent Posts</a>
+    </div>
+    <ul class="list">
+        
+        
+        <li>
+            <!-- TODO 如果文章要显示图片，那么在front-matter上添加preview属性(url or path) -->
+            
+            <div class="normal">
+                <p class="index first">
+                    <span>1</span>
+                </p>
+                <p class="title">
+                    <a href="/2020/10/21/test_2023_0529/" title="dwjdwjdw基于链表的两个递增有序序列的合并">dwjdwjdw基于链表的两个递增有序序列的合并</a>
+                </p>
+            </div>
+            
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>2</span>
+                </p>
+                <p class="title">
+                    <a href="/2018/12/15/12-15-1/" title="基于快排思想的查找">基于快排思想的查找</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>3</span>
+                </p>
+                <p class="title">
+                    <a href="/2018/12/15/12-15/" title="基于双向链表的双向冒泡排序法">基于双向链表的双向冒泡排序法</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>4</span>
+                </p>
+                <p class="title">
+                    <a href="/2018/11/20/11-2/" title="基于哈夫曼树的数据压缩算法">基于哈夫曼树的数据压缩算法</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>5</span>
+                </p>
+                <p class="title">
+                    <a href="/2018/11/04/11-4/" title="基于栈的中缀算术表达式求值">基于栈的中缀算术表达式求值</a>
+                </p>
+            </div>
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+
+
+
+<div class="cube-tagcloud cube-sidebar" id="cube-tagcloud">
+    <div class="title">
+        <a href="/tags">Tagcloud</a>
+    </div>
+    <div class="cube-boxs">
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/易错和struct/">#易错和struct</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/多项式/">#多项式</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/数据结构/">#数据结构</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/感想/">#感想</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/基础/">#基础</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/排序sort/">#排序sort</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/顺序存储结构/">#顺序存储结构</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/无/">#无</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/顺序存储结构顺序表/">#顺序存储结构顺序表</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/域名/">#域名</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/申请暑校/">#申请暑校</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/介绍/">#介绍</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/编程经验/">#编程经验</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/Dijkstra/">#Dijkstra</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/prime/">#prime</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/bfs和dfs/">#bfs和dfs</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/并查集/">#并查集</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/线段树/">#线段树</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/游戏/">#游戏</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/博客技巧/">#博客技巧</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/添加博客/">#添加博客</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/常用学习网址/">#常用学习网址</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/感想-杂谈/">#感想(杂谈)</a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="cube-links cube-sidebar" id="cube-links">
+    <div class="title">
+        <a>Links</a>
+    </div>
+    <ul class="list">
+        
+        <li>
+            
+            
+            <img src="https://github.com/wenjishiwo/wenjishiwo.github.io/blob/master/images/lg/GitHub.png?raw=true">
+            
+            <a href="https://github.com/wenjishiwo" target="_blank">my GitHub</a>
+        </li>
+        
+        <li>
+            
+            
+            <img src="http://www.bjfuacm.com/static/img/index/a.png">
+            
+            <a href="http://www.bjfuacm.com/" target="_blank">北林oj</a>
+        </li>
+        
+        <li>
+            
+            
+            <img src="http://acm.hdu.edu.cn/images/banner.jpg">
+            
+            <a href="http://acm.hdu.edu.cn/" target="_blank">杭电oj</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+<div class="cube-friend-links cube-sidebar" id="cube-friend-links">
+    <div class="title">
+        <a>Friend Links</a>
+    </div>
+    <ul class="list">
+        
+        <li>
+            <!-- TODO change avatar.png to friend.png-->
+            <img src="https://github.com/wenjishiwo/wenjishiwo.github.io/blob/master/images/lg/d1.png?raw=true">
+            <a href="https://cyyzero.github.io/" target="_blank">计协会长巨佬</a>
+        </li>
+        
+        <li>
+            <!-- TODO change avatar.png to friend.png-->
+            <img src="https://github.com/wenjishiwo/wenjishiwo.github.io/blob/master/images/lg/xuejie.jpg?raw=true">
+            <a href="https://me.csdn.net/sanganqi_wusuierzi" target="_blank">网工14级学姐桑安琪</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+    </div>
+</div>
+<footer class="cube-footer">
+    
+© 2018 WenJi
+
+<br>
+Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://wenjishiwo.github.io" target="_blank">WenJi</a>
+</footer>
+<!-- inject:script -->
+<script src="/js/script.js"></script>
+<!-- endinject -->
+<div class="cube-loading out"></div>
+</body>
+</html>
